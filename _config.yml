@@ -15,6 +15,10 @@ collections:
     permalink: /stories/:path/
 # GoatCounter site code (the part before .goatcounter.com). Empty = no analytics.
 goatcounter: ""
+# Public contact address shown on the About page and in the footer. Empty = hidden.
+contact_email: ""
+# Buttondown username for the email newsletter. Empty = no signup forms.
+newsletter: ""
 plugins:
   - jekyll-feed
   - jekyll-sitemap

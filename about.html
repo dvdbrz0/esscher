@@ -1,0 +1,41 @@
+---
+layout: default
+title: About Esscher
+permalink: /about/
+description: "What Esscher covers, how each edition is put together, and the standards it holds itself to."
+---
+<article class="page-article">
+  <header class="page-head">
+    <h1 class="lead-title">About Esscher</h1>
+    <p class="dek">A morning briefing on artificial intelligence, machine learning, quantitative finance, the economy and mathematics, for readers who want the substance and the sources.</p>
+  </header>
+
+  <div class="prose">
+    <h2>What we publish</h2>
+    <p>The <a href="{{ '/' | relative_url }}">Daily Brief</a> goes online every weekday at 05:00 Bucharest time (02:00 UTC in winter, 03:00 UTC in summer). It covers the most important developments in AI research and industry, new papers worth knowing about, markets, the economy and mathematics, with a chart of the day when the data tell a story.</p>
+    <p>The <a href="{{ '/weekly/' | relative_url }}">Weekly Review</a> appears on Sundays: what actually mattered, which papers became canon, the debates of the week and what is worth reading in full.</p>
+    <p>Every story and paper has its own page with a fuller summary and links to the original, and everything is filed by <a href="{{ '/topics/' | relative_url }}">topic</a> and kept in the <a href="{{ '/archive/' | relative_url }}">archive</a>.</p>
+
+    <h2 id="standards">Editorial standards</h2>
+    <p><strong>Primary sources first.</strong> Each item starts from the original: the paper on arXiv, the official announcement, the central bank statement, the data release. Where we rely on reporting by another outlet, we name it and link to it.</p>
+    <p><strong>Only what the sources say.</strong> Summaries are written in our own words and contain only facts that appear in the linked sources. When sources disagree, or a claim has not been independently confirmed, we say so in the story.</p>
+    <p><strong>Dates you can check.</strong> Stories show when their source was published whenever the source gives a date, and every edition shows when it went online and when it was last updated.</p>
+    <p><strong>Figures with a source.</strong> Market figures state the date they refer to and where they come from. Charts are drawn from public data, with the source linked under each one.</p>
+    <p><strong>Independence.</strong> Esscher carries no advertising and no sponsored content, and is not paid to cover anything.</p>
+    <p><strong>Not advice.</strong> Nothing on this site is investment, financial or legal advice.</p>
+
+    <h2 id="corrections-policy">Corrections</h2>
+    <p>When we get something wrong, we correct it promptly and say so. The correction appears at the end of the story with its date and what changed, the story is marked as corrected in its edition, and every correction is listed on the <a href="{{ '/corrections/' | relative_url }}">corrections page</a>. We do not silently change published facts.</p>
+
+    <h2 id="contact">Contact</h2>
+    {% if site.contact_email and site.contact_email != "" %}
+    <p>To report an error, suggest a paper or a story, or get in touch for any other reason, write to <a href="mailto:{{ site.contact_email }}">{{ site.contact_email }}</a>.</p>
+    {% else %}
+    <p>A contact address will appear here shortly.</p>
+    {% endif %}
+
+    <h2>Follow</h2>
+    <p>{% if site.newsletter and site.newsletter != "" %}<a href="{{ '/subscribe/' | relative_url }}">Get the Daily Brief by email</a>, or follow{% else %}Follow{% endif %} the <a href="{{ '/feed.xml' | relative_url }}">RSS feed</a> in any feed reader.</p>
+
+  </div>
+</article>

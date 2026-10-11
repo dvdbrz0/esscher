@@ -1,0 +1,43 @@
+{% assign org_logo = '/assets/icon-512.png' | absolute_url %}
+{% capture publisher %}{"@type": "Organization", "@id": "{{ '/#publisher' | absolute_url }}", "name": "Esscher", "url": "{{ '/' | absolute_url }}", "logo": {"@type": "ImageObject", "url": "{{ org_logo }}", "width": 512, "height": 512}}{% endcapture %}
+{% if page.layout == "story" %}
+{% assign primary = page.sources | first %}
+{% assign modified = page.date | date_to_xmlschema %}{% if page.corrections.size > 0 %}{% assign lastc = page.corrections | last %}{% assign modified = lastc.date %}{% endif %}
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "NewsArticle",
+ "headline": {{ page.title | truncate: 110 | jsonify }},
+ "description": {{ page.summary | jsonify }},
+ "url": "{{ page.url | absolute_url }}",
+ "mainEntityOfPage": "{{ page.url | absolute_url }}",
+ "datePublished": "{{ page.date | date_to_xmlschema }}",
+ "dateModified": "{{ modified }}",
+ "image": ["{{ '/assets/share.png' | absolute_url }}"],
+ "articleSection": {{ page.section | jsonify }},
+ {% if page.topics %}"keywords": {{ page.topics | jsonify }},{% endif %}
+ {% if page.arxiv %}"isBasedOn": "https://arxiv.org/abs/{{ page.arxiv }}",{% elsif primary %}"isBasedOn": {{ primary.url | jsonify }},{% endif %}
+ "inLanguage": "en",
+ "author": {"@type": "Organization", "name": "Esscher", "url": "{{ '/about/' | absolute_url }}"},
+ "publisher": {{ publisher }}}
+</script>
+{% elsif page.layout == "brief" or page.layout == "weekly" %}
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "NewsArticle",
+ "headline": {{ page.headline | truncate: 110 | jsonify }},
+ "description": {{ page.description | jsonify }},
+ "url": "{{ page.url | absolute_url }}",
+ "mainEntityOfPage": "{{ page.url | absolute_url }}",
+ "datePublished": "{% if page.published %}{{ page.published }}{% else %}{{ page.date | date_to_xmlschema }}{% endif %}",
+ "dateModified": "{% if page.updated %}{{ page.updated }}{% elsif page.published %}{{ page.published }}{% else %}{{ page.date | date_to_xmlschema }}{% endif %}",
+ "image": ["{{ '/assets/share.png' | absolute_url }}"],
+ "inLanguage": "en",
+ "author": {"@type": "Organization", "name": "Esscher", "url": "{{ '/about/' | absolute_url }}"},
+ "publisher": {{ publisher }}}
+</script>
+{% elsif page.url == "/" %}
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@graph": [
+ {"@type": "WebSite", "@id": "{{ '/#website' | absolute_url }}", "name": "Esscher", "url": "{{ '/' | absolute_url }}", "description": {{ site.description | jsonify }}, "inLanguage": "en", "publisher": {"@id": "{{ '/#publisher' | absolute_url }}"},
+  "potentialAction": {"@type": "SearchAction", "target": "{{ '/search/' | absolute_url }}?q={search_term_string}", "query-input": "required name=search_term_string"}},
+ {{ publisher }}]}
+</script>
+{% endif %}

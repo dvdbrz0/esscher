@@ -1,12 +1,26 @@
 # How an edition is written
 
+Read `_docs/style.md` first: it is the house style every edition follows.
+
 Every edition is a JSON file turned into a post by `scripts/new_post.py`:
 
     python3 scripts/new_post.py /tmp/brief.json
 
 The script validates the file, unwraps tracking links and writes
-`_posts/YYYY-MM-DD-daily.md` or `_posts/YYYY-MM-DD-weekly.md`.
-Run it again with the same date to replace an edition.
+`_posts/YYYY-MM-DD-daily.md` or `_posts/YYYY-MM-DD-weekly.md`, a page per story
+in `_stories/`, and the chart in `_includes/charts/`. It prints every file it
+wrote. Run it again with the same date to replace an edition: the original
+publication time is kept and the edition is marked as updated.
+
+Then publish with:
+
+    git add -A _posts _stories _includes/charts
+    git commit -m "Daily brief YYYY-MM-DD"
+    git push
+
+A new edition pushed to GitHub is also emailed to newsletter subscribers
+automatically (`.github/workflows/newsletter.yml`); a rerun of the same date is
+not emailed again.
 
 Write everything in English, in your own words. Every string is plain text
 (no HTML, no markdown). Every `url` is a full https link to the original source.
@@ -52,11 +66,24 @@ Never use dollar signs for math (prices use them). Keep headlines, summaries and
   "edition": "daily",
   "date": "2026-10-12",
   "ticker_label": "Friday close",
+  "ticker_asof": "2026-10-09",
+  "ticker_source": "Yahoo Finance, CNBC",
   "ticker": [
     {"label": "S&P 500", "value": "7,811.54", "change": "+1.2% wk", "dir": "up"},
     {"label": "US 10Y", "value": "5.25%"}
   ],
   "three_lines": ["...", "...", "..."],
+  "chart": {
+    "kind": "line",
+    "title": "Long-term US yields at their highest since 2002",
+    "subtitle": "US 10-year Treasury yield, daily close, %",
+    "unit": "%", "decimals": 2,
+    "points": [{"x": "2026-07-01", "y": 4.48}, {"x": "2026-07-02", "y": 4.46}],
+    "source": "Board of Governors of the Federal Reserve System, via FRED",
+    "source_url": "https://fred.stlouisfed.org/series/DGS10",
+    "note": "Two or three sentences with the key numbers and dates.",
+    "alt": "One sentence describing the chart for screen readers."
+  },
   "must_read": {
     "section": "Mathematics · AI",
     "headline": "...",
@@ -83,7 +110,34 @@ Never use dollar signs for math (prices use them). Keep headlines, summaries and
 - `must_read` is optional: leave it out when nothing qualifies.
 - The first item of `ai` is shown largest: put the most important story first.
 - `ticker` holds only figures taken from a source; leave out anything you do not have. `dir` is "up" or "down".
+  `ticker_asof` is the date the figures refer to (the last close), `ticker_source` names where they come from.
+- `chart` is optional; see "Chart of the day" below.
 - `voices`, `mathematics`, `papers_note`, `status` are optional.
+
+## Chart of the day
+
+`chart` draws one chart in the house style. Two kinds:
+
+- `"kind": "line"` with `"points": [{"x": "YYYY-MM-DD", "y": number}, ...]` for a series over time.
+  Get the points from FRED with `python3 scripts/fred.py SERIES_ID START_DATE`, which prints
+  the list ready to paste (run `python3 scripts/fred.py` alone for useful series). The source
+  is then "Board of Governors of the Federal Reserve System, via FRED" for Treasury yields, or
+  the agency named on the series page, with `source_url` `https://fred.stlouisfed.org/series/SERIES_ID`.
+- `"kind": "bar"` with `"points": [{"label": "AT&T", "y": -10.2}, ...]` for a comparison of a few
+  figures, each one stated in a source you read (put that source in `source` and `source_url`).
+
+`unit` is printed after values ("%", "bp"), `prefix` before them ("$"), `decimals` sets the
+rounding. Every figure in `title`, `subtitle` and `note` must be visible in the points.
+
+## Corrections
+
+When a fact in an earlier edition turns out to be wrong:
+
+    python3 scripts/correct.py /stories/STORY-NAME/ --note "An earlier version of this story said X. It is Y." --replace "wrong text" "right text"
+    git add -A _posts _stories && git commit -m "Correction: STORY-NAME" && git push
+
+The note appears at the end of the story, the story is marked "Corrected" in its edition,
+and it is listed on the corrections page.
 
 ## Weekly review
 

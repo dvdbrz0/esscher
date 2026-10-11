@@ -1,0 +1,24 @@
+---
+layout: default
+title: Corrections
+permalink: /corrections/
+description: "Every correction made to stories published on Esscher."
+---
+{% assign corrected = site.stories | where_exp: "s", "s.corrections" | sort: "corrected" | reverse %}
+<header class="page-head">
+  <h1 class="lead-title">Corrections</h1>
+  <p class="muted">When we get something wrong, we fix it and say so. Every correction is listed here, newest first. <a href="{{ '/about/#corrections-policy' | relative_url }}">Our corrections policy</a>.</p>
+</header>
+{% if corrected.size > 0 %}
+<ul class="topic-list corrections-list">
+  {% for s in corrected %}{% for c in s.corrections reversed %}
+  <li>
+    <div class="topic-meta"><span class="small nums muted"><time datetime="{{ c.date | escape }}">{{ c.date | date: "%-d %b %Y" }}</time></span></div>
+    <a class="topic-title" href="{{ s.url | relative_url }}#corrections">{{ s.title | escape }}</a>
+    <p>{{ c.note | escape }}</p>
+  </li>
+  {% endfor %}{% endfor %}
+</ul>
+{% else %}
+<p class="muted topic-empty">No corrections so far.</p>
+{% endif %}

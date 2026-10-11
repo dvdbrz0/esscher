@@ -1,0 +1,18 @@
+---
+layout: default
+title: Page not found
+permalink: /404.html
+sitemap: false
+---
+{% assign latest = site.posts | where: "edition", "daily" | first %}
+<section class="page-head not-found">
+  <span class="label-sm accent">Error 404</span>
+  <h1 class="lead-title">This page does not exist</h1>
+  <p class="dek">The link may be mistyped, or the page may have moved. Try searching the archive.</p>
+  <form class="search-page-form" role="search" action="{{ '/search/' | relative_url }}" method="get">
+    <label for="nf-search" class="visually-hidden">Search the archive</label>
+    <input id="nf-search" type="search" name="q" placeholder="Search stories and papers">
+    <button class="button" type="submit">Search</button>
+  </form>
+  <p class="small muted">Or go to <a href="{{ '/' | relative_url }}">today's Daily Brief</a>{% if latest %} ({{ latest.date | date: "%-d %B %Y" }}){% endif %}, the <a href="{{ '/topics/' | relative_url }}">topics</a> or the <a href="{{ '/archive/' | relative_url }}">archive</a>.</p>
+</section>

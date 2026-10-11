@@ -1,0 +1,105 @@
+# Esscher house style
+
+Read this before writing an edition. It keeps every edition sounding like the
+same publication. When in doubt, write it the way The Economist or Reuters would.
+
+## Voice
+
+- Plain, precise, calm. State what happened, then why it matters. No hype.
+- Lead with the fact, not with the context: "The Fed raised rates to 4%",
+  not "In a move that surprised few, the Fed...".
+- Short sentences. One idea per sentence. Active voice.
+- Never address the reader ("you"), never mention who writes Esscher, never
+  write about the newsletter itself.
+- No rhetorical questions, no exclamation marks, no jokes in news items.
+- Do not pad. If a story is thin, keep it short.
+
+Words and habits to avoid, because they read as filler or as machine-written:
+groundbreaking, revolutionary, game-changer, game-changing, unprecedented,
+paradigm shift, cutting-edge, state-of-the-art (unless quoting a paper),
+landscape, ecosystem (unless literal), delve, dive into, deep dive, unpack,
+navigate, leverage (as a verb), harness, unlock, empower, robust (outside
+statistics), seamless, crucial, pivotal, vital, notably, importantly,
+interestingly, it is worth noting, it remains to be seen, in a significant
+move, sent shockwaves, amid (more than once per edition), "not just X but Y",
+lists of three adjectives, and sentences built around a colon or a dash for
+drama. Use at most one dash-pair aside per story.
+
+## Spelling and grammar
+
+- British English with -ise endings: optimise, generalisation, randomised,
+  organisation, centre, labour, modelling, programme (but "computer program").
+- "maths", not "math". "Data" takes a plural or singular verb, be consistent
+  within a story.
+- Proper names keep their own spelling: "Center for AI Safety",
+  "Federal Reserve", "Lean formalization" when quoting a title.
+- Paper titles exactly as on arXiv.
+
+## Headlines
+
+- Sentence case: capital only for the first word and proper names.
+- Say what happened, with a verb, in present tense: "Fed signals another hike".
+- At most about 70 characters. No full stop. At most one colon.
+- Digits for all numbers: "722 papers", "3 labs".
+- A question headline only when the piece itself is an open question.
+- No "BREAKING", no "Here's why", no "everything you need to know".
+
+## Summaries and three lines
+
+- Summary: one or two sentences, at most 40 words, starting with the news.
+- The three lines (five for the weekly) each stand alone, one sentence each,
+  and together tell the reader the day in 30 seconds.
+- Dek of the must-read: two sentences at most.
+
+## Numbers, money, dates
+
+- Numbers: words for one to nine in running text ("three labs"), digits for
+  10 and above; always digits with units, percentages, money, ages, scores.
+- Percentages: "5.25%" everywhere. Changes in rates and yields in basis
+  points: "up 12 basis points". Changes in percentages as "percentage points".
+- Money: "$30bn", "$51m", "€2.5bn", "£400m". "Trillion" as "tn": "$1.2tn".
+- Large plain numbers with commas: "7,811.54".
+- Dates: "9 October 2026"; with weekday "Tuesday 13 October". No ordinals
+  ("13th"). Times in 24-hour UTC: "14:30 UTC".
+- Ranges: "8–13%" with an en dash.
+
+## Names and attribution
+
+- People: full name and role on first mention ("Jerome Powell, chair of the
+  Federal Reserve"), surname afterwards. No honorifics.
+- Companies by their usual names: "OpenAI", "Anthropic", "Jane Street".
+- Abbreviations: write the full name the first time in a story with the short
+  form in brackets, then the short form: "European Central Bank (ECB)".
+  Exceptions that never need spelling out: AI, US, UK, EU, GDP, IPO, CEO.
+- Attribute every claim that is not plainly established: "according to the
+  Financial Times", "the company said". Use "said", not "claimed",
+  "admitted" or "revealed".
+- Unconfirmed claims say so: "not yet independently reviewed",
+  "reportedly, according to Bloomberg". Never repeat a rumour without a named
+  source.
+- Papers: "Hanneke et al." for three or more authors, both surnames for two.
+
+## Markets band
+
+- Figures only from a source read that morning, with the date they refer to
+  in "ticker_asof" and the source names in "ticker_source".
+- Label the band with the close it shows: "Friday close", "Monday close".
+
+## Chart of the day
+
+- One chart, from data downloaded that morning (for example with
+  `scripts/fred.py`) or figures stated in a source. Never estimate a point.
+- Title states the finding ("Long-term US yields at their highest since
+  2002"); subtitle states exactly what is plotted, frequency and unit
+  ("US 10-year Treasury yield, daily close, %").
+- The note is two or three sentences with the key numbers and dates, every one
+  of them visible in the data.
+- Leave the chart out when nothing in the day's news has data worth showing.
+
+## Corrections
+
+- If a fact published in an earlier edition turns out to be wrong, correct it
+  with `scripts/correct.py` and a note in this form:
+  "An earlier version of this story said X. It is Y."
+- Never change a published fact without a correction. Fixing a typo or a
+  broken link needs no correction note.

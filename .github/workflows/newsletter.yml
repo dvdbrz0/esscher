@@ -1,0 +1,64 @@
+# Sends each new edition to newsletter subscribers through Buttondown.
+# Runs when a new file appears in _posts/ on main. Does nothing until the
+# repository secret BUTTONDOWN_API_KEY exists (Settings > Secrets and variables > Actions).
+name: Newsletter
+
+on:
+  push:
+    branches: [main]
+    paths: ["_posts/**"]
+  workflow_dispatch:
+    inputs:
+      post:
+        description: "Edition to send, for example _posts/2026-10-12-daily.md"
+        required: true
+
+concurrency:
+  group: newsletter
+  cancel-in-progress: false
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Send new editions
+        env:
+          BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
+          BEFORE: ${{ github.event.before }}
+          MANUAL_POST: ${{ github.event.inputs.post }}
+        run: |
+          if [ -z "$BUTTONDOWN_API_KEY" ]; then
+            echo "No BUTTONDOWN_API_KEY secret yet: nothing to send."
+            exit 0
+          fi
+          if [ -n "$MANUAL_POST" ]; then
+            files="$MANUAL_POST"
+          elif [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            echo "No previous commit to compare with: nothing to send."
+            exit 0
+          else
+            # Only editions added in this push; reruns that replace an edition are not resent.
+            files=$(git diff --name-only --diff-filter=A "$BEFORE" "$GITHUB_SHA" -- _posts)
+          fi
+          if [ -z "$files" ]; then
+            echo "No new edition in this push."
+            exit 0
+          fi
+          today=$(date -u +%Y-%m-%d)
+          yesterday=$(date -u -d "yesterday" +%Y-%m-%d)
+          # Give GitHub Pages time to publish the pages the email links to.
+          sleep 120
+          for f in $files; do
+            day=$(basename "$f" | cut -c1-10)
+            if [ -z "$MANUAL_POST" ] && [ "$day" != "$today" ] && [ "$day" != "$yesterday" ]; then
+              echo "Skipping $f: not today's edition."
+              continue
+            fi
+            python3 scripts/newsletter.py "$f" --send
+          done

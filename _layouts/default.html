@@ -35,6 +35,7 @@
 <link rel="apple-touch-icon" href="{{ '/apple-touch-icon.png' | relative_url }}">
 <link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
 {% feed_meta %}
+{% include schema.html %}
 </head>
 <body>
 {% if page.ticker %}{% assign tick_page = page %}{% else %}{% assign tick_page = site.posts | where: "edition", "daily" | first %}{% endif %}
@@ -71,6 +72,7 @@
       {% for t in tick_page.ticker %}
       <span class="tick" data-label="{{ t.label | escape }}"><span class="tick-name">{{ t.label | escape }}</span> {{ t.value | escape }}{% if t.change %} <span class="tick-change {% if t.dir == 'down' %}down{% else %}up{% endif %}">{{ t.change | escape }}</span>{% endif %}</span>
       {% endfor %}
+      {% if tick_page.ticker_asof or tick_page.ticker_source %}<span class="ticker-source">{% if tick_page.ticker_asof %}As of {{ tick_page.ticker_asof | date: "%-d %B %Y" }}.{% endif %}{% if tick_page.ticker_source %} Source: {{ tick_page.ticker_source | escape }}.{% endif %}</span>{% endif %}
     </div>
     {% endif %}
   </div>
@@ -88,12 +90,23 @@
       <p class="small">For information only. Not investment advice.</p>
     </div>
     <nav aria-label="Footer" class="footer-nav">
-      <a href="{{ '/' | relative_url }}">Daily</a>
-      <a href="{{ '/weekly/' | relative_url }}">Weekly Review</a>
-      <a href="{{ '/topics/' | relative_url }}">Topics</a>
-      <a href="{{ '/archive/' | relative_url }}">Archive</a>
-      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
-      <span class="muted">© {{ site.time | date: "%Y" }} Esscher</span>
+      <div class="footer-col">
+        <a href="{{ '/' | relative_url }}">Daily Brief</a>
+        <a href="{{ '/weekly/' | relative_url }}">Weekly Review</a>
+        <a href="{{ '/topics/' | relative_url }}">Topics</a>
+        <a href="{{ '/archive/' | relative_url }}">Archive</a>
+      </div>
+      <div class="footer-col">
+        <a href="{{ '/about/' | relative_url }}">About Esscher</a>
+        <a href="{{ '/about/#standards' | relative_url }}">Editorial standards</a>
+        <a href="{{ '/corrections/' | relative_url }}">Corrections</a>
+        {% if site.contact_email and site.contact_email != "" %}<a href="mailto:{{ site.contact_email }}">Contact</a>{% endif %}
+      </div>
+      <div class="footer-col">
+        {% if site.newsletter and site.newsletter != "" %}<a href="{{ '/subscribe/' | relative_url }}">Newsletter</a>{% endif %}
+        <a href="{{ '/feed.xml' | relative_url }}">RSS feed</a>
+        <span class="muted">© {{ site.time | date: "%Y" }} Esscher</span>
+      </div>
     </nav>
   </div>
 </footer>

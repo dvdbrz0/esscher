@@ -1,0 +1,14 @@
+{% if site.newsletter and site.newsletter != "" %}
+<section class="signup" aria-labelledby="signup-h-{{ include.id | default: 'main' }}">
+  <div class="signup-text">
+    <h2 id="signup-h-{{ include.id | default: 'main' }}" class="signup-title">Get the Daily Brief by email</h2>
+    <p>Every weekday at 05:00 Bucharest time, with the Weekly Review on Sundays. Free, and you can unsubscribe at any time.</p>
+  </div>
+  <form class="signup-form" action="https://buttondown.com/api/emails/embed-subscribe/{{ site.newsletter }}" method="post">
+    <label for="signup-email-{{ include.id | default: 'main' }}" class="visually-hidden">Email address</label>
+    <input id="signup-email-{{ include.id | default: 'main' }}" type="email" name="email" required autocomplete="email" placeholder="Your email address">
+    <input type="hidden" name="embed" value="1">
+    <button class="button" type="submit">Subscribe</button>
+  </form>
+</section>
+{% endif %}

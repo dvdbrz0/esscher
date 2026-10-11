@@ -6,7 +6,8 @@ Usage:
 
 The JSON format is described in _docs/format.md. The script validates the
 input, cleans links, and writes _posts/YYYY-MM-DD-daily.md or
-_posts/YYYY-MM-DD-weekly.md. It prints the path of the file it wrote.
+_posts/YYYY-MM-DD-weekly.md, one page per story in _stories/, and the chart of
+the day in _includes/charts/. It prints every file it wrote.
 """
 import json
 import re
@@ -15,7 +16,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import chart  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent
+WRITTEN = []
 LIST_KEYS = ["ai", "markets", "economy", "mathematics", "voices", "papers",
              "mattered", "canon", "read", "debates", "watch"]
 
@@ -182,8 +187,71 @@ def write_stories(front, edition, day):
                 story["section"] = "Must-read · " + it["section"]
             text = "---\n" + json.dumps(story, ensure_ascii=False, indent=1) + "\n---\n"
             (stories_dir / f"{name}.md").write_text(text, encoding="utf-8")
+            WRITTEN.append(stories_dir / f"{name}.md")
             it["story"] = f"/stories/{name}/"
             it["body"] = body
+
+
+def site_url():
+    m = re.search(r'^url:\s*"?([^"\n]+)"?', (ROOT / "_config.yml").read_text(encoding="utf-8"), re.M)
+    return (m.group(1).rstrip("/") if m else "")
+
+
+def write_chart(front, edition, day):
+    """Validate the chart of the day and draw it as an SVG include."""
+    spec = front.get("chart")
+    if not spec:
+        return
+    for k in ("title", "points", "source", "source_url"):
+        if not spec.get(k):
+            fail(f'chart needs "{k}" (see _docs/format.md)')
+    if not str(spec["source_url"]).startswith("http"):
+        fail("chart.source_url must be an http(s) link")
+    if spec.get("kind", "line") not in ("line", "bar"):
+        fail('chart.kind must be "line" or "bar"')
+    try:
+        svg = chart.render(spec)
+    except (ValueError, KeyError, TypeError) as e:
+        fail(f"chart could not be drawn: {e}")
+    rel = f'charts/{day.strftime("%Y-%m-%d")}-{edition}.svg'
+    out = ROOT / "_includes" / rel
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(svg, encoding="utf-8")
+    WRITTEN.append(out)
+    pts = spec.pop("points")
+    spec["svg"] = rel
+    if spec.get("kind", "line") == "line":
+        last = max(pts, key=lambda q: q["x"])
+        spec.setdefault("latest", last["y"])
+        spec.setdefault("latest_date", last["x"])
+
+
+def feed_body(front, edition):
+    """Plain links for feed readers: the lines of the day and every headline."""
+    base = site_url()
+    out = []
+    lines = front.get("three_lines") or front.get("five_lines") or []
+    for i, l in enumerate(lines, 1):
+        out.append(f"{i}. {l}")
+    out.append("")
+    for key, label, _ in SECTIONS[edition]:
+        items = front.get(key)
+        if isinstance(items, dict):
+            items = [items]
+        if not items:
+            continue
+        out.append(f"**{label}**")
+        out.append("")
+        for it in items:
+            title = it.get("headline") or it.get("title")
+            if not title:
+                continue
+            link = base + it["story"] if it.get("story") else None
+            summary = it.get("summary") or it.get("dek") or it.get("why") or ""
+            head = f"[{title}]({link})" if link else title
+            out.append(f"- {head}" + (f": {summary}" if summary else ""))
+        out.append("")
+    return "\n".join(out).strip() + "\n"
 
 
 def main():
@@ -240,23 +308,38 @@ def main():
         "description": description,
     })
     for k, v in data.items():
-        if k not in ("edition", "date", "published"):
+        if k not in ("edition", "date", "published", "updated"):
             front[k] = v
-    # When the edition went online, in UTC.
-    front["published"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    if front.get("ticker_asof") and not re.match(r"^\d{4}-\d{2}-\d{2}$", str(front["ticker_asof"])):
+        fail('"ticker_asof" must look like 2026-10-09')
 
+    out = ROOT / "_posts" / f'{day.strftime("%Y-%m-%d")}-{edition}.md'
+    now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    # When the edition first went online, in UTC. A rerun keeps it and records the update.
+    previous = None
+    if out.exists():
+        m = re.match(r"^---\n(.*?)\n---\n", out.read_text(encoding="utf-8"), re.S)
+        try:
+            previous = json.loads(m.group(1)).get("published") if m else None
+        except ValueError:
+            previous = None
+    front["published"] = previous or now
+    if previous:
+        front["updated"] = now
+
+    write_chart(front, edition, day)
     write_stories(front, edition, day)
     if has_math({k: v for k, v in front.items() if k != "body"}):
         front["math"] = True
 
     # JSON is valid YAML, so the front matter is written as JSON: no quoting pitfalls.
-    body_lines = "\n".join("- " + l for l in lines)
-    text = "---\n" + json.dumps(front, ensure_ascii=False, indent=1) + "\n---\n\n" + body_lines + "\n"
+    text = "---\n" + json.dumps(front, ensure_ascii=False, indent=1) + "\n---\n\n" + feed_body(front, edition)
 
-    out = ROOT / "_posts" / f'{day.strftime("%Y-%m-%d")}-{edition}.md'
     out.parent.mkdir(exist_ok=True)
     out.write_text(text, encoding="utf-8")
-    print(out)
+    WRITTEN.append(out)
+    for path in WRITTEN:
+        print(path.relative_to(ROOT))
 
 
 if __name__ == "__main__":

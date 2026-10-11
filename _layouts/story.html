@@ -13,7 +13,7 @@ layout: default
     {% if st.summary %}<p class="dek">{{ st.summary | escape }}</p>{% endif %}
     <p class="story-dates small muted">
       {% if st.published %}Source published <time datetime="{{ st.published | escape }}">{% if st.published contains "T" %}{{ st.published | date: "%-d %B %Y, %H:%M UTC" }}{% else %}{{ st.published | date: "%-d %B %Y" }}{% endif %}</time> · {% endif %}
-      In the <a href="{{ st.edition_url | relative_url }}">{% if st.edition == "weekly" %}Weekly Review{% else %}Daily Brief{% endif %} of {{ st.date | date: "%-d %B %Y" }}</a>
+      In the <a href="{{ st.edition_url | relative_url }}">{% if st.edition == "weekly" %}Weekly Review{% else %}Daily Brief{% endif %} of {{ st.date | date: "%-d %B %Y" }}</a>{% if st.corrections.size > 0 %} · <a href="#corrections">Corrected</a>{% endif %}
     </p>
     {% if st.topics.size > 0 %}
     <nav class="topic-chips" aria-label="Topics">
@@ -23,6 +23,13 @@ layout: default
     <div class="story-body">
       {% for para in st.body %}<p>{{ para | escape }}</p>{% endfor %}
     </div>
+    {% if st.corrections.size > 0 %}
+    <div class="correction-box" id="corrections">
+      {% for c in st.corrections %}
+      <p><strong>Correction, <time datetime="{{ c.date | escape }}">{{ c.date | date: "%-d %B %Y" }}</time>.</strong> {{ c.note | escape }}</p>
+      {% endfor %}
+    </div>
+    {% endif %}
   </div>
 
   <aside class="story-page-aside">
@@ -57,5 +64,20 @@ layout: default
     {% endif %}
   </aside>
 </article>
+
+{% assign related_count = 0 %}
+{% capture related %}{% assign pool = site.stories | sort: "date" | reverse %}{% for s in pool %}{% if related_count >= 4 %}{% break %}{% endif %}{% if s.url == st.url %}{% continue %}{% endif %}{% assign shared = false %}{% for t in s.topics %}{% if st.topics contains t %}{% assign shared = true %}{% break %}{% endif %}{% endfor %}{% if shared %}{% assign related_count = related_count | plus: 1 %}
+  <li>
+    <span class="small muted">{% if s.tag %}{{ s.tag | escape }}{% else %}{{ s.section | remove: "Must-read · " | escape }}{% endif %} · {{ s.date | date: "%-d %b %Y" }}</span>
+    <a href="{{ s.url | relative_url }}">{{ s.title | escape }}</a>
+  </li>{% endif %}{% endfor %}{% endcapture %}
+{% if related_count > 0 %}
+<section class="related" aria-labelledby="related-h">
+  <h2 id="related-h" class="section-label">Related</h2>
+  <ul class="related-list">{{ related }}</ul>
+</section>
+{% endif %}
+
+{% include signup.html id="story" %}
 
 <p class="edition-link"><a href="{{ st.edition_url | relative_url }}">Back to the {% if st.edition == "weekly" %}Weekly Review{% else %}Daily Brief{% endif %} of {{ st.date | date: "%-d %B %Y" }}</a></p>
