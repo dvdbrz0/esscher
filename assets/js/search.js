@@ -20,7 +20,7 @@
       hits.forEach(function (it) {
         var li = document.createElement("li");
         var date = document.createElement("span");
-        date.className = "mono small muted";
+        date.className = "small nums muted";
         date.textContent = it.date;
         var tag = document.createElement("span");
         tag.className = "tag";

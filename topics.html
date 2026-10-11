@@ -12,7 +12,7 @@ permalink: /topics/
   {% assign n = site.stories | where_exp: "s", "s.topics contains t.name" | size %}
   <li>
     <a href="{{ '/topics/' | append: t.slug | append: '/' | relative_url }}">{{ t.name | escape }}</a>
-    <span class="mono small muted">{{ n }}</span>
+    <span class="small nums muted">{{ n }}</span>
     <p class="small muted">{{ t.about | escape }}</p>
   </li>
   {% endfor %}

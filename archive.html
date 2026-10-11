@@ -14,7 +14,7 @@ permalink: /archive/
   <ul class="archive-list">
     {% for p in month.items %}
     <li>
-      <span class="mono small muted">{{ p.date | date: "%a %-d" }}</span>
+      <span class="small nums muted">{{ p.date | date: "%a %-d" }}</span>
       <span class="tag">{% if p.edition == "weekly" %}Weekly{% else %}Daily{% endif %}</span>
       <a href="{{ p.url | relative_url }}">{% if p.headline %}{{ p.headline | escape }}{% else %}{{ p.title | escape }}{% endif %}</a>
     </li>

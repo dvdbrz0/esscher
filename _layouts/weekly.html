@@ -13,7 +13,7 @@ layout: default
 <section class="three-lines" aria-labelledby="five-h">
   <h2 id="five-h" class="label">The week in five lines</h2>
   <ol class="five-list">
-    {% for line in w.five_lines %}<li><span class="num">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span><p>{{ line | escape }}</p></li>{% endfor %}
+    {% for line in w.five_lines %}<li><span class="num">{{ forloop.index }}</span><p>{{ line | escape }}</p></li>{% endfor %}
   </ol>
 </section>
 {% endif %}
@@ -44,7 +44,7 @@ layout: default
       {% if p.focus %}<div><dt>Focus on</dt><dd>{{ p.focus | escape }}</dd></div>{% endif %}
       {% if p.time %}<div><dt>Reading time</dt><dd>{{ p.time | escape }}</dd></div>{% endif %}
     </dl>
-    {% if p.arxiv %}<a class="mono small" href="https://arxiv.org/abs/{{ p.arxiv | escape }}">arXiv:{{ p.arxiv | escape }}</a>{% elsif p.url %}<a class="small" href="{{ p.url | escape }}">Read the paper</a>{% endif %}
+    {% if p.arxiv %}<a class="small nums" href="https://arxiv.org/abs/{{ p.arxiv | escape }}">arXiv:{{ p.arxiv | escape }}</a>{% elsif p.url %}<a class="small" href="{{ p.url | escape }}">Read the paper</a>{% endif %}
   </div>
   {% endfor %}
 </section>
@@ -60,7 +60,7 @@ layout: default
       <h3>{% if p.story %}<a href="{{ p.story | relative_url }}">{{ p.title | escape }}</a>{% else %}{{ p.title | escape }}{% endif %}</h3>
       {% if p.authors %}<span class="muted small">{{ p.authors | escape }}</span>{% endif %}
       <p>{{ p.summary | escape }}</p>
-      {% if p.arxiv %}<a class="mono small" href="https://arxiv.org/abs/{{ p.arxiv | escape }}">arXiv:{{ p.arxiv | escape }}</a>{% elsif p.url %}<a class="small" href="{{ p.url | escape }}">Read the paper</a>{% endif %}
+      {% if p.arxiv %}<a class="small nums" href="https://arxiv.org/abs/{{ p.arxiv | escape }}">arXiv:{{ p.arxiv | escape }}</a>{% elsif p.url %}<a class="small" href="{{ p.url | escape }}">Read the paper</a>{% endif %}
     </div>
     {% endfor %}
   </div>
@@ -117,7 +117,7 @@ layout: default
 <section class="weekly-section" aria-labelledby="watch-h">
   <h2 id="watch-h" class="section-label">Next week to watch</h2>
   <ul class="watch-list">
-    {% for x in w.watch %}<li><span class="mono small">{{ x.date | escape }}</span><span>{{ x.item | escape }}</span></li>{% endfor %}
+    {% for x in w.watch %}<li><span class="small nums">{{ x.date | escape }}</span><span>{{ x.item | escape }}</span></li>{% endfor %}
   </ul>
 </section>
 {% endif %}

@@ -14,7 +14,7 @@ layout: default
   {% for s in items %}
   <li>
     <div class="topic-meta">
-      <span class="mono small muted">{{ s.date | date: "%-d %b %Y" }}</span>
+      <span class="small nums muted">{{ s.date | date: "%-d %b %Y" }}</span>
       <span class="tag">{% if s.kind == "paper" %}Paper{% else %}Story{% endif %}</span>
     </div>
     <a class="topic-title" href="{{ s.url | relative_url }}">{{ s.title | escape }}</a>

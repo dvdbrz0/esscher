@@ -8,7 +8,7 @@
   <div class="three-grid">
     {% for line in b.three_lines %}
     <div class="three-item">
-      <span class="num">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
+      <span class="num">{{ forloop.index }}</span>
       <p>{{ line | escape }}</p>
     </div>
     {% endfor %}
@@ -107,7 +107,7 @@
       <h3>{% if p.story %}<a href="{{ p.story | relative_url }}">{{ p.title | escape }}</a>{% else %}{{ p.title | escape }}{% endif %}</h3>
       {% if p.authors %}<span class="muted small">{{ p.authors | escape }}</span>{% endif %}
       <p>{{ p.summary | escape }}</p>
-      <span class="paper-meta">{% if p.arxiv %}<a class="mono small" href="https://arxiv.org/abs/{{ p.arxiv | escape }}">arXiv:{{ p.arxiv | escape }}</a>{% elsif p.url %}<a class="small" href="{{ p.url | escape }}">Read the paper</a>{% endif %}{% if p.published %} <span class="muted small">· <time datetime="{{ p.published | escape }}">{{ p.published | date: "%-d %b %Y" }}</time></span>{% endif %}</span>
+      <span class="paper-meta">{% if p.arxiv %}<a class="small nums" href="https://arxiv.org/abs/{{ p.arxiv | escape }}">arXiv:{{ p.arxiv | escape }}</a>{% elsif p.url %}<a class="small" href="{{ p.url | escape }}">Read the paper</a>{% endif %}{% if p.published %} <span class="muted small">· <time datetime="{{ p.published | escape }}">{{ p.published | date: "%-d %b %Y" }}</time></span>{% endif %}</span>
     </div>
     {% endfor %}
   </div>
