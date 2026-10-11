@@ -41,6 +41,8 @@ jobs:
           if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ] && [ -z "$MANUAL_POST" ]; then
             code=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: Token $BUTTONDOWN_API_KEY" https://api.buttondown.com/v1/ping)
             echo "Buttondown API key check: HTTP $code"
+            curl -s -H "Authorization: Token $BUTTONDOWN_API_KEY" https://api.buttondown.com/v1/newsletters \
+              | python3 -c "import json,sys; d=json.load(sys.stdin); [print('Newsletter:', n.get('username'), '|', n.get('name'), '| status:', n.get('status') or n.get('state')) for n in d.get('results', [])]" || true
             [ "$code" = "200" ] && exit 0 || exit 1
           fi
           if [ -n "$MANUAL_POST" ]; then
