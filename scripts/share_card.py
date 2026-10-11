@@ -10,6 +10,7 @@ Fonts in scripts/fonts/ are under the SIL Open Font License (see the OFL files).
 from pathlib import Path
 
 FONTS = Path(__file__).resolve().parent / "fonts"
+BRAND = Path(__file__).resolve().parent / "brand"
 W, H = 1200, 630
 MARGIN = 72
 BG = (15, 17, 20)
@@ -38,13 +39,6 @@ def _wrap(draw, text, font, width):
     return lines
 
 
-def _tracked(draw, xy, text, font, fill, tracking):
-    x, y = xy
-    for ch in text:
-        draw.text((x, y), ch, font=font, fill=fill)
-        x += draw.textlength(ch, font=font) + tracking
-
-
 def make_card(out_path, title, kicker="", date_text=""):
     """Write the card as a small palette PNG. Returns True when written."""
     try:
@@ -54,10 +48,9 @@ def make_card(out_path, title, kicker="", date_text=""):
     im = Image.new("RGB", (W, H), BG)
     d = ImageDraw.Draw(im)
 
-    # Masthead: wordmark and the orange square of the site icon.
-    mark = _font("Archivo-ExtraBold.ttf", 40)
-    _tracked(d, (MARGIN, 58), "ESSCHER", mark, INK, 2)
-    d.rectangle([W - MARGIN - 22, 66, W - MARGIN, 88], fill=ACCENT)
+    # Masthead: the drawn wordmark (made by brand.py, rendered once to a white PNG).
+    wordmark = Image.open(BRAND / "wordmark-white.png").convert("RGBA")
+    im.paste(wordmark, (MARGIN, 56), wordmark)
 
     # Headline: the largest size whose lines fit between the section label and the footer.
     width = W - 2 * MARGIN

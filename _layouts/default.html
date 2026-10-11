@@ -42,42 +42,49 @@
 </head>
 <body>
 {% if page.ticker %}{% assign tick_page = page %}{% else %}{% assign tick_page = site.posts | where: "edition", "daily" | first %}{% endif %}
+{% assign dailies_all = site.posts | where: "edition", "daily" %}{% assign ed_no = nil %}{% for d in dailies_all %}{% if d.url == tick_page.url %}{% assign ed_no = dailies_all.size | minus: forloop.index0 %}{% endif %}{% endfor %}
 <header class="site-header">
-  <div class="wrap">
-    <div class="topbar">
-      <span>{% if page.date %}{{ page.date | date: "%A, %-d %B %Y" }}{% elsif tick_page %}{{ tick_page.date | date: "%A, %-d %B %Y" }}{% endif %}</span>
-      <nav aria-label="Sections" class="topnav">
-        <a href="{{ '/' | relative_url }}#ai">AI</a>
-        <a href="{{ '/' | relative_url }}#papers">Papers</a>
-        <a href="{{ '/' | relative_url }}#markets">Markets</a>
-        <a href="{{ '/' | relative_url }}#economy">Economy</a>
-        <a href="{{ '/topics/' | relative_url }}">Topics</a>
-        <a href="{{ '/weekly/' | relative_url }}">Weekly Review</a>
-        <a href="{{ '/archive/' | relative_url }}">Archive</a>
-      </nav>
+  <div class="wrap mh-row">
+    <a class="wordmark" href="{{ '/' | relative_url }}" aria-label="Esscher, front page">{% include brand/wordmark.svg %}</a>
+    <nav aria-label="Sections" class="topnav">
+      <a href="{{ '/' | relative_url }}#ai">AI</a>
+      <a href="{{ '/' | relative_url }}#papers">Papers</a>
+      <a href="{{ '/' | relative_url }}#markets">Markets</a>
+      <a href="{{ '/' | relative_url }}#economy">Economy</a>
+      <a href="{{ '/topics/' | relative_url }}">Topics</a>
+      <a href="{{ '/weekly/' | relative_url }}">Weekly Review</a>
+      <a href="{{ '/archive/' | relative_url }}">Archive</a>
+    </nav>
+    <div class="mh-tools">
+      <a class="icon-link" href="{{ '/search/' | relative_url }}" aria-label="Search the archive"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"><circle cx="10.5" cy="10.5" r="6.5"></circle><line x1="15.5" y1="15.5" x2="21" y2="21"></line></svg></a>
+      <details class="menu">
+        <summary>Menu</summary>
+        <nav aria-label="Sections" class="menu-panel">
+          <a href="{{ '/' | relative_url }}#ai">AI and machine learning</a>
+          <a href="{{ '/' | relative_url }}#papers">Papers</a>
+          <a href="{{ '/' | relative_url }}#markets">Markets</a>
+          <a href="{{ '/' | relative_url }}#economy">Economy</a>
+          <a href="{{ '/topics/' | relative_url }}">Topics</a>
+          <a href="{{ '/weekly/' | relative_url }}">Weekly Review</a>
+          <a href="{{ '/maths/' | relative_url }}">The maths behind the news</a>
+          <a href="{{ '/archive/' | relative_url }}">Archive</a>
+        </nav>
+      </details>
     </div>
-    <div class="masthead">
-      <div class="brand">
-        <a class="wordmark" href="{{ '/' | relative_url }}">ESSCHER</a>
-        <span class="tagline">{{ site.tagline }}</span>
+  </div>
+  <div class="mh-sub">
+    <div class="wrap mh-sub-inner">
+      <span class="mh-date">{% if page.date %}{{ page.date | date: "%A %-d %B %Y" }}{% elsif tick_page %}{{ tick_page.date | date: "%A %-d %B %Y" }}{% endif %}{% if ed_no and page.layout != "story" %}<span class="mh-no">No. {{ ed_no }}</span>{% endif %}</span>
+      {% if tick_page.ticker %}
+      <div class="ticker" aria-label="Markets" data-markets="{{ '/markets.json' | relative_url }}" data-date="{{ tick_page.date | date: '%Y-%m-%d' }}">
+        <span class="ticker-label"{% if tick_page.ticker_asof or tick_page.ticker_source %} title="{% if tick_page.ticker_asof %}As of {{ tick_page.ticker_asof | date: '%-d %B %Y' }}.{% endif %}{% if tick_page.ticker_source %} Source: {{ tick_page.ticker_source | escape }}.{% endif %}"{% endif %}>{% if tick_page.ticker_label %}{{ tick_page.ticker_label | escape }}{% else %}Latest close{% endif %}</span>
+        {% for t in tick_page.ticker %}
+        <span class="tick" data-label="{{ t.label | escape }}"><span class="tick-name">{{ t.label | escape }}</span> {{ t.value | escape }}{% if t.change %} <span class="tick-change {% if t.dir == 'down' %}down{% else %}up{% endif %}">{{ t.change | escape }}</span>{% endif %}</span>
+        {% endfor %}
+        {% if tick_page.ticker_asof or tick_page.ticker_source %}<span class="ticker-source">{% if tick_page.ticker_asof %}As of {{ tick_page.ticker_asof | date: "%-d %B" }}.{% endif %}{% if tick_page.ticker_source %} {{ tick_page.ticker_source | escape }}.{% endif %}</span>{% endif %}
       </div>
-      <form class="search-form" role="search" action="{{ '/search/' | relative_url }}" method="get">
-        <label for="site-search" class="visually-hidden">Search the archive</label>
-        <input id="site-search" type="search" name="q" placeholder="Search the archive">
-        <button type="submit" aria-label="Search">
-          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg>
-        </button>
-      </form>
+      {% endif %}
     </div>
-    {% if tick_page.ticker %}
-    <div class="ticker" aria-label="Markets" data-markets="{{ '/markets.json' | relative_url }}" data-date="{{ tick_page.date | date: '%Y-%m-%d' }}">
-      <span class="ticker-label">{% if tick_page.ticker_label %}{{ tick_page.ticker_label | escape }}{% else %}Latest close{% endif %}</span>
-      {% for t in tick_page.ticker %}
-      <span class="tick" data-label="{{ t.label | escape }}"><span class="tick-name">{{ t.label | escape }}</span> {{ t.value | escape }}{% if t.change %} <span class="tick-change {% if t.dir == 'down' %}down{% else %}up{% endif %}">{{ t.change | escape }}</span>{% endif %}</span>
-      {% endfor %}
-      {% if tick_page.ticker_asof or tick_page.ticker_source %}<span class="ticker-source">{% if tick_page.ticker_asof %}As of {{ tick_page.ticker_asof | date: "%-d %B %Y" }}.{% endif %}{% if tick_page.ticker_source %} Source: {{ tick_page.ticker_source | escape }}.{% endif %}</span>{% endif %}
-    </div>
-    {% endif %}
   </div>
 </header>
 
@@ -88,7 +95,7 @@
 <footer class="site-footer">
   <div class="wrap footer-inner">
     <div class="footer-about">
-      <span class="footer-mark">ESSCHER</span>
+      <span class="footer-mark">{% include brand/wordmark.svg %}</span>
       <p>{{ site.tagline }}</p>
       <p class="small">For information only. Not investment advice.</p>
     </div>
@@ -116,5 +123,16 @@
   </div>
 </footer>
 <script src="{{ '/assets/js/sparklines.js' | relative_url }}" defer></script>
+<script>
+(function () {
+  // Fade the right edge of the markets row while part of it is hidden; it scrolls sideways.
+  var t = document.querySelector(".ticker");
+  if (!t) return;
+  function check() { t.classList.toggle("is-clipped", t.scrollLeft + t.clientWidth < t.scrollWidth - 2); }
+  t.addEventListener("scroll", check, { passive: true });
+  window.addEventListener("resize", check);
+  check();
+})();
+</script>
 </body>
 </html>

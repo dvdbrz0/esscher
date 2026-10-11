@@ -21,7 +21,8 @@ A map of the moving parts, for whoever works on the site next. The house style i
 | `scripts/correct.py STORY --note ... --replace OLD NEW` | Public correction: changes the text, adds a dated note, marks the story in its edition, lists it on /corrections/, redraws the share image if the headline changed. |
 | `scripts/chart.py` | Draws the chart of the day (line or bar) as inline SVG styled by `site.css`. |
 | `scripts/fred.py SERIES START` | Downloads a FRED series as chart points. |
-| `scripts/share_card.py` | Draws the 1200x630 image shown when a page is shared. Fonts in `scripts/fonts/` (SIL Open Font License). Needs Pillow; without it pages use `assets/share.png`. |
+| `scripts/share_card.py` | Draws the 1200x630 image shown when a page is shared. Fonts in `scripts/fonts/` (SIL Open Font License). The wordmark comes from `scripts/brand/wordmark-white.png`. Needs Pillow; without it pages use `assets/share.png`. |
+| `scripts/brand.py` | Redraws the wordmark, the mark and `assets/favicon.svg` from Newsreader (`scripts/fonts/`). Only needed if the brand changes; needs fonttools and uharfbuzz. The PNG icons and `scripts/brand/wordmark-white.png` are rendered from those SVGs. |
 | `scripts/newsletter.py POST [--send]` | Builds the newsletter email from an edition and sends it through Buttondown. |
 | `scripts/publish.sh MESSAGE` | Commit and push everything an edition produces. |
 
@@ -52,7 +53,15 @@ search (`search.json`), The maths behind the news (/maths/), corrections (/corre
 About and editorial standards, privacy notice, 404 page, RSS feed, sitemap, structured
 data (NewsArticle, WebSite, Organization), per-page share images, dark mode, KaTeX
 formulas (self-hosted), self-hosted fonts: Source Serif 4 for headlines and reading text,
-Source Sans 3 for interface, Archivo ExtraBold for the wordmark only.
+Source Sans 3 for interface.
+
+Masthead: one compact row (drawn wordmark, sections, search; a Menu on phones) above a
+thin row with the date, the edition number ("No. N", counted from the first daily
+edition) and the markets band, which scrolls sideways when it does not fit. The
+wordmark is "Esscher" in Newsreader (display size, weight 700) drawn as outlines with
+the two s joined, kept in `_includes/brand/wordmark.svg` and inlined so it follows the
+text colour in dark mode. `_includes/brand/mark.svg` is a density and its Esscher tilt,
+kept for small uses such as an end mark.
 
 ## Known pitfalls
 
