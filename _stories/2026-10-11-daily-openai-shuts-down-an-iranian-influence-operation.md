@@ -18,6 +18,9 @@
    "url": "https://www.inquirer.com/news/nation-world/iran-chat-gpt-fake-news-articles-published-us-openai-20261009.html"
   }
  ],
- "published": "2026-10-09"
+ "published": "2026-10-09",
+ "topics": [
+  "AI safety"
+ ]
 }
 ---

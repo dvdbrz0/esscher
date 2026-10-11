@@ -17,6 +17,10 @@
    "name": "Jane Street blog",
    "url": "https://blog.janestreet.com/can-you-use-autoregressive-diffusion-to-generate-market-data/"
   }
+ ],
+ "topics": [
+  "Quantitative finance",
+  "Market microstructure"
  ]
 }
 ---

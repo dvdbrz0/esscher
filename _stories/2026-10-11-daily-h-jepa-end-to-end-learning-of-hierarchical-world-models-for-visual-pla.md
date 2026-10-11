@@ -14,6 +14,9 @@
  ],
  "authors": "Zhang et al.",
  "arxiv": "2610.06805",
- "tag": "World models"
+ "tag": "Agents",
+ "topics": [
+  "Agents"
+ ]
 }
 ---

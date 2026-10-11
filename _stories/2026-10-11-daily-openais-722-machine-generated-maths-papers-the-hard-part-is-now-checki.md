@@ -28,6 +28,10 @@
    "url": "https://arxiv.org/abs/2610.08144"
   }
  ],
- "status": "Claims not yet independently reviewed"
+ "status": "Claims not yet independently reviewed",
+ "topics": [
+  "Mathematics",
+  "Large language models"
+ ]
 }
 ---

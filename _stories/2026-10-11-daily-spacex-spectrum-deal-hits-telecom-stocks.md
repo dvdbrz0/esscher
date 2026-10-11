@@ -17,6 +17,9 @@
    "name": "Benzinga",
    "url": "https://www.benzinga.com/markets/tech/26/10/62271617"
   }
+ ],
+ "topics": [
+  "Markets"
  ]
 }
 ---

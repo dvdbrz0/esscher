@@ -15,6 +15,11 @@ layout: default
       {% if st.published %}Source published <time datetime="{{ st.published | escape }}">{% if st.published contains "T" %}{{ st.published | date: "%-d %B %Y, %H:%M UTC" }}{% else %}{{ st.published | date: "%-d %B %Y" }}{% endif %}</time> · {% endif %}
       In the <a href="{{ st.edition_url | relative_url }}">{% if st.edition == "weekly" %}Weekly Review{% else %}Daily Brief{% endif %} of {{ st.date | date: "%-d %B %Y" }}</a>
     </p>
+    {% if st.topics.size > 0 %}
+    <nav class="topic-chips" aria-label="Topics">
+      {% for name in st.topics %}{% assign tt = site.data.topics | where: "name", name | first %}{% if tt %}<a href="{{ '/topics/' | append: tt.slug | append: '/' | relative_url }}">{{ tt.name | escape }}</a>{% endif %}{% endfor %}
+    </nav>
+    {% endif %}
     <div class="story-body">
       {% for para in st.body %}<p>{{ para | escape }}</p>{% endfor %}
     </div>

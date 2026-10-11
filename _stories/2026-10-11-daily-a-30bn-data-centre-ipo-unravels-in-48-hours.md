@@ -18,6 +18,10 @@
    "url": "https://www.bloomberg.com/news/articles/2026-10-09/data-center-darling-s-30-billion-ipo-dream-crushed-in-48-hours"
   }
  ],
- "published": "2026-10-09"
+ "published": "2026-10-09",
+ "topics": [
+  "Markets",
+  "AI industry"
+ ]
 }
 ---

@@ -17,6 +17,9 @@
    "name": "CNBC",
    "url": "https://www.cnbc.com/2026/09/10/ecb-interest-rate-hike-lagarde-iran.html"
   }
+ ],
+ "topics": [
+  "Economy"
  ]
 }
 ---

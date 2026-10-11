@@ -22,6 +22,9 @@
    "url": "https://www.wsj.com/tech/ai/ai-computing-power-demand-a63da9b9"
   }
  ],
- "published": "2026-10-09"
+ "published": "2026-10-09",
+ "topics": [
+  "AI industry"
+ ]
 }
 ---

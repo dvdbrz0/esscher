@@ -21,6 +21,9 @@
    "name": "Investing.com",
    "url": "https://www.investing.com/news/company-news/nvidia-in-talks-to-acquire-reflection-ai-or-increase-investment-ft-reports-4942324"
   }
+ ],
+ "topics": [
+  "AI industry"
  ]
 }
 ---

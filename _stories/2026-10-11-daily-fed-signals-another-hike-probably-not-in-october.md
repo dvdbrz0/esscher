@@ -18,6 +18,9 @@
    "url": "https://www.cnbc.com/2026/10/07/fed-officials-see-another-hike-coming-but-no-sign-as-to-when-minutes-show.html"
   }
  ],
- "published": "2026-10-07"
+ "published": "2026-10-07",
+ "topics": [
+  "Economy"
+ ]
 }
 ---

@@ -18,6 +18,10 @@
    "url": "https://www.axios.com/2026/10/09/anthropic-ai-security-white-house"
   }
  ],
- "published": "2026-10-09"
+ "published": "2026-10-09",
+ "topics": [
+  "AI policy",
+  "AI safety"
+ ]
 }
 ---

@@ -14,6 +14,10 @@
  ],
  "authors": "Tan et al.",
  "arxiv": "2610.08869",
- "tag": "Credit risk"
+ "tag": "Credit risk",
+ "topics": [
+  "Credit risk",
+  "Quantitative finance"
+ ]
 }
 ---

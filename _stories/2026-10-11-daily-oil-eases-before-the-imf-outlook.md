@@ -17,6 +17,9 @@
    "name": "IMF",
    "url": "https://www.imf.org/en/publications/weo/issues/2026/10/13/world-economic-outlook-october-2026"
   }
+ ],
+ "topics": [
+  "Economy"
  ]
 }
 ---

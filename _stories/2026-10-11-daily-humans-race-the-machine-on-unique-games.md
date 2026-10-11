@@ -18,6 +18,9 @@
    "url": "https://quantamagazine.org/as-ai-closed-in-on-unique-games-proof-researchers-raced-to-beat-the-machines-20261007"
   }
  ],
- "published": "2026-10-07"
+ "published": "2026-10-07",
+ "topics": [
+  "Mathematics"
+ ]
 }
 ---

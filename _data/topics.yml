@@ -1,0 +1,46 @@
+# The fixed list of topics. Each has its own page at /topics/<slug>/.
+- name: Learning theory
+  slug: learning-theory
+  about: Generalization, sample complexity, information-theoretic and PAC-Bayes bounds.
+- name: Probability
+  slug: probability
+  about: Concentration inequalities, random matrices, stochastic processes, high-dimensional probability.
+- name: Optimization
+  slug: optimization
+  about: Stochastic and convex optimization, training dynamics, sampling algorithms.
+- name: Reasoning and inference
+  slug: reasoning-and-inference
+  about: Test-time computation, majority voting, self-consistency, chain-of-thought and its theory.
+- name: Large language models
+  slug: large-language-models
+  about: New models, training and post-training methods, evaluations.
+- name: Agents
+  slug: agents
+  about: AI systems that act in software and on the web.
+- name: AI safety
+  slug: ai-safety
+  about: Alignment, reward hacking, evaluations of dangerous behaviour, security incidents.
+- name: AI policy
+  slug: ai-policy
+  about: Regulation, government action and public institutions.
+- name: AI industry
+  slug: ai-industry
+  about: Companies, deals, compute, revenue and investment.
+- name: Quantitative finance
+  slug: quantitative-finance
+  about: Pricing, portfolio construction, systematic strategies, financial machine learning.
+- name: Market microstructure
+  slug: market-microstructure
+  about: Order books, price impact, liquidity and execution.
+- name: Credit risk
+  slug: credit-risk
+  about: Credit scoring, default modelling and model governance.
+- name: Markets
+  slug: markets
+  about: Equities, rates, commodities and the moves that matter.
+- name: Economy
+  slug: economy
+  about: Central banks, inflation, growth and macroeconomic data.
+- name: Mathematics
+  slug: mathematics
+  about: Notable results and how mathematics is changing.

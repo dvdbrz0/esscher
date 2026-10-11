@@ -1,0 +1,27 @@
+---
+layout: default
+---
+{% assign t = site.data.topics | where: "name", page.topic | first %}
+{% assign items = site.stories | where_exp: "s", "s.topics contains page.topic" | sort: "date" | reverse %}
+<header class="page-head">
+  <span class="label-sm accent">Topic</span>
+  <h1 class="lead-title">{{ page.topic | escape }}</h1>
+  {% if t.about %}<p class="muted">{{ t.about | escape }}</p>{% endif %}
+  <p class="small muted">{{ items.size }} {% if items.size == 1 %}item{% else %}items{% endif %} · <a href="{{ '/topics/' | relative_url }}">All topics</a></p>
+</header>
+{% if items.size > 0 %}
+<ul class="topic-list">
+  {% for s in items %}
+  <li>
+    <div class="topic-meta">
+      <span class="mono small muted">{{ s.date | date: "%-d %b %Y" }}</span>
+      <span class="tag">{% if s.kind == "paper" %}Paper{% else %}Story{% endif %}</span>
+    </div>
+    <a class="topic-title" href="{{ s.url | relative_url }}">{{ s.title | escape }}</a>
+    {% if s.summary %}<p>{{ s.summary | escape }}</p>{% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p class="muted topic-empty">Nothing here yet. Stories and papers on this topic will appear as editions are published.</p>
+{% endif %}

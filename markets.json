@@ -1,0 +1,5 @@
+---
+layout: null
+permalink: /markets.json
+---
+{% assign dailies = site.posts | where: "edition", "daily" %}[{% for p in dailies limit: 30 %}{"date": {{ p.date | date: "%Y-%m-%d" | jsonify }}, "ticker": {{ p.ticker | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]

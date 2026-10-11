@@ -31,6 +31,20 @@ picture before deciding to open the original. Rules for `body`:
   same story; if that is too thin, keep the body short rather than invent.
 - Optional per item: `"why"`, one sentence on why it matters (shown in a box).
 
+Topics: every story and paper carries `"topics"`, a list of 1 to 3 names taken
+exactly from this list (each has its own page on the site):
+Learning theory, Probability, Optimization, Reasoning and inference,
+Large language models, Agents, AI safety, AI policy, AI industry,
+Quantitative finance, Market microstructure, Credit risk, Markets, Economy,
+Mathematics. For papers, `"tag"` should also be one of these names. Unknown names
+are dropped by the script.
+
+Mathematics: write formulas in LaTeX inside `"body"` (and `"why"` if needed), with
+`\( ... \)` for inline formulas and `\[ ... \]` for displayed ones. Remember
+that in JSON every backslash is doubled: `"\\(\\sqrt{d \\lambda_{\\max}}\\)"`.
+Never use dollar signs for math (prices use them). Keep headlines, summaries and
+`"three_lines"` free of LaTeX: they also appear in link previews.
+
 ## Daily brief
 
 ```json
@@ -53,12 +67,12 @@ picture before deciding to open the original. Rules for `body`:
     "links": [{"label": "New Scientist: the announcement", "url": "https://..."}]
   },
   "ai": [
-    {"headline": "...", "summary": "One or two sentences.", "body": ["Paragraph one.", "Paragraph two."], "why": "Optional.", "published": "2026-10-09", "sources": [{"name": "TechCrunch", "url": "https://..."}]}
+    {"headline": "...", "summary": "One or two sentences.", "body": ["Paragraph one.", "Paragraph two."], "why": "Optional.", "topics": ["AI safety", "Agents"], "published": "2026-10-09", "sources": [{"name": "TechCrunch", "url": "https://..."}]}
   ],
   "voices": [{"name": "Yann LeCun", "summary": "...", "url": "https://x.com/..."}],
   "papers_note": "New on arXiv today",
   "papers": [
-    {"tag": "Learning theory", "title": "...", "authors": "Hanneke et al.", "summary": "Main result in words.", "body": ["The question.", "The main result in words, and why it matters."], "arxiv": "2610.10600", "published": "2026-10-09"}
+    {"tag": "Learning theory", "title": "...", "authors": "Hanneke et al.", "summary": "Main result in words.", "body": ["The question.", "The main result in words, and why it matters."], "topics": ["Learning theory", "Reasoning and inference"], "arxiv": "2610.10600", "published": "2026-10-09"}
   ],
   "markets": [{"headline": "...", "summary": "...", "body": ["...", "..."], "sources": [{"name": "...", "url": "https://..."}]}],
   "economy": [{"headline": "...", "summary": "...", "body": ["...", "..."], "sources": [{"name": "...", "url": "https://..."}]}],

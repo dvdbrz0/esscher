@@ -24,6 +24,10 @@
    "url": "https://www.nytimes.com/2026/10/09/technology/anthropic-rogue-ai-agents.html"
   }
  ],
- "published": "2026-10-09"
+ "published": "2026-10-09",
+ "topics": [
+  "AI safety",
+  "Agents"
+ ]
 }
 ---

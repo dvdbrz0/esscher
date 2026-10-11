@@ -18,6 +18,10 @@
    "name": "Epoch AI",
    "url": "https://epoch.ai/publications/innovationeval"
   }
+ ],
+ "topics": [
+  "Agents",
+  "Large language models"
  ]
 }
 ---

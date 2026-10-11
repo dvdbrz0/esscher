@@ -95,6 +95,41 @@ def paragraphs(body):
     return [p.strip() for p in body if isinstance(p, str) and p.strip()]
 
 
+def load_topics():
+    text = (ROOT / "_data" / "topics.yml").read_text(encoding="utf-8")
+    return [m.strip().strip('"') for m in re.findall(r"^- name:\s*(.+)$", text, re.M)]
+
+
+DEFAULT_TOPICS = {"markets": ["Markets"], "economy": ["Economy"], "mathematics": ["Mathematics"]}
+
+
+def pick_topics(it, key, allowed):
+    topics = it.get("topics") or []
+    if isinstance(topics, str):
+        topics = [topics]
+    good = [t for t in topics if t in allowed]
+    for t in topics:
+        if t not in allowed:
+            sys.stderr.write(f"new_post.py: unknown topic '{t}' dropped (see _data/topics.yml)\n")
+    if not good:
+        if it.get("tag") in allowed:
+            good = [it["tag"]]
+        else:
+            good = DEFAULT_TOPICS.get(key, [])
+    return good[:3]
+
+
+def has_math(obj):
+    """True when any string uses the \\( \\) or \\[ \\] math delimiters."""
+    if isinstance(obj, str):
+        return "\\(" in obj or "\\[" in obj
+    if isinstance(obj, dict):
+        return any(has_math(v) for v in obj.values())
+    if isinstance(obj, list):
+        return any(has_math(v) for v in obj)
+    return False
+
+
 def write_stories(front, edition, day):
     """Write one page per story or paper that has a "body", and link it from the edition."""
     stories_dir = ROOT / "_stories"
@@ -103,6 +138,7 @@ def write_stories(front, edition, day):
     for old in stories_dir.glob(prefix + "*.md"):
         old.unlink()
     edition_url = f'/{day.strftime("%Y/%m/%d")}/{edition}/'
+    allowed = load_topics()
     used = set()
     for key, label, kind in SECTIONS[edition]:
         items = front.get(key)
@@ -136,6 +172,12 @@ def write_stories(front, edition, day):
             for k in ("why", "sources", "links", "published", "authors", "arxiv", "url", "tag", "status"):
                 if it.get(k):
                     story[k] = it[k]
+            topics = pick_topics(it, key, allowed)
+            if topics:
+                story["topics"] = topics
+                it["topics"] = topics
+            if has_math(story):
+                story["math"] = True
             if key == "must_read" and it.get("section"):
                 story["section"] = "Must-read · " + it["section"]
             text = "---\n" + json.dumps(story, ensure_ascii=False, indent=1) + "\n---\n"
@@ -204,6 +246,8 @@ def main():
     front["published"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     write_stories(front, edition, day)
+    if has_math({k: v for k, v in front.items() if k != "body"}):
+        front["math"] = True
 
     # JSON is valid YAML, so the front matter is written as JSON: no quoting pitfalls.
     body_lines = "\n".join("- " + l for l in lines)

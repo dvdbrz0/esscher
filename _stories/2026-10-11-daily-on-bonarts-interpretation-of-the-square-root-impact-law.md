@@ -15,6 +15,10 @@
  ],
  "authors": "Bouchaud et al.",
  "arxiv": "2610.10053",
- "tag": "Market microstructure"
+ "tag": "Market microstructure",
+ "topics": [
+  "Market microstructure",
+  "Quantitative finance"
+ ]
 }
 ---

@@ -1,0 +1,19 @@
+---
+layout: default
+title: Topics
+permalink: /topics/
+---
+<header class="page-head">
+  <h1 class="lead-title">Topics</h1>
+  <p class="muted">Every story and paper, filed by subject.</p>
+</header>
+<ul class="topics-index">
+  {% for t in site.data.topics %}
+  {% assign n = site.stories | where_exp: "s", "s.topics contains t.name" | size %}
+  <li>
+    <a href="{{ '/topics/' | append: t.slug | append: '/' | relative_url }}">{{ t.name | escape }}</a>
+    <span class="mono small muted">{{ n }}</span>
+    <p class="small muted">{{ t.about | escape }}</p>
+  </li>
+  {% endfor %}
+</ul>
