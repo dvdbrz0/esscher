@@ -14,9 +14,10 @@ publication time is kept and the edition is marked as updated.
 
 Then publish with:
 
-    git add -A _posts _stories _includes/charts
-    git commit -m "Daily brief YYYY-MM-DD"
-    git push
+    bash scripts/publish.sh "Daily brief YYYY-MM-DD"
+
+which commits the post, the story pages, the chart and the share images, and pushes
+(rebasing once if the push is rejected).
 
 A new edition pushed to GitHub is also emailed to newsletter subscribers
 automatically (`.github/workflows/newsletter.yml`); a rerun of the same date is
@@ -114,6 +115,20 @@ Never use dollar signs for math (prices use them). Keep headlines, summaries and
 - `chart` is optional; see "Chart of the day" below.
 - `voices`, `mathematics`, `papers_note`, `status` are optional.
 
+## The maths behind the news (weekly)
+
+`maths` is one object: the mathematics underneath one story of the week, explained on its
+own page and listed at /maths/. Rules:
+- Pick a story from this week's editions whose mechanism is mathematical: a pricing formula,
+  a statistical claim, a scaling law, an optimisation result, a probability argument.
+- `body`: four to seven paragraphs (about 350 to 600 words). Start from the news, state the
+  question, then build the mathematics step by step with the formulas written in LaTeX
+  (`\( \)` inline, `\[ \]` displayed), and end with what the mathematics says about the story.
+- Only standard, well-established mathematics, stated correctly with its assumptions. If a
+  number is used, it comes from a source in `sources`. No speculation dressed as derivation.
+- Pitched at a reader comfortable with undergraduate probability and calculus.
+- `headline` and `summary` contain no LaTeX.
+
 ## Chart of the day
 
 `chart` draws one chart in the house style. Two kinds:
@@ -134,7 +149,7 @@ rounding. Every figure in `title`, `subtitle` and `note` must be visible in the 
 When a fact in an earlier edition turns out to be wrong:
 
     python3 scripts/correct.py /stories/STORY-NAME/ --note "An earlier version of this story said X. It is Y." --replace "wrong text" "right text"
-    git add -A _posts _stories && git commit -m "Correction: STORY-NAME" && git push
+    bash scripts/publish.sh "Correction: STORY-NAME"
 
 The note appears at the end of the story, the story is marked "Corrected" in its edition,
 and it is listed on the corrections page.
@@ -149,6 +164,7 @@ and it is listed on the corrections page.
   "headline": "A short headline for the week",
   "five_lines": ["...", "...", "...", "...", "..."],
   "mattered": [{"headline": "...", "summary": "Two to four sentences, shown on the review page.", "body": ["Paragraphs for the story page."], "sources": [{"name": "...", "url": "https://..."}]}],
+  "maths": {"headline": "Why a 24-year high in yields hits long bonds hardest", "summary": "Two sentences on the question and the answer.", "body": ["Four to seven paragraphs, with LaTeX where it helps."], "topics": ["Markets", "Mathematics"], "sources": [{"name": "...", "url": "https://..."}]},
   "canon": [{"tag": "...", "title": "...", "authors": "...", "summary": "...", "body": ["..."], "arxiv": "2610.10600"}],
   "read": [{"title": "...", "authors": "...", "why": "...", "prerequisites": "...", "focus": "Sections 2 and 4", "time": "About 2 hours", "arxiv": "..."}],
   "debates": [{"headline": "...", "summary": "...", "body": ["..."], "sources": [{"name": "...", "url": "https://..."}]}],

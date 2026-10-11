@@ -21,6 +21,7 @@
  "published": "2026-10-09",
  "topics": [
   "AI safety"
- ]
+ ],
+ "image": "/assets/og/2026-10-11-daily-openai-shuts-down-an-iranian-influence-operation.png"
 }
 ---

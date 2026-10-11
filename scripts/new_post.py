@@ -18,6 +18,7 @@ from urllib.parse import parse_qs, urlparse
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import chart  # noqa: E402
+import share_card  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 WRITTEN = []
@@ -81,7 +82,8 @@ SECTIONS = {
     "daily": [("must_read", "Must-read", "story"), ("ai", "AI and machine learning", "story"),
               ("markets", "Markets", "story"), ("economy", "Economy", "story"),
               ("mathematics", "Mathematics", "story"), ("papers", "Papers", "paper")],
-    "weekly": [("mattered", "What actually mattered", "story"), ("read", "Read this week", "paper"),
+    "weekly": [("mattered", "What actually mattered", "story"), ("maths", "The maths behind the news", "explainer"),
+               ("read", "Read this week", "paper"),
                ("canon", "Papers that became canon", "paper"), ("debates", "The debates", "story"),
                ("markets", "Quantitative finance and markets", "story"), ("economy", "Economy", "story"),
                ("mathematics", "Mathematics", "story")],
@@ -105,7 +107,7 @@ def load_topics():
     return [m.strip().strip('"') for m in re.findall(r"^- name:\s*(.+)$", text, re.M)]
 
 
-DEFAULT_TOPICS = {"markets": ["Markets"], "economy": ["Economy"], "mathematics": ["Mathematics"]}
+DEFAULT_TOPICS = {"markets": ["Markets"], "economy": ["Economy"], "mathematics": ["Mathematics"], "maths": ["Mathematics"]}
 
 
 def pick_topics(it, key, allowed):
@@ -142,6 +144,9 @@ def write_stories(front, edition, day):
     prefix = f'{day.strftime("%Y-%m-%d")}-{edition}-'
     for old in stories_dir.glob(prefix + "*.md"):
         old.unlink()
+    for old in (ROOT / "assets" / "og").glob(prefix + "*.png"):
+        old.unlink()
+    nice_day = f"{day.day} {day.strftime('%B %Y')}"
     edition_url = f'/{day.strftime("%Y/%m/%d")}/{edition}/'
     allowed = load_topics()
     used = set()
@@ -185,6 +190,14 @@ def write_stories(front, edition, day):
                 story["math"] = True
             if key == "must_read" and it.get("section"):
                 story["section"] = "Must-read · " + it["section"]
+            if kind == "paper":
+                kicker = "Paper · " + it["tag"] if it.get("tag") else "Paper"
+            else:
+                kicker = " · ".join(story["section"].split(" · ")[:2])
+            card = ROOT / "assets" / "og" / f"{name}.png"
+            if share_card.make_card(card, title, kicker, nice_day):
+                story["image"] = f"/assets/og/{name}.png"
+                WRITTEN.append(card)
             text = "---\n" + json.dumps(story, ensure_ascii=False, indent=1) + "\n---\n"
             (stories_dir / f"{name}.md").write_text(text, encoding="utf-8")
             WRITTEN.append(stories_dir / f"{name}.md")
@@ -296,6 +309,11 @@ def main():
             fail('"five_lines" must be a non-empty list')
         for k in ("mattered", "debates", "markets", "economy", "mathematics"):
             check_sources(data.get(k), k)
+        mx = data.get("maths")
+        if mx is not None:
+            if not isinstance(mx, dict) or not mx.get("headline") or not mx.get("summary") or not mx.get("body"):
+                fail('"maths" must be one object with a headline, a summary and a body')
+            check_sources([mx], "maths")
         headline = data.get("headline") or ("Week of " + data.get("week_of", ""))
         description = " ".join(lines)
         front = {"layout": "weekly", "title": "Weekly Review"}
@@ -329,6 +347,13 @@ def main():
 
     write_chart(front, edition, day)
     write_stories(front, edition, day)
+    card = ROOT / "assets" / "og" / f'{day.strftime("%Y-%m-%d")}-{edition}.png'
+    kicker = "Daily Brief" if edition == "daily" else "Weekly Review"
+    if share_card.make_card(card, headline, kicker, f"{day.day} {day.strftime('%B %Y')}"):
+        front["image"] = f'/assets/og/{card.name}'
+        WRITTEN.append(card)
+    else:
+        sys.stderr.write("new_post.py: Pillow not available, pages use the default share image\n")
     if has_math({k: v for k, v in front.items() if k != "body"}):
         front["math"] = True
 

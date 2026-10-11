@@ -22,6 +22,7 @@
  "topics": [
   "AI policy",
   "AI safety"
- ]
+ ],
+ "image": "/assets/og/2026-10-11-daily-white-house-makes-ai-incident-reporting-mandatory.png"
 }
 ---

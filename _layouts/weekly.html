@@ -33,6 +33,18 @@ layout: default
 </section>
 {% endif %}
 
+{% if w.maths %}
+{% assign mx = w.maths %}
+<section class="weekly-section maths-feature" aria-labelledby="maths-h">
+  <h2 id="maths-h" class="section-label">The maths behind the news</h2>
+  <div class="maths-inner">
+    <h3 class="maths-title">{% if mx.story %}<a href="{{ mx.story | relative_url }}">{{ mx.headline | escape }}</a>{% else %}{{ mx.headline | escape }}{% endif %}</h3>
+    <p class="dek">{{ mx.summary | escape }}</p>
+    <p class="maths-links">{% if mx.story %}<a class="read-more" href="{{ mx.story | relative_url }}">Read the explanation</a> · {% endif %}<a href="{{ '/maths/' | relative_url }}">All explainers</a></p>
+  </div>
+</section>
+{% endif %}
+
 {% if w.read %}
 <section class="weekly-section read-box" aria-labelledby="read-h">
   <h2 id="read-h" class="section-label">Read this week</h2>

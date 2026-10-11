@@ -32,6 +32,7 @@
  "topics": [
   "Mathematics",
   "Large language models"
- ]
+ ],
+ "image": "/assets/og/2026-10-11-daily-openais-722-machine-generated-maths-papers-the-hard-part-is-now-checki.png"
 }
 ---

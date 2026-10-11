@@ -18,6 +18,7 @@
  "topics": [
   "Credit risk",
   "Quantitative finance"
- ]
+ ],
+ "image": "/assets/og/2026-10-11-daily-learned-monotone-recurrent-features-in-governed-credit-scoring.png"
 }
 ---

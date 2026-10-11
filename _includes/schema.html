@@ -11,7 +11,7 @@
  "mainEntityOfPage": "{{ page.url | absolute_url }}",
  "datePublished": "{{ page.date | date_to_xmlschema }}",
  "dateModified": "{{ modified }}",
- "image": ["{{ '/assets/share.png' | absolute_url }}"],
+ "image": ["{{ page.image | default: '/assets/share.png' | absolute_url }}"],
  "articleSection": {{ page.section | jsonify }},
  {% if page.topics %}"keywords": {{ page.topics | jsonify }},{% endif %}
  {% if page.arxiv %}"isBasedOn": "https://arxiv.org/abs/{{ page.arxiv }}",{% elsif primary %}"isBasedOn": {{ primary.url | jsonify }},{% endif %}
@@ -28,7 +28,7 @@
  "mainEntityOfPage": "{{ page.url | absolute_url }}",
  "datePublished": "{% if page.published %}{{ page.published }}{% else %}{{ page.date | date_to_xmlschema }}{% endif %}",
  "dateModified": "{% if page.updated %}{{ page.updated }}{% elsif page.published %}{{ page.published }}{% else %}{{ page.date | date_to_xmlschema }}{% endif %}",
- "image": ["{{ '/assets/share.png' | absolute_url }}"],
+ "image": ["{{ page.image | default: '/assets/share.png' | absolute_url }}"],
  "inLanguage": "en",
  "author": {"@type": "Organization", "name": "Esscher", "url": "{{ '/about/' | absolute_url }}"},
  "publisher": {{ publisher }}}

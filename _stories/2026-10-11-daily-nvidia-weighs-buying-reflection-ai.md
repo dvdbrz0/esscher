@@ -24,6 +24,7 @@
  ],
  "topics": [
   "AI industry"
- ]
+ ],
+ "image": "/assets/og/2026-10-11-daily-nvidia-weighs-buying-reflection-ai.png"
 }
 ---

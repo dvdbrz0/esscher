@@ -20,6 +20,7 @@
   "Optimization",
   "Probability"
  ],
- "math": true
+ "math": true,
+ "image": "/assets/og/2026-10-11-daily-a-stochastic-subgradient-method-with-optimal-failure-exponent.png"
 }
 ---

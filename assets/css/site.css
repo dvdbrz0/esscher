@@ -21,7 +21,8 @@
 html { -webkit-text-size-adjust: 100%; }
 body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--text); font-size: 17px; line-height: 1.5; font-kerning: normal; text-rendering: optimizeLegibility; }
 h1, h2, h3, .topic-title, .archive-list a { text-wrap: balance; }
-p { text-wrap: pretty; }
+/* Better line breaks for short texts. Not on story bodies: with displayed formulas it crashes Chromium. */
+.dek, .story p, .paper p, .three-item p, .five-list p, .topic-list p, .chart-note { text-wrap: pretty; }
 a { color: inherit; text-decoration: none; }
 a:hover { text-decoration: underline; }
 a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -311,3 +312,12 @@ sup { font-size: 0.7em; }
   .chart-line { stroke-width: 4; }
 }
 .page-head a { text-decoration: underline; }
+.signup-text a { text-decoration: underline; }
+
+/* The maths behind the news */
+.maths-feature .maths-inner { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; padding: 28px 32px; background: var(--soft); border-left: 3px solid var(--accent); max-width: 900px; }
+.maths-title { font-family: var(--serif); font-weight: 600; font-size: 30px; line-height: 1.15; }
+.maths-title a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.maths-links { font-size: 16px; }
+.maths-links a:not(.read-more) { text-decoration: underline; }
+.kicker a.accent:hover { text-decoration: underline; }

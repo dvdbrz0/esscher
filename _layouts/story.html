@@ -6,7 +6,7 @@ layout: default
   <div class="story-page-main">
     <div class="kicker">
       {% if st.tag %}<span class="accent">{{ st.tag | escape }}</span>{% endif %}
-      <span class="{% if st.tag %}muted{% else %}accent{% endif %}">{{ st.section | escape }}</span>
+      {% if st.kind == "explainer" %}<a class="accent" href="{{ '/maths/' | relative_url }}">{{ st.section | escape }}</a>{% else %}<span class="{% if st.tag %}muted{% else %}accent{% endif %}">{{ st.section | escape }}</span>{% endif %}
     </div>
     <h1 id="story-h" class="lead-title">{{ st.title | escape }}</h1>
     {% if st.authors %}<p class="muted">{{ st.authors | escape }}</p>{% endif %}

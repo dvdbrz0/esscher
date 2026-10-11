@@ -21,6 +21,7 @@
  "topics": [
   "Quantitative finance",
   "Market microstructure"
- ]
+ ],
+ "image": "/assets/og/2026-10-11-daily-can-diffusion-models-generate-market-data.png"
 }
 ---

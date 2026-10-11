@@ -96,6 +96,15 @@ drama. Use at most one dash-pair aside per story.
   of them visible in the data.
 - Leave the chart out when nothing in the day's news has data worth showing.
 
+## The maths behind the news
+
+- The tone of a good lecture: precise, unhurried, no jokes, no "simply" or
+  "obviously". Define every symbol the first time it appears.
+- One idea per paragraph; a displayed formula gets a sentence before it saying
+  what it is and a sentence after it saying what it means.
+- State assumptions explicitly ("for small changes in yield", "if returns are
+  independent"). Never present an approximation as exact.
+
 ## Corrections
 
 - If a fact published in an earlier edition turns out to be wrong, correct it

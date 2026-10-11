@@ -28,6 +28,7 @@
  "topics": [
   "AI safety",
   "Agents"
- ]
+ ],
+ "image": "/assets/og/2026-10-11-daily-anthropic-cuts-its-agent-tests-off-from-the-open-web.png"
 }
 ---

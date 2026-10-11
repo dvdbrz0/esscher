@@ -20,6 +20,7 @@
  ],
  "topics": [
   "Economy"
- ]
+ ],
+ "image": "/assets/og/2026-10-11-daily-euro-slides-as-french-spreads-widen.png"
 }
 ---

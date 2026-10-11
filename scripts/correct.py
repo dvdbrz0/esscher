@@ -49,7 +49,7 @@ def swap(obj, old, new, count):
     if isinstance(obj, list):
         return [swap(x, old, new, count) for x in obj]
     if isinstance(obj, dict):
-        return {k: (v if k in ("url", "story", "edition_url", "layout") else swap(v, old, new, count)) for k, v in obj.items()}
+        return {k: (v if k in ("url", "story", "edition_url", "layout", "image") else swap(v, old, new, count)) for k, v in obj.items()}
     return obj
 
 
@@ -87,6 +87,7 @@ def main():
     if m:
         edition_file = ROOT / "_posts" / f"{m.group(1)}-{m.group(2)}-{m.group(3)}-{m.group(4)}.md"
 
+    old_title = story.get("title")
     count = [0]
     for old, new in a.replace:
         story = swap(story, old, new, count)
@@ -99,6 +100,19 @@ def main():
     story["corrected"] = day
     spath.write_text(join(story, sbody), encoding="utf-8")
     print(spath.relative_to(ROOT))
+
+    if story.get("image") and story.get("title") != old_title:
+        # The headline changed: redraw the image shown when the story is shared.
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        import share_card
+        if story.get("kind") == "paper":
+            kicker = "Paper · " + story["tag"] if story.get("tag") else "Paper"
+        else:
+            kicker = " · ".join(str(story.get("section", "")).split(" · ")[:2])
+        d = datetime.strptime(str(story["date"])[:10], "%Y-%m-%d")
+        card = ROOT / story["image"].lstrip("/")
+        if share_card.make_card(card, story["title"], kicker, f"{d.day} {d.strftime('%B %Y')}"):
+            print(card.relative_to(ROOT))
 
     if edition_file and edition_file.exists():
         front, body = split(edition_file)

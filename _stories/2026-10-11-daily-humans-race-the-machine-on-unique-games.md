@@ -21,6 +21,7 @@
  "published": "2026-10-07",
  "topics": [
   "Mathematics"
- ]
+ ],
+ "image": "/assets/og/2026-10-11-daily-humans-race-the-machine-on-unique-games.png"
 }
 ---

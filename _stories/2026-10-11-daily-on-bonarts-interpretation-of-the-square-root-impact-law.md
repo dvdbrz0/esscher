@@ -19,6 +19,7 @@
  "topics": [
   "Market microstructure",
   "Quantitative finance"
- ]
+ ],
+ "image": "/assets/og/2026-10-11-daily-on-bonarts-interpretation-of-the-square-root-impact-law.png"
 }
 ---

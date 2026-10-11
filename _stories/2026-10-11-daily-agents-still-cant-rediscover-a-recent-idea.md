@@ -22,6 +22,7 @@
  "topics": [
   "Agents",
   "Large language models"
- ]
+ ],
+ "image": "/assets/og/2026-10-11-daily-agents-still-cant-rediscover-a-recent-idea.png"
 }
 ---

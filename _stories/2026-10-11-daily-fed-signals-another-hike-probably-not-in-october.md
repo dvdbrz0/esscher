@@ -21,6 +21,7 @@
  "published": "2026-10-07",
  "topics": [
   "Economy"
- ]
+ ],
+ "image": "/assets/og/2026-10-11-daily-fed-signals-another-hike-probably-not-in-october.png"
 }
 ---

@@ -1,0 +1,25 @@
+---
+layout: default
+title: The maths behind the news
+permalink: /maths/
+description: "Every week, the mathematics behind one story in the news, explained on a single page."
+---
+{% assign explainers = site.stories | where: "kind", "explainer" | sort: "date" | reverse %}
+<header class="page-head">
+  <span class="label-sm accent">A weekly series</span>
+  <h1 class="lead-title">The maths behind the news</h1>
+  <p class="dek">Each week, one story from the news and the mathematics that explains it: the model, the formula or the theorem underneath, worked through on a single page. Published with the <a href="{{ '/weekly/' | relative_url }}">Weekly Review</a> on Sundays.</p>
+</header>
+{% if explainers.size > 0 %}
+<ul class="topic-list">
+  {% for s in explainers %}
+  <li>
+    <div class="topic-meta"><span class="small nums muted">{{ s.date | date: "%-d %b %Y" }}</span></div>
+    <a class="topic-title" href="{{ s.url | relative_url }}">{{ s.title | escape }}</a>
+    {% if s.summary %}<p>{{ s.summary | escape }}</p>{% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p class="muted topic-empty">The first explainer appears with the Weekly Review on Sunday 18 October 2026.</p>
+{% endif %}

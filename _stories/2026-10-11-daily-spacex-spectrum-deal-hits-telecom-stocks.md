@@ -20,6 +20,7 @@
  ],
  "topics": [
   "Markets"
- ]
+ ],
+ "image": "/assets/og/2026-10-11-daily-spacex-spectrum-deal-hits-telecom-stocks.png"
 }
 ---

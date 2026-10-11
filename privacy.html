@@ -1,0 +1,33 @@
+---
+layout: default
+title: Privacy
+permalink: /privacy/
+description: "What personal data Esscher collects, why, and the rights you have over it."
+---
+<article class="page-article">
+  <header class="page-head">
+    <h1 class="lead-title">Privacy</h1>
+    <p class="dek">Esscher collects as little personal data as possible. This page explains what is collected, why, and how to have it removed.</p>
+    <p class="small muted">Last updated {{ "2026-10-11" | date: "%-d %B %Y" }}</p>
+  </header>
+
+  <div class="prose">
+    <h2>Reading the site</h2>
+    {% if site.goatcounter and site.goatcounter != "" %}<p>Esscher sets no cookies and shows no advertising. To know which pages are read, it counts visits with GoatCounter, which stores no cookies and no personal data: no IP addresses, only the page, the referring site, and the browser and screen size in aggregate. Everything else is served from esscher.com itself.</p>{% else %}<p>Esscher sets no cookies, shows no advertising and uses no tracking or advertising scripts. Fonts, formulas and charts are served from esscher.com itself, so reading a page sends no request to third parties.</p>{% endif %}
+    <p>The site is hosted by GitHub Pages. To deliver pages and protect the service, GitHub records technical data such as the IP address of each visit, as described in the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub Privacy Statement</a>. Esscher has no access to those records.</p>
+
+    <h2>The newsletter</h2>
+    <p>If you subscribe, your email address is stored by our newsletter provider, Buttondown, solely to send you the Daily Brief and the Weekly Review. It is never sold, rented or shared with anyone else. The legal basis is your consent, which you give by subscribing and confirming the address.</p>
+    <p>Buttondown processes the address on our behalf and may store it outside the European Union, under the safeguards described in the <a href="https://buttondown.com/legal/privacy">Buttondown privacy policy</a>. It may also record basic delivery statistics, such as whether an email was delivered or opened.</p>
+    <p>Every email has an unsubscribe link. Unsubscribing stops all emails at once; you can also ask for your address to be deleted completely.</p>
+
+    <h2>Writing to us</h2>
+    <p>If you email Esscher, your message and address are used only to reply and are kept no longer than needed for that.</p>
+
+    <h2>Your rights</h2>
+    <p>Under the European Union's General Data Protection Regulation you can ask to see the personal data held about you, to correct it, or to have it deleted, and you can withdraw consent at any time. {% if site.contact_email and site.contact_email != "" %}Write to <a href="mailto:{{ site.contact_email }}">{{ site.contact_email }}</a>.{% else %}Use the contact address on the <a href="{{ '/about/#contact' | relative_url }}">About page</a>.{% endif %} You also have the right to complain to a data protection authority; in Romania this is the National Supervisory Authority for Personal Data Processing (ANSPDCP).</p>
+
+    <h2>Changes</h2>
+    <p>If this notice changes, the date at the top changes with it.</p>
+  </div>
+</article>

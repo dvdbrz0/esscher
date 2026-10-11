@@ -2,7 +2,7 @@
 <section class="signup" aria-labelledby="signup-h-{{ include.id | default: 'main' }}">
   <div class="signup-text">
     <h2 id="signup-h-{{ include.id | default: 'main' }}" class="signup-title">Get the Daily Brief by email</h2>
-    <p>Every weekday at 05:00 Bucharest time, with the Weekly Review on Sundays. Free, and you can unsubscribe at any time.</p>
+    <p>Every weekday at 05:00 Bucharest time, with the Weekly Review on Sundays. Free, and you can unsubscribe at any time. <a href="{{ '/privacy/' | relative_url }}">How your address is used</a>.</p>
   </div>
   <form class="signup-form" action="https://buttondown.com/api/emails/embed-subscribe/{{ site.newsletter }}" method="post">
     <label for="signup-email-{{ include.id | default: 'main' }}" class="visually-hidden">Email address</label>

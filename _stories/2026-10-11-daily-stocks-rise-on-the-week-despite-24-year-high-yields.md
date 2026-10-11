@@ -21,6 +21,7 @@
  "published": "2026-10-09",
  "topics": [
   "Markets"
- ]
+ ],
+ "image": "/assets/og/2026-10-11-daily-stocks-rise-on-the-week-despite-24-year-high-yields.png"
 }
 ---

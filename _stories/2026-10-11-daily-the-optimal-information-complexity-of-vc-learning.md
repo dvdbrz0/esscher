@@ -19,6 +19,7 @@
  "topics": [
   "Learning theory"
  ],
- "math": true
+ "math": true,
+ "image": "/assets/og/2026-10-11-daily-the-optimal-information-complexity-of-vc-learning.png"
 }
 ---

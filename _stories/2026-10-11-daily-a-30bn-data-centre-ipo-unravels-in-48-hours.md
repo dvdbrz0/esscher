@@ -22,6 +22,7 @@
  "topics": [
   "Markets",
   "AI industry"
- ]
+ ],
+ "image": "/assets/og/2026-10-11-daily-a-30bn-data-centre-ipo-unravels-in-48-hours.png"
 }
 ---

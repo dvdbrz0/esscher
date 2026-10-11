@@ -25,6 +25,7 @@
  "published": "2026-10-09",
  "topics": [
   "AI industry"
- ]
+ ],
+ "image": "/assets/og/2026-10-11-daily-lab-revenue-figures-arent-like-for-like.png"
 }
 ---
