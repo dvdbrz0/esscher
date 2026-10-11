@@ -10,8 +10,9 @@ on:
   workflow_dispatch:
     inputs:
       post:
-        description: "Edition to send, for example _posts/2026-10-12-daily.md"
-        required: true
+        description: "Edition to send, for example _posts/2026-10-12-daily.md. Leave empty to only check the API key."
+        required: false
+        default: ""
 
 concurrency:
   group: newsletter
@@ -36,6 +37,11 @@ jobs:
           if [ -z "$BUTTONDOWN_API_KEY" ]; then
             echo "No BUTTONDOWN_API_KEY secret yet: nothing to send."
             exit 0
+          fi
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ] && [ -z "$MANUAL_POST" ]; then
+            code=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: Token $BUTTONDOWN_API_KEY" https://api.buttondown.com/v1/ping)
+            echo "Buttondown API key check: HTTP $code"
+            [ "$code" = "200" ] && exit 0 || exit 1
           fi
           if [ -n "$MANUAL_POST" ]; then
             files="$MANUAL_POST"
