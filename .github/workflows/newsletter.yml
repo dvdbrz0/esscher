@@ -45,6 +45,10 @@ jobs:
               | python3 -c "import json,sys; d=json.load(sys.stdin); [print('Newsletter:', n.get('username'), '|', n.get('name'), '| status:', n.get('status') or n.get('state')) for n in d.get('results', [])]" || true
             [ "$code" = "200" ] && exit 0 || exit 1
           fi
+          if ! grep -qE '^newsletter: "[^"]+"' _config.yml && [ -z "$MANUAL_POST" ]; then
+            echo "Newsletter not switched on yet (newsletter is empty in _config.yml): nothing to send."
+            exit 0
+          fi
           if [ -n "$MANUAL_POST" ]; then
             files="$MANUAL_POST"
           elif [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
