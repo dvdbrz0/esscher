@@ -1,7 +1,10 @@
 {% assign b = include.b %}
 {% if b.three_lines %}
 <section class="three-lines" aria-labelledby="three-lines-h">
-  <h2 id="three-lines-h" class="label">In three lines</h2>
+  <div class="edition-head">
+    <h2 id="three-lines-h" class="label">In three lines</h2>
+    {% include published.html p=b %}
+  </div>
   <div class="three-grid">
     {% for line in b.three_lines %}
     <div class="three-item">
@@ -47,7 +50,7 @@
     <div class="story story-lg">
       <h3>{{ first.headline | escape }}</h3>
       <p>{{ first.summary | escape }}</p>
-      {% include sources.html sources=first.sources %}
+      {% include item-meta.html it=first %}
     </div>
     {% if b.ai.size > 1 %}
     <div class="story-grid">
@@ -55,7 +58,7 @@
       <div class="story">
         <h3>{{ s.headline | escape }}</h3>
         <p>{{ s.summary | escape }}</p>
-        {% include sources.html sources=s.sources %}
+        {% include item-meta.html it=s %}
       </div>
       {% endfor %}
     </div>
@@ -71,7 +74,7 @@
       <div class="story story-sm">
         <h3>{{ s.headline | escape }}</h3>
         <p>{{ s.summary | escape }}</p>
-        {% include sources.html sources=s.sources %}
+        {% include item-meta.html it=s %}
       </div>
       {% endfor %}
     </section>
@@ -83,7 +86,7 @@
       <div class="story story-sm">
         <h3>{{ s.headline | escape }}</h3>
         <p>{{ s.summary | escape }}</p>
-        {% include sources.html sources=s.sources %}
+        {% include item-meta.html it=s %}
       </div>
       {% endfor %}
     </section>
@@ -104,7 +107,7 @@
       <h3>{{ p.title | escape }}</h3>
       {% if p.authors %}<span class="muted small">{{ p.authors | escape }}</span>{% endif %}
       <p>{{ p.summary | escape }}</p>
-      {% if p.arxiv %}<a class="mono small" href="https://arxiv.org/abs/{{ p.arxiv | escape }}">arXiv:{{ p.arxiv | escape }}</a>{% elsif p.url %}<a class="small" href="{{ p.url | escape }}">Read the paper</a>{% endif %}
+      <span class="paper-meta">{% if p.arxiv %}<a class="mono small" href="https://arxiv.org/abs/{{ p.arxiv | escape }}">arXiv:{{ p.arxiv | escape }}</a>{% elsif p.url %}<a class="small" href="{{ p.url | escape }}">Read the paper</a>{% endif %}{% if p.published %} <span class="muted small">· <time datetime="{{ p.published | escape }}">{{ p.published | date: "%-d %b %Y" }}</time></span>{% endif %}</span>
     </div>
     {% endfor %}
   </div>
@@ -135,7 +138,7 @@
       <div class="story story-sm">
         <h3>{{ s.headline | escape }}</h3>
         <p>{{ s.summary | escape }}</p>
-        {% include sources.html sources=s.sources %}
+        {% include item-meta.html it=s %}
       </div>
       {% endfor %}
     </section>

@@ -1,0 +1,1 @@
+{% if include.p.published %}<p class="published">Published <time datetime="{{ include.p.published | escape }}">{{ include.p.published | date: "%A, %-d %B %Y, %H:%M UTC" }}</time></p>{% elsif include.p.date %}<p class="published">Published <time datetime="{{ include.p.date | date_to_xmlschema }}">{{ include.p.date | date: "%A, %-d %B %Y" }}</time></p>{% endif %}

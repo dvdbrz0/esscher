@@ -6,6 +6,7 @@ layout: default
   <span class="label-sm accent">The Weekly Review</span>
   <h1 class="lead-title">{% if w.headline %}{{ w.headline | escape }}{% else %}Week of {{ w.week_of | escape }}{% endif %}</h1>
   {% if w.week_of %}<span class="muted">Week of {{ w.week_of | escape }}</span>{% endif %}
+  {% include published.html p=w %}
 </header>
 
 {% if w.five_lines %}
@@ -24,7 +25,7 @@ layout: default
   <div class="story story-long">
     <h3>{{ s.headline | escape }}</h3>
     <p>{{ s.body | escape }}</p>
-    {% include sources.html sources=s.sources %}
+    {% include item-meta.html it=s %}
   </div>
   {% endfor %}
 </section>
@@ -74,7 +75,7 @@ layout: default
     <div class="story">
       <h3>{{ s.headline | escape }}</h3>
       <p>{{ s.body | escape }}</p>
-      {% include sources.html sources=s.sources %}
+      {% include item-meta.html it=s %}
     </div>
     {% endfor %}
   </div>
@@ -87,7 +88,7 @@ layout: default
     <h2 id="wm-h" class="section-label">Quantitative finance and markets</h2>
     <div class="story-grid">
       {% for s in w.markets %}
-      <div class="story"><h3>{{ s.headline | escape }}</h3><p>{{ s.body | default: s.summary | escape }}</p>{% include sources.html sources=s.sources %}</div>
+      <div class="story"><h3>{{ s.headline | escape }}</h3><p>{{ s.body | default: s.summary | escape }}</p>{% include item-meta.html it=s %}</div>
       {% endfor %}
     </div>
   </section>
@@ -97,7 +98,7 @@ layout: default
     <section aria-labelledby="we-h">
       <h2 id="we-h" class="section-label">Economy</h2>
       {% for s in w.economy %}
-      <div class="story story-sm"><h3>{{ s.headline | escape }}</h3><p>{{ s.body | default: s.summary | escape }}</p>{% include sources.html sources=s.sources %}</div>
+      <div class="story story-sm"><h3>{{ s.headline | escape }}</h3><p>{{ s.body | default: s.summary | escape }}</p>{% include item-meta.html it=s %}</div>
       {% endfor %}
     </section>
     {% endif %}
@@ -105,7 +106,7 @@ layout: default
     <section aria-labelledby="wmath-h">
       <h2 id="wmath-h" class="section-label">Mathematics</h2>
       {% for s in w.mathematics %}
-      <div class="story story-sm"><h3>{{ s.headline | escape }}</h3><p>{{ s.body | default: s.summary | escape }}</p>{% include sources.html sources=s.sources %}</div>
+      <div class="story story-sm"><h3>{{ s.headline | escape }}</h3><p>{{ s.body | default: s.summary | escape }}</p>{% include item-meta.html it=s %}</div>
       {% endfor %}
     </section>
     {% endif %}

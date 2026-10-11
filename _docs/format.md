@@ -11,6 +11,13 @@ Run it again with the same date to replace an edition.
 Write everything in English, in your own words. Every string is plain text
 (no HTML, no markdown). Every `url` is a full https link to the original source.
 
+Publication dates: every story and paper may carry `"published"`, the date the
+original source was published, exactly as shown on the source page (for a paper,
+the date on its arXiv abstract page). Format `YYYY-MM-DD`, or
+`YYYY-MM-DDTHH:MM:SSZ` in UTC when the page gives a time. If you did not see the
+date on the page, leave the field out: never guess. The time the edition itself
+goes online is added by the script automatically.
+
 ## Daily brief
 
 ```json
@@ -33,12 +40,12 @@ Write everything in English, in your own words. Every string is plain text
     "links": [{"label": "New Scientist: the announcement", "url": "https://..."}]
   },
   "ai": [
-    {"headline": "...", "summary": "One or two sentences.", "sources": [{"name": "TechCrunch", "url": "https://..."}]}
+    {"headline": "...", "summary": "One or two sentences.", "published": "2026-10-09", "sources": [{"name": "TechCrunch", "url": "https://..."}]}
   ],
   "voices": [{"name": "Yann LeCun", "summary": "...", "url": "https://x.com/..."}],
   "papers_note": "New on arXiv today",
   "papers": [
-    {"tag": "Learning theory", "title": "...", "authors": "Hanneke et al.", "summary": "Main result in words.", "arxiv": "2610.10600"}
+    {"tag": "Learning theory", "title": "...", "authors": "Hanneke et al.", "summary": "Main result in words.", "arxiv": "2610.10600", "published": "2026-10-09"}
   ],
   "markets": [{"headline": "...", "summary": "...", "sources": [{"name": "...", "url": "https://..."}]}],
   "economy": [{"headline": "...", "summary": "...", "sources": [{"name": "...", "url": "https://..."}]}],

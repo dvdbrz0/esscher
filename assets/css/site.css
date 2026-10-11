@@ -60,6 +60,11 @@ sup { font-size: 0.7em; }
 .section-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 24px; padding-top: 10px; border-top: 3px solid var(--ink); margin-bottom: 8px; }
 
 .three-lines { padding: 32px 0; border-bottom: 1px solid var(--rule); }
+.edition-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 24px; margin-bottom: 20px; }
+.edition-head .label { margin-bottom: 0; }
+.published { font-size: 13px; color: var(--muted); }
+.paper-meta { display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: baseline; }
+.sources time { color: var(--muted); }
 .three-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px 40px; }
 .three-item { display: flex; gap: 14px; }
 .num { font-family: var(--mono); font-size: 14px; font-weight: 500; color: var(--accent); }

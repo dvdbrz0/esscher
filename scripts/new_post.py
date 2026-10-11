@@ -9,8 +9,9 @@ input, cleans links, and writes _posts/YYYY-MM-DD-daily.md or
 _posts/YYYY-MM-DD-weekly.md. It prints the path of the file it wrote.
 """
 import json
+import re
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
@@ -52,6 +53,18 @@ def clean(obj):
     return obj
 
 
+DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2})?Z)?$")
+
+
+def check_dates(items, where):
+    """Keep "published" only when it is YYYY-MM-DD or YYYY-MM-DDTHH:MM(:SS)Z."""
+    for i, it in enumerate(items or []):
+        if isinstance(it, dict) and "published" in it:
+            if not isinstance(it["published"], str) or not DATE_RE.match(it["published"]):
+                sys.stderr.write(f"new_post.py: dropped {where}[{i}].published (use YYYY-MM-DD or YYYY-MM-DDTHH:MM:SSZ)\n")
+                del it["published"]
+
+
 def check_sources(items, where):
     for i, it in enumerate(items or []):
         for s in it.get("sources", []) or []:
@@ -76,6 +89,7 @@ def main():
     for k in LIST_KEYS:
         if k in data and not isinstance(data[k], list):
             fail(f'"{k}" must be a list')
+        check_dates(data.get(k), k)
 
     if edition == "daily":
         lines = data.get("three_lines")
@@ -112,8 +126,10 @@ def main():
         "description": description,
     })
     for k, v in data.items():
-        if k not in ("edition", "date"):
+        if k not in ("edition", "date", "published"):
             front[k] = v
+    # When the edition went online, in UTC.
+    front["published"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     # JSON is valid YAML, so the front matter is written as JSON: no quoting pitfalls.
     body_lines = "\n".join("- " + l for l in lines)
