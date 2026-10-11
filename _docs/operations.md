@@ -52,8 +52,9 @@ markets band with date, source and sparklines, topics (`_data/topics.yml`), arch
 search (`search.json`), The maths behind the news (/maths/), corrections (/corrections/),
 About and editorial standards, privacy notice, 404 page, RSS feed, sitemap, structured
 data (NewsArticle, WebSite, Organization), per-page share images, dark mode, KaTeX
-formulas (self-hosted), self-hosted fonts: Source Serif 4 for headlines and reading text,
-Source Sans 3 for interface.
+formulas (self-hosted), self-hosted fonts: Newsreader for headlines (the face the wordmark
+is drawn from), Source Serif 4 for reading text, Source Sans 3 for interface. Accent colour
+#1D4F91 (ink blue; #8AB4F8 in dark mode), used for labels, links and charts.
 
 Masthead: one compact row (drawn wordmark, sections, search; a Menu on phones) above a
 thin row with the date, the edition number ("No. N", counted from the first daily

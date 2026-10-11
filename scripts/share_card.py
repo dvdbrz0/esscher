@@ -15,7 +15,7 @@ W, H = 1200, 630
 MARGIN = 72
 BG = (15, 17, 20)
 INK = (255, 255, 255)
-ACCENT = (240, 122, 63)
+ACCENT = (138, 180, 248)   # the site accent as it appears in dark mode
 MUTED = (163, 166, 173)
 RULE = (42, 45, 51)
 
@@ -23,6 +23,15 @@ RULE = (42, 45, 51)
 def _font(name, size):
     from PIL import ImageFont
     return ImageFont.truetype(str(FONTS / name), size)
+
+
+def _headline_font(size):
+    """Newsreader, the headline face of the site, at display optical size."""
+    f = _font("Newsreader-Variable.ttf", size)
+    axes = {a["name"]: a for a in f.get_variation_axes()}
+    values = {b"Weight": 560, b"Optical Size": 72}
+    f.set_variation_by_axes([values.get(name, a["default"]) for name, a in axes.items()])
+    return f
 
 
 def _wrap(draw, text, font, width):
@@ -56,7 +65,7 @@ def make_card(out_path, title, kicker="", date_text=""):
     width = W - 2 * MARGIN
     top, bottom = 204, 522
     for size in (80, 74, 68, 62, 58, 54, 50, 46):
-        f = _font("SourceSerif4Display-Semibold.ttf", size)
+        f = _headline_font(size)
         lines = _wrap(d, title, f, width)
         lh = int(size * 1.1)
         if len(lines) <= 4 and lh * len(lines) <= bottom - top:
