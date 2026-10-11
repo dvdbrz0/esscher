@@ -72,6 +72,78 @@ def check_sources(items, where):
                 fail(f"{where}[{i}] has a source without a name or an http(s) url")
 
 
+SECTIONS = {
+    "daily": [("must_read", "Must-read", "story"), ("ai", "AI and machine learning", "story"),
+              ("markets", "Markets", "story"), ("economy", "Economy", "story"),
+              ("mathematics", "Mathematics", "story"), ("papers", "Papers", "paper")],
+    "weekly": [("mattered", "What actually mattered", "story"), ("read", "Read this week", "paper"),
+               ("canon", "Papers that became canon", "paper"), ("debates", "The debates", "story"),
+               ("markets", "Quantitative finance and markets", "story"), ("economy", "Economy", "story"),
+               ("mathematics", "Mathematics", "story")],
+}
+
+
+def slugify(text, limit=70):
+    text = text.lower().replace("'", "").replace("’", "")
+    text = re.sub(r"[^a-z0-9]+", "-", text).strip("-")
+    return text[:limit].rstrip("-") or "story"
+
+
+def paragraphs(body):
+    if isinstance(body, str):
+        body = [p for p in re.split(r"\n\s*\n", body) if p.strip()]
+    return [p.strip() for p in body if isinstance(p, str) and p.strip()]
+
+
+def write_stories(front, edition, day):
+    """Write one page per story or paper that has a "body", and link it from the edition."""
+    stories_dir = ROOT / "_stories"
+    stories_dir.mkdir(exist_ok=True)
+    prefix = f'{day.strftime("%Y-%m-%d")}-{edition}-'
+    for old in stories_dir.glob(prefix + "*.md"):
+        old.unlink()
+    edition_url = f'/{day.strftime("%Y/%m/%d")}/{edition}/'
+    used = set()
+    for key, label, kind in SECTIONS[edition]:
+        items = front.get(key)
+        if isinstance(items, dict):
+            items = [items]
+        for it in items or []:
+            body = paragraphs(it.get("body") or [])
+            title = it.get("headline") or it.get("title")
+            if not body or not title:
+                if title:
+                    sys.stderr.write(f"new_post.py: no story page for '{title}' (no body)\n")
+                continue
+            slug = slugify(title)
+            n = 2
+            while slug in used:
+                slug = f"{slugify(title)}-{n}"
+                n += 1
+            used.add(slug)
+            name = prefix + slug
+            story = {
+                "layout": "story",
+                "title": title,
+                "kind": kind,
+                "section": label,
+                "edition": edition,
+                "edition_url": edition_url,
+                "date": front["date"],
+                "summary": it.get("summary") or it.get("dek") or it.get("why") or "",
+                "body": body,
+            }
+            for k in ("why", "sources", "links", "published", "authors", "arxiv", "url", "tag", "status"):
+                if it.get(k):
+                    story[k] = it[k]
+            if key == "must_read" and it.get("section"):
+                story["section"] = "Must-read · " + it["section"]
+            text = "---\n" + json.dumps(story, ensure_ascii=False, indent=1) + "\n---\n"
+            (stories_dir / f"{name}.md").write_text(text, encoding="utf-8")
+            it["story"] = f"/stories/{name}/"
+            it["body"] = body
+
+
 def main():
     if len(sys.argv) != 2:
         fail("give exactly one argument: the JSON file")
@@ -130,6 +202,8 @@ def main():
             front[k] = v
     # When the edition went online, in UTC.
     front["published"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    write_stories(front, edition, day)
 
     # JSON is valid YAML, so the front matter is written as JSON: no quoting pitfalls.
     body_lines = "\n".join("- " + l for l in lines)

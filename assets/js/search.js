@@ -16,7 +16,7 @@
         var hay = (it.title + " " + it.text).toLowerCase();
         return terms.every(function (t) { return hay.indexOf(t) !== -1; });
       });
-      status.textContent = hits.length === 1 ? "1 edition found." : hits.length + " editions found.";
+      status.textContent = hits.length === 1 ? "1 result." : hits.length + " results.";
       hits.forEach(function (it) {
         var li = document.createElement("li");
         var date = document.createElement("span");
@@ -24,7 +24,7 @@
         date.textContent = it.date;
         var tag = document.createElement("span");
         tag.className = "tag";
-        tag.textContent = it.edition === "weekly" ? "Weekly" : "Daily";
+        tag.textContent = it.edition === "weekly" ? "Weekly" : (it.edition === "story" ? "Story" : "Daily");
         var a = document.createElement("a");
         a.href = it.url;
         a.textContent = it.title;

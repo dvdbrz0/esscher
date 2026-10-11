@@ -18,6 +18,19 @@ the date on its arXiv abstract page). Format `YYYY-MM-DD`, or
 date on the page, leave the field out: never guess. The time the edition itself
 goes online is added by the script automatically.
 
+Story pages: every story and paper should also carry `"body"`, a list of 2 or 3
+paragraphs (about 100 to 200 words in total). The script turns each item with a
+body into its own page, linked from the headline, where readers get a fuller
+picture before deciding to open the original. Rules for `body`:
+- Only facts you read in the sources (the article, the paper's abstract and
+  introduction, the official announcement). Never fill gaps from guesswork.
+- Your own words and your own structure: explain what happened or what was
+  shown, the key details and numbers, and the context a mathematically minded
+  reader needs. Do not retell the source paragraph by paragraph, and do not quote.
+- For a paywalled source, use what is publicly visible and other coverage of the
+  same story; if that is too thin, keep the body short rather than invent.
+- Optional per item: `"why"`, one sentence on why it matters (shown in a box).
+
 ## Daily brief
 
 ```json
@@ -34,22 +47,22 @@ goes online is added by the script automatically.
     "section": "Mathematics · AI",
     "headline": "...",
     "dek": "One or two sentences.",
-    "body": "A short paragraph.",
+    "body": ["Paragraph one.", "Paragraph two.", "Paragraph three."],
     "why": "Why it matters, one sentence.",
     "status": "Partly unconfirmed",
     "links": [{"label": "New Scientist: the announcement", "url": "https://..."}]
   },
   "ai": [
-    {"headline": "...", "summary": "One or two sentences.", "published": "2026-10-09", "sources": [{"name": "TechCrunch", "url": "https://..."}]}
+    {"headline": "...", "summary": "One or two sentences.", "body": ["Paragraph one.", "Paragraph two."], "why": "Optional.", "published": "2026-10-09", "sources": [{"name": "TechCrunch", "url": "https://..."}]}
   ],
   "voices": [{"name": "Yann LeCun", "summary": "...", "url": "https://x.com/..."}],
   "papers_note": "New on arXiv today",
   "papers": [
-    {"tag": "Learning theory", "title": "...", "authors": "Hanneke et al.", "summary": "Main result in words.", "arxiv": "2610.10600", "published": "2026-10-09"}
+    {"tag": "Learning theory", "title": "...", "authors": "Hanneke et al.", "summary": "Main result in words.", "body": ["The question.", "The main result in words, and why it matters."], "arxiv": "2610.10600", "published": "2026-10-09"}
   ],
-  "markets": [{"headline": "...", "summary": "...", "sources": [{"name": "...", "url": "https://..."}]}],
-  "economy": [{"headline": "...", "summary": "...", "sources": [{"name": "...", "url": "https://..."}]}],
-  "mathematics": [{"headline": "...", "summary": "...", "sources": [{"name": "...", "url": "https://..."}]}]
+  "markets": [{"headline": "...", "summary": "...", "body": ["...", "..."], "sources": [{"name": "...", "url": "https://..."}]}],
+  "economy": [{"headline": "...", "summary": "...", "body": ["...", "..."], "sources": [{"name": "...", "url": "https://..."}]}],
+  "mathematics": [{"headline": "...", "summary": "...", "body": ["...", "..."], "sources": [{"name": "...", "url": "https://..."}]}]
 }
 ```
 
@@ -67,13 +80,13 @@ goes online is added by the script automatically.
   "week_of": "12 October 2026",
   "headline": "A short headline for the week",
   "five_lines": ["...", "...", "...", "...", "..."],
-  "mattered": [{"headline": "...", "body": "Two to four sentences.", "sources": [{"name": "...", "url": "https://..."}]}],
-  "canon": [{"tag": "...", "title": "...", "authors": "...", "summary": "...", "arxiv": "2610.10600"}],
+  "mattered": [{"headline": "...", "summary": "Two to four sentences, shown on the review page.", "body": ["Paragraphs for the story page."], "sources": [{"name": "...", "url": "https://..."}]}],
+  "canon": [{"tag": "...", "title": "...", "authors": "...", "summary": "...", "body": ["..."], "arxiv": "2610.10600"}],
   "read": [{"title": "...", "authors": "...", "why": "...", "prerequisites": "...", "focus": "Sections 2 and 4", "time": "About 2 hours", "arxiv": "..."}],
-  "debates": [{"headline": "...", "body": "...", "sources": [{"name": "...", "url": "https://..."}]}],
-  "markets": [{"headline": "...", "body": "...", "sources": [...]}],
-  "economy": [{"headline": "...", "body": "...", "sources": [...]}],
-  "mathematics": [{"headline": "...", "body": "...", "sources": [...]}],
+  "debates": [{"headline": "...", "summary": "...", "body": ["..."], "sources": [{"name": "...", "url": "https://..."}]}],
+  "markets": [{"headline": "...", "summary": "...", "body": ["..."], "sources": [...]}],
+  "economy": [{"headline": "...", "summary": "...", "body": ["..."], "sources": [...]}],
+  "mathematics": [{"headline": "...", "summary": "...", "body": ["..."], "sources": [...]}],
   "watch": [{"date": "Tue 13 Oct", "item": "IMF World Economic Outlook"}]
 }
 ```

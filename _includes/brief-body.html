@@ -21,9 +21,9 @@
 <article class="lead" aria-labelledby="lead-h">
   <div class="lead-main">
     <div class="kicker"><span class="accent">Must-read</span>{% if m.section %}<span class="muted">{{ m.section | escape }}</span>{% endif %}</div>
-    <h1 id="lead-h" class="lead-title">{{ m.headline | escape }}</h1>
+    <h1 id="lead-h" class="lead-title">{% if m.story %}<a href="{{ m.story | relative_url }}">{{ m.headline | escape }}</a>{% else %}{{ m.headline | escape }}{% endif %}</h1>
     {% if m.dek %}<p class="dek">{{ m.dek | escape }}</p>{% endif %}
-    {% if m.body %}<p class="lead-body">{{ m.body | escape }}</p>{% endif %}
+    {% if m.story %}<a class="read-more" href="{{ m.story | relative_url }}">Read the full summary</a>{% elsif m.body %}<p class="lead-body">{{ m.body | escape }}</p>{% endif %}
   </div>
   <aside class="lead-aside">
     {% if m.why %}
@@ -48,7 +48,7 @@
     <h2 id="ai-h" class="section-label">AI and machine learning</h2>
     {% assign first = b.ai | first %}
     <div class="story story-lg">
-      <h3>{{ first.headline | escape }}</h3>
+      <h3>{% if first.story %}<a href="{{ first.story | relative_url }}">{{ first.headline | escape }}</a>{% else %}{{ first.headline | escape }}{% endif %}</h3>
       <p>{{ first.summary | escape }}</p>
       {% include item-meta.html it=first %}
     </div>
@@ -56,7 +56,7 @@
     <div class="story-grid">
       {% for s in b.ai offset:1 %}
       <div class="story">
-        <h3>{{ s.headline | escape }}</h3>
+        <h3>{% if s.story %}<a href="{{ s.story | relative_url }}">{{ s.headline | escape }}</a>{% else %}{{ s.headline | escape }}{% endif %}</h3>
         <p>{{ s.summary | escape }}</p>
         {% include item-meta.html it=s %}
       </div>
@@ -72,7 +72,7 @@
       <h2 id="markets-h" class="section-label">Markets</h2>
       {% for s in b.markets %}
       <div class="story story-sm">
-        <h3>{{ s.headline | escape }}</h3>
+        <h3>{% if s.story %}<a href="{{ s.story | relative_url }}">{{ s.headline | escape }}</a>{% else %}{{ s.headline | escape }}{% endif %}</h3>
         <p>{{ s.summary | escape }}</p>
         {% include item-meta.html it=s %}
       </div>
@@ -84,7 +84,7 @@
       <h2 id="economy-h" class="section-label">Economy</h2>
       {% for s in b.economy %}
       <div class="story story-sm">
-        <h3>{{ s.headline | escape }}</h3>
+        <h3>{% if s.story %}<a href="{{ s.story | relative_url }}">{{ s.headline | escape }}</a>{% else %}{{ s.headline | escape }}{% endif %}</h3>
         <p>{{ s.summary | escape }}</p>
         {% include item-meta.html it=s %}
       </div>
@@ -104,7 +104,7 @@
     {% for p in b.papers %}
     <div class="paper">
       {% if p.tag %}<span class="tag">{{ p.tag | escape }}</span>{% endif %}
-      <h3>{{ p.title | escape }}</h3>
+      <h3>{% if p.story %}<a href="{{ p.story | relative_url }}">{{ p.title | escape }}</a>{% else %}{{ p.title | escape }}{% endif %}</h3>
       {% if p.authors %}<span class="muted small">{{ p.authors | escape }}</span>{% endif %}
       <p>{{ p.summary | escape }}</p>
       <span class="paper-meta">{% if p.arxiv %}<a class="mono small" href="https://arxiv.org/abs/{{ p.arxiv | escape }}">arXiv:{{ p.arxiv | escape }}</a>{% elsif p.url %}<a class="small" href="{{ p.url | escape }}">Read the paper</a>{% endif %}{% if p.published %} <span class="muted small">· <time datetime="{{ p.published | escape }}">{{ p.published | date: "%-d %b %Y" }}</time></span>{% endif %}</span>
@@ -136,7 +136,7 @@
       <h2 id="math-h" class="section-label">Mathematics</h2>
       {% for s in b.mathematics %}
       <div class="story story-sm">
-        <h3>{{ s.headline | escape }}</h3>
+        <h3>{% if s.story %}<a href="{{ s.story | relative_url }}">{{ s.headline | escape }}</a>{% else %}{{ s.headline | escape }}{% endif %}</h3>
         <p>{{ s.summary | escape }}</p>
         {% include item-meta.html it=s %}
       </div>

@@ -1,0 +1,56 @@
+---
+layout: default
+---
+{% assign st = page %}
+<article class="story-page" aria-labelledby="story-h">
+  <div class="story-page-main">
+    <div class="kicker">
+      {% if st.tag %}<span class="accent">{{ st.tag | escape }}</span>{% endif %}
+      <span class="{% if st.tag %}muted{% else %}accent{% endif %}">{{ st.section | escape }}</span>
+    </div>
+    <h1 id="story-h" class="lead-title">{{ st.title | escape }}</h1>
+    {% if st.authors %}<p class="muted">{{ st.authors | escape }}</p>{% endif %}
+    {% if st.summary %}<p class="dek">{{ st.summary | escape }}</p>{% endif %}
+    <p class="story-dates small muted">
+      {% if st.published %}Source published <time datetime="{{ st.published | escape }}">{% if st.published contains "T" %}{{ st.published | date: "%-d %B %Y, %H:%M UTC" }}{% else %}{{ st.published | date: "%-d %B %Y" }}{% endif %}</time> · {% endif %}
+      In the <a href="{{ st.edition_url | relative_url }}">{% if st.edition == "weekly" %}Weekly Review{% else %}Daily Brief{% endif %} of {{ st.date | date: "%-d %B %Y" }}</a>
+    </p>
+    <div class="story-body">
+      {% for para in st.body %}<p>{{ para | escape }}</p>{% endfor %}
+    </div>
+  </div>
+
+  <aside class="story-page-aside">
+    {% if st.why %}
+    <div class="why-box">
+      <span class="label-sm muted">Why it matters</span>
+      <p>{{ st.why | escape }}</p>
+    </div>
+    {% endif %}
+    {% if st.status %}<span class="status">{{ st.status | escape }}</span>{% endif %}
+
+    {% if st.kind == "paper" %}
+      {% if st.arxiv %}
+      <a class="button" href="https://arxiv.org/abs/{{ st.arxiv | escape }}">Read the paper on arXiv</a>
+      <a class="small" href="https://arxiv.org/pdf/{{ st.arxiv | escape }}">PDF · arXiv:{{ st.arxiv | escape }}</a>
+      {% elsif st.url %}
+      <a class="button" href="{{ st.url | escape }}">Read the paper</a>
+      {% endif %}
+    {% else %}
+      {% assign primary = st.sources | first %}
+      {% if primary %}<a class="button" href="{{ primary.url | escape }}">Read the original at {{ primary.name | escape }}</a>{% endif %}
+    {% endif %}
+
+    {% if st.sources.size > 0 or st.links.size > 0 %}
+    <div class="source-list">
+      <span class="label-sm muted">Sources</span>
+      <ul class="link-list">
+        {% for s in st.sources %}<li><a href="{{ s.url | escape }}">{{ s.name | escape }}</a></li>{% endfor %}
+        {% for l in st.links %}<li><a href="{{ l.url | escape }}">{{ l.label | escape }}</a></li>{% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </aside>
+</article>
+
+<p class="edition-link"><a href="{{ st.edition_url | relative_url }}">Back to the {% if st.edition == "weekly" %}Weekly Review{% else %}Daily Brief{% endif %} of {{ st.date | date: "%-d %B %Y" }}</a></p>

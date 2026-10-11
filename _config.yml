@@ -9,6 +9,12 @@ lang: en
 permalink: /:year/:month/:day/:title/
 markdown: kramdown
 future: true
+collections:
+  stories:
+    output: true
+    permalink: /stories/:path/
+# GoatCounter site code (the part before .goatcounter.com). Empty = no analytics.
+goatcounter: ""
 plugins:
   - jekyll-feed
   - jekyll-sitemap

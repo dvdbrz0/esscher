@@ -6,6 +6,8 @@
   --soft: #F4F4F2;
   --paper: #FFFFFF;
   --accent: #C2410C;
+  --band: #0F1114;
+  --on-accent: #FFFFFF;
   --head-muted: #A3A6AD;
   --head-rule: #2A2D33;
   --up: #7BD389;
@@ -34,7 +36,7 @@ sup { font-size: 0.7em; }
 .accent { color: var(--accent); }
 
 /* Header */
-.site-header { background: var(--ink); color: #FFFFFF; }
+.site-header { background: var(--band); color: #FFFFFF; }
 .topbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 24px; padding: 12px 0; border-bottom: 1px solid var(--head-rule); font-size: 13px; color: var(--head-muted); }
 .topnav { display: flex; flex-wrap: wrap; gap: 6px 24px; color: #E6E7EA; }
 .masthead { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 20px 32px; padding: 32px 0 26px; }
@@ -44,7 +46,7 @@ sup { font-size: 0.7em; }
 .tagline { font-size: 15px; color: var(--head-muted); }
 .search-form { display: flex; align-items: center; }
 .search-form input { height: 44px; width: 280px; max-width: 62vw; padding: 0 14px; background: #1A1D22; border: 1px solid #3A3E45; border-right: none; color: #FFFFFF; font-family: var(--text); font-size: 15px; border-radius: 0; }
-.search-form button { height: 44px; width: 48px; display: flex; align-items: center; justify-content: center; background: var(--accent); border: none; color: #FFFFFF; cursor: pointer; }
+.search-form button { height: 44px; width: 48px; display: flex; align-items: center; justify-content: center; background: var(--accent); border: none; color: var(--on-accent); cursor: pointer; }
 .ticker { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 32px; padding: 13px 0; border-top: 1px solid var(--head-rule); font-family: var(--mono); font-size: 13px; }
 .ticker-label { color: var(--head-muted); font-family: var(--text); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
 .tick-name { color: var(--head-muted); }
@@ -121,12 +123,12 @@ sup { font-size: 0.7em; }
 .edition-link { padding: 8px 0 32px; font-size: 14px; color: var(--muted); }
 .edition-link a { text-decoration: underline; }
 
-.weekly-teaser { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px 40px; padding: 32px 36px; background: var(--ink); color: #FFFFFF; }
+.weekly-teaser { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px 40px; padding: 32px 36px; background: var(--band); color: #FFFFFF; }
 .weekly-teaser-text { flex: 999 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
 .weekly-teaser .label-sm { color: var(--head-muted); }
 .weekly-teaser h2 { font-family: var(--display); font-weight: 700; font-size: 30px; line-height: 1.15; }
 .weekly-teaser p { font-size: 16px; line-height: 1.5; color: #D4D6DA; }
-.button { display: inline-flex; align-items: center; min-height: 44px; padding: 0 22px; background: var(--accent); color: #FFFFFF; font-weight: 600; font-size: 15px; border: none; cursor: pointer; font-family: var(--text); }
+.button { display: inline-flex; align-items: center; min-height: 44px; padding: 0 22px; background: var(--accent); color: var(--on-accent); font-weight: 600; font-size: 15px; border: none; cursor: pointer; font-family: var(--text); }
 .button:hover { text-decoration: none; filter: brightness(1.08); }
 .button-quiet { background: transparent; border: 1px solid #3A3E45; color: #D4D6DA; cursor: default; }
 
@@ -147,7 +149,7 @@ sup { font-size: 0.7em; }
 .archive-list li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; padding: 14px 0; border-bottom: 1px solid var(--rule); font-size: 16px; }
 .archive-list a { font-family: var(--display); font-weight: 600; }
 .search-page-form { display: flex; flex-wrap: wrap; gap: 12px; padding: 28px 0 12px; }
-.search-page-form input { flex: 1 1 280px; height: 44px; padding: 0 14px; border: 1px solid var(--ink); font-family: var(--text); font-size: 16px; border-radius: 0; }
+.search-page-form input { flex: 1 1 280px; height: 44px; padding: 0 14px; border: 1px solid var(--ink); background: var(--paper); color: var(--ink); font-family: var(--text); font-size: 16px; border-radius: 0; }
 
 .prev-next { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 32px 0 0; }
 .prev-next a { display: flex; flex-direction: column; gap: 4px; font-family: var(--display); font-weight: 600; }
@@ -168,4 +170,38 @@ sup { font-size: 0.7em; }
   .dek { font-size: 18px; }
   .story-lg h3 { font-size: 22px; }
   .weekly-teaser { padding: 24px 20px; }
+}
+
+/* Story pages */
+.lead-title a, .story h3 a, .paper h3 a { text-decoration: none; }
+.lead-title a:hover, .story h3 a:hover, .paper h3 a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.read-more { align-self: flex-start; font-weight: 600; font-size: 15px; color: var(--accent); }
+.story-page { display: flex; flex-wrap: wrap; gap: 32px 56px; padding: 44px 0; border-bottom: 1px solid var(--rule); }
+.story-page-main { flex: 999 1 620px; min-width: 0; display: flex; flex-direction: column; gap: 16px; max-width: 820px; }
+.story-page-aside { flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 18px; align-items: flex-start; }
+.story-page-aside .button { justify-content: center; }
+.story-dates a { text-decoration: underline; }
+.story-body { display: flex; flex-direction: column; gap: 18px; padding-top: 8px; border-top: 1px solid var(--rule); margin-top: 4px; }
+.story-body p { font-size: 18px; line-height: 1.65; padding-top: 0; }
+.story-body p:first-child { padding-top: 14px; }
+.source-list { display: flex; flex-direction: column; gap: 10px; }
+
+/* Dark mode follows the reader's system setting */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #E8E9EC;
+    --ink-2: #B9BCC3;
+    --muted: #9A9EA6;
+    --rule: #2A2D33;
+    --soft: #1A1D22;
+    --paper: #0E1013;
+    --accent: #F07A3F;
+    --band: #07080A;
+    --on-accent: #111214;
+    --head-rule: #23262C;
+  }
+  .site-header { border-bottom: 1px solid var(--rule); }
+  .weekly-teaser { border: 1px solid var(--rule); }
+  .search-form input { background: #15181C; }
+  img, svg { color-scheme: dark; }
 }

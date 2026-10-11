@@ -23,8 +23,8 @@ layout: default
   <h2 id="mattered-h" class="section-label">What actually mattered</h2>
   {% for s in w.mattered %}
   <div class="story story-long">
-    <h3>{{ s.headline | escape }}</h3>
-    <p>{{ s.body | escape }}</p>
+    <h3>{% if s.story %}<a href="{{ s.story | relative_url }}">{{ s.headline | escape }}</a>{% else %}{{ s.headline | escape }}{% endif %}</h3>
+    <p>{% if s.summary %}{{ s.summary | escape }}{% else %}{{ s.body | join: ' ' | escape }}{% endif %}</p>
     {% include item-meta.html it=s %}
   </div>
   {% endfor %}
@@ -36,7 +36,7 @@ layout: default
   <h2 id="read-h" class="section-label">Read this week</h2>
   {% for p in w.read %}
   <div class="story story-long">
-    <h3>{{ p.title | escape }}</h3>
+    <h3>{% if p.story %}<a href="{{ p.story | relative_url }}">{{ p.title | escape }}</a>{% else %}{{ p.title | escape }}{% endif %}</h3>
     {% if p.authors %}<span class="muted small">{{ p.authors | escape }}</span>{% endif %}
     <p>{{ p.why | escape }}</p>
     <dl class="read-meta">
@@ -57,7 +57,7 @@ layout: default
     {% for p in w.canon %}
     <div class="paper">
       {% if p.tag %}<span class="tag">{{ p.tag | escape }}</span>{% endif %}
-      <h3>{{ p.title | escape }}</h3>
+      <h3>{% if p.story %}<a href="{{ p.story | relative_url }}">{{ p.title | escape }}</a>{% else %}{{ p.title | escape }}{% endif %}</h3>
       {% if p.authors %}<span class="muted small">{{ p.authors | escape }}</span>{% endif %}
       <p>{{ p.summary | escape }}</p>
       {% if p.arxiv %}<a class="mono small" href="https://arxiv.org/abs/{{ p.arxiv | escape }}">arXiv:{{ p.arxiv | escape }}</a>{% elsif p.url %}<a class="small" href="{{ p.url | escape }}">Read the paper</a>{% endif %}
@@ -73,8 +73,8 @@ layout: default
   <div class="story-grid">
     {% for s in w.debates %}
     <div class="story">
-      <h3>{{ s.headline | escape }}</h3>
-      <p>{{ s.body | escape }}</p>
+      <h3>{% if s.story %}<a href="{{ s.story | relative_url }}">{{ s.headline | escape }}</a>{% else %}{{ s.headline | escape }}{% endif %}</h3>
+      <p>{% if s.summary %}{{ s.summary | escape }}{% else %}{{ s.body | join: ' ' | escape }}{% endif %}</p>
       {% include item-meta.html it=s %}
     </div>
     {% endfor %}
@@ -88,7 +88,7 @@ layout: default
     <h2 id="wm-h" class="section-label">Quantitative finance and markets</h2>
     <div class="story-grid">
       {% for s in w.markets %}
-      <div class="story"><h3>{{ s.headline | escape }}</h3><p>{{ s.body | default: s.summary | escape }}</p>{% include item-meta.html it=s %}</div>
+      <div class="story"><h3>{% if s.story %}<a href="{{ s.story | relative_url }}">{{ s.headline | escape }}</a>{% else %}{{ s.headline | escape }}{% endif %}</h3><p>{% if s.summary %}{{ s.summary | escape }}{% else %}{{ s.body | join: ' ' | escape }}{% endif %}</p>{% include item-meta.html it=s %}</div>
       {% endfor %}
     </div>
   </section>
@@ -98,7 +98,7 @@ layout: default
     <section aria-labelledby="we-h">
       <h2 id="we-h" class="section-label">Economy</h2>
       {% for s in w.economy %}
-      <div class="story story-sm"><h3>{{ s.headline | escape }}</h3><p>{{ s.body | default: s.summary | escape }}</p>{% include item-meta.html it=s %}</div>
+      <div class="story story-sm"><h3>{% if s.story %}<a href="{{ s.story | relative_url }}">{{ s.headline | escape }}</a>{% else %}{{ s.headline | escape }}{% endif %}</h3><p>{% if s.summary %}{{ s.summary | escape }}{% else %}{{ s.body | join: ' ' | escape }}{% endif %}</p>{% include item-meta.html it=s %}</div>
       {% endfor %}
     </section>
     {% endif %}
@@ -106,7 +106,7 @@ layout: default
     <section aria-labelledby="wmath-h">
       <h2 id="wmath-h" class="section-label">Mathematics</h2>
       {% for s in w.mathematics %}
-      <div class="story story-sm"><h3>{{ s.headline | escape }}</h3><p>{{ s.body | default: s.summary | escape }}</p>{% include item-meta.html it=s %}</div>
+      <div class="story story-sm"><h3>{% if s.story %}<a href="{{ s.story | relative_url }}">{{ s.headline | escape }}</a>{% else %}{{ s.headline | escape }}{% endif %}</h3><p>{% if s.summary %}{{ s.summary | escape }}{% else %}{{ s.body | join: ' ' | escape }}{% endif %}</p>{% include item-meta.html it=s %}</div>
       {% endfor %}
     </section>
     {% endif %}
