@@ -1,0 +1,145 @@
+{% assign b = include.b %}
+{% if b.three_lines %}
+<section class="three-lines" aria-labelledby="three-lines-h">
+  <h2 id="three-lines-h" class="label">In three lines</h2>
+  <div class="three-grid">
+    {% for line in b.three_lines %}
+    <div class="three-item">
+      <span class="num">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
+      <p>{{ line | escape }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if b.must_read %}
+{% assign m = b.must_read %}
+<article class="lead" aria-labelledby="lead-h">
+  <div class="lead-main">
+    <div class="kicker"><span class="accent">Must-read</span>{% if m.section %}<span class="muted">{{ m.section | escape }}</span>{% endif %}</div>
+    <h1 id="lead-h" class="lead-title">{{ m.headline | escape }}</h1>
+    {% if m.dek %}<p class="dek">{{ m.dek | escape }}</p>{% endif %}
+    {% if m.body %}<p class="lead-body">{{ m.body | escape }}</p>{% endif %}
+  </div>
+  <aside class="lead-aside">
+    {% if m.why %}
+    <div class="why-box">
+      <span class="label-sm muted">Why it matters</span>
+      <p>{{ m.why | escape }}</p>
+    </div>
+    {% endif %}
+    {% if m.status %}<span class="status">{{ m.status | escape }}</span>{% endif %}
+    {% if m.links %}
+    <ul class="link-list">
+      {% for l in m.links %}<li><a href="{{ l.url | escape }}">{{ l.label | escape }}</a></li>{% endfor %}
+    </ul>
+    {% endif %}
+  </aside>
+</article>
+{% endif %}
+
+<div class="columns">
+  {% if b.ai and b.ai.size > 0 %}
+  <section id="ai" class="col-main" aria-labelledby="ai-h">
+    <h2 id="ai-h" class="section-label">AI and machine learning</h2>
+    {% assign first = b.ai | first %}
+    <div class="story story-lg">
+      <h3>{{ first.headline | escape }}</h3>
+      <p>{{ first.summary | escape }}</p>
+      {% include sources.html sources=first.sources %}
+    </div>
+    {% if b.ai.size > 1 %}
+    <div class="story-grid">
+      {% for s in b.ai offset:1 %}
+      <div class="story">
+        <h3>{{ s.headline | escape }}</h3>
+        <p>{{ s.summary | escape }}</p>
+        {% include sources.html sources=s.sources %}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </section>
+  {% endif %}
+
+  <div class="col-rail">
+    {% if b.markets and b.markets.size > 0 %}
+    <section id="markets" aria-labelledby="markets-h">
+      <h2 id="markets-h" class="section-label">Markets</h2>
+      {% for s in b.markets %}
+      <div class="story story-sm">
+        <h3>{{ s.headline | escape }}</h3>
+        <p>{{ s.summary | escape }}</p>
+        {% include sources.html sources=s.sources %}
+      </div>
+      {% endfor %}
+    </section>
+    {% endif %}
+    {% if b.economy and b.economy.size > 0 %}
+    <section id="economy" aria-labelledby="economy-h">
+      <h2 id="economy-h" class="section-label">Economy</h2>
+      {% for s in b.economy %}
+      <div class="story story-sm">
+        <h3>{{ s.headline | escape }}</h3>
+        <p>{{ s.summary | escape }}</p>
+        {% include sources.html sources=s.sources %}
+      </div>
+      {% endfor %}
+    </section>
+    {% endif %}
+  </div>
+</div>
+
+{% if b.papers and b.papers.size > 0 %}
+<section id="papers" class="papers" aria-labelledby="papers-h">
+  <div class="section-head">
+    <h2 id="papers-h" class="section-label-inline">Papers</h2>
+    {% if b.papers_note %}<span class="muted small">{{ b.papers_note | escape }}</span>{% endif %}
+  </div>
+  <div class="paper-grid">
+    {% for p in b.papers %}
+    <div class="paper">
+      {% if p.tag %}<span class="tag">{{ p.tag | escape }}</span>{% endif %}
+      <h3>{{ p.title | escape }}</h3>
+      {% if p.authors %}<span class="muted small">{{ p.authors | escape }}</span>{% endif %}
+      <p>{{ p.summary | escape }}</p>
+      {% if p.arxiv %}<a class="mono small" href="https://arxiv.org/abs/{{ p.arxiv | escape }}">arXiv:{{ p.arxiv | escape }}</a>{% elsif p.url %}<a class="small" href="{{ p.url | escape }}">Read the paper</a>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if b.voices.size > 0 or b.mathematics.size > 0 %}
+<div class="columns columns-last">
+  {% if b.voices and b.voices.size > 0 %}
+  <section class="col-main" aria-labelledby="voices-h">
+    <h2 id="voices-h" class="section-label">What researchers are saying</h2>
+    <div class="story-grid">
+      {% for v in b.voices %}
+      <div class="voice">
+        <span class="voice-name">{{ v.name | escape }}</span>
+        <p>{{ v.summary | escape }}</p>
+        {% if v.url %}<a class="muted small" href="{{ v.url | escape }}">{% if v.url contains "x.com" %}On X{% else %}Source{% endif %}</a>{% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+  {% if b.mathematics and b.mathematics.size > 0 %}
+  <div class="col-rail">
+    <section id="mathematics" aria-labelledby="math-h">
+      <h2 id="math-h" class="section-label">Mathematics</h2>
+      {% for s in b.mathematics %}
+      <div class="story story-sm">
+        <h3>{{ s.headline | escape }}</h3>
+        <p>{{ s.summary | escape }}</p>
+        {% include sources.html sources=s.sources %}
+      </div>
+      {% endfor %}
+    </section>
+  </div>
+  {% endif %}
+</div>
+{% endif %}

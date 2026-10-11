@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% if page.title and page.url != "/" %}<title>{{ page.title }}{% if page.date %}, {{ page.date | date: "%-d %B %Y" }}{% endif %} · Esscher</title>{% else %}<title>Esscher</title>{% endif %}
+<meta name="description" content="{% if page.description %}{{ page.description | strip_html | strip_newlines | truncate: 200 | escape }}{% else %}{{ site.description | escape }}{% endif %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+<link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
+{% feed_meta %}
+</head>
+<body>
+{% if page.ticker %}{% assign tick_page = page %}{% else %}{% assign tick_page = site.posts | where: "edition", "daily" | first %}{% endif %}
+<header class="site-header">
+  <div class="wrap">
+    <div class="topbar">
+      <span>{% if page.date %}{{ page.date | date: "%A, %-d %B %Y" }}{% elsif tick_page %}{{ tick_page.date | date: "%A, %-d %B %Y" }}{% endif %}</span>
+      <nav aria-label="Sections" class="topnav">
+        <a href="{{ '/' | relative_url }}#ai">AI</a>
+        <a href="{{ '/' | relative_url }}#papers">Papers</a>
+        <a href="{{ '/' | relative_url }}#markets">Markets</a>
+        <a href="{{ '/' | relative_url }}#economy">Economy</a>
+        <a href="{{ '/weekly/' | relative_url }}">Weekly Review</a>
+        <a href="{{ '/archive/' | relative_url }}">Archive</a>
+      </nav>
+    </div>
+    <div class="masthead">
+      <div class="brand">
+        <a class="wordmark" href="{{ '/' | relative_url }}">ESSCHER</a>
+        <span class="tagline">{{ site.tagline }}</span>
+      </div>
+      <form class="search-form" role="search" action="{{ '/search/' | relative_url }}" method="get">
+        <label for="site-search" class="visually-hidden">Search the archive</label>
+        <input id="site-search" type="search" name="q" placeholder="Search the archive">
+        <button type="submit" aria-label="Search">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg>
+        </button>
+      </form>
+    </div>
+    {% if tick_page.ticker %}
+    <div class="ticker" aria-label="Markets">
+      <span class="ticker-label">{% if tick_page.ticker_label %}{{ tick_page.ticker_label | escape }}{% else %}Latest close{% endif %}</span>
+      {% for t in tick_page.ticker %}
+      <span class="tick"><span class="tick-name">{{ t.label | escape }}</span> {{ t.value | escape }}{% if t.change %} <span class="tick-change {% if t.dir == 'down' %}down{% else %}up{% endif %}">{{ t.change | escape }}</span>{% endif %}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</header>
+
+<main class="wrap main">
+{{ content }}
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-about">
+      <span class="footer-mark">ESSCHER</span>
+      <p>Named after the Esscher transform, <span class="mono ink">dQ/dP = e<sup>θX</sup> / E[e<sup>θX</sup>]</span>, the exponential tilt behind Chernoff bounds and risk-neutral pricing.</p>
+    </div>
+    <nav aria-label="Footer" class="footer-nav">
+      <a href="{{ '/' | relative_url }}">Daily</a>
+      <a href="{{ '/weekly/' | relative_url }}">Weekly Review</a>
+      <a href="{{ '/archive/' | relative_url }}">Archive</a>
+      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+      <span class="muted">© {{ site.time | date: "%Y" }} Esscher</span>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

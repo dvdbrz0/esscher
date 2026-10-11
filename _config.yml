@@ -1,0 +1,23 @@
+title: Esscher
+description: "AI, machine learning and quantitative finance. Every weekday morning."
+tagline: "AI, machine learning and quantitative finance. Every weekday morning."
+# While the site is served from dvdbrz0.github.io/esscher the baseurl is /esscher.
+# Once esscher.com points here: url "https://esscher.com", baseurl "" and add a CNAME file.
+url: "https://dvdbrz0.github.io"
+baseurl: "/esscher"
+timezone: Europe/Bucharest
+lang: en
+permalink: /:year/:month/:day/:title/
+markdown: kramdown
+future: true
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+feed:
+  path: feed.xml
+exclude:
+  - scripts
+  - _docs
+  - README.md
+  - Gemfile
+  - Gemfile.lock

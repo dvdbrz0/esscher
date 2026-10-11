@@ -1,0 +1,25 @@
+---
+layout: default
+title: Esscher
+---
+{% assign latest = site.posts | where: "edition", "daily" | first %}
+{% assign latest_weekly = site.posts | where: "edition", "weekly" | first %}
+{% if latest %}
+{% include brief-body.html b=latest %}
+<p class="edition-link"><a href="{{ latest.url | relative_url }}">Permanent link to this edition</a> · <a href="{{ '/archive/' | relative_url }}">Earlier editions</a></p>
+{% else %}
+<section class="three-lines"><p>The first edition will appear here shortly.</p></section>
+{% endif %}
+
+<section class="weekly-teaser" aria-labelledby="weekly-teaser-h">
+  <div class="weekly-teaser-text">
+    <span class="label-sm">Every Sunday</span>
+    <h2 id="weekly-teaser-h">The Weekly Review</h2>
+    <p>What actually mattered, which papers became canon, and what is worth reading in full.</p>
+  </div>
+  {% if latest_weekly %}
+  <a class="button" href="{{ latest_weekly.url | relative_url }}">Read the latest review</a>
+  {% else %}
+  <span class="button button-quiet">First review this Sunday</span>
+  {% endif %}
+</section>

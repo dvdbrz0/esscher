@@ -1,0 +1,22 @@
+---
+layout: default
+title: Weekly Review
+permalink: /weekly/
+---
+<header class="page-head">
+  <h1 class="lead-title">The Weekly Review</h1>
+  <p class="muted">Every Sunday: what actually mattered, which papers became canon, and what is worth reading in full.</p>
+</header>
+{% assign weeklies = site.posts | where: "edition", "weekly" %}
+{% if weeklies.size > 0 %}
+<ul class="archive-list">
+  {% for p in weeklies %}
+  <li>
+    <span class="mono small muted">{{ p.date | date: "%-d %b %Y" }}</span>
+    <a href="{{ p.url | relative_url }}">{% if p.headline %}{{ p.headline | escape }}{% else %}Week of {{ p.week_of | escape }}{% endif %}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p class="muted">The first review appears this Sunday.</p>
+{% endif %}

@@ -1,0 +1,7 @@
+---
+layout: null
+permalink: /search.json
+---
+[{% for p in site.posts %}{% capture text %}{{ p.headline }} {{ p.description }} {% for x in p.three_lines %}{{ x }} {% endfor %}{% for x in p.five_lines %}{{ x }} {% endfor %}{{ p.must_read.headline }} {{ p.must_read.dek }} {% for s in p.ai %}{{ s.headline }} {{ s.summary }} {% endfor %}{% for s in p.markets %}{{ s.headline }} {{ s.summary }} {% endfor %}{% for s in p.economy %}{{ s.headline }} {{ s.summary }} {% endfor %}{% for s in p.mathematics %}{{ s.headline }} {{ s.summary }} {{ s.body }} {% endfor %}{% for s in p.papers %}{{ s.title }} {{ s.authors }} {{ s.summary }} {{ s.tag }} {% endfor %}{% for s in p.canon %}{{ s.title }} {{ s.authors }} {{ s.summary }} {% endfor %}{% for s in p.read %}{{ s.title }} {{ s.authors }} {% endfor %}{% for s in p.voices %}{{ s.name }} {{ s.summary }} {% endfor %}{% for s in p.mattered %}{{ s.headline }} {{ s.body }} {% endfor %}{% for s in p.debates %}{{ s.headline }} {{ s.body }} {% endfor %}{% endcapture %}
+{"title": {% if p.headline %}{{ p.headline | jsonify }}{% else %}{{ p.title | jsonify }}{% endif %}, "edition": {{ p.edition | jsonify }}, "date": {{ p.date | date: "%-d %B %Y" | jsonify }}, "url": {{ p.url | relative_url | jsonify }}, "text": {{ text | strip_newlines | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}
+]

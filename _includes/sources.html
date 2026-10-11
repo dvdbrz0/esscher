@@ -1,0 +1,1 @@
+{% if include.sources and include.sources.size > 0 %}<span class="sources">{% for s in include.sources %}<a href="{{ s.url | escape }}">{{ s.name | escape }}</a>{% unless forloop.last %} · {% endunless %}{% endfor %}</span>{% endif %}

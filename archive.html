@@ -1,0 +1,24 @@
+---
+layout: default
+title: Archive
+permalink: /archive/
+---
+<header class="page-head">
+  <h1 class="lead-title">Archive</h1>
+  <p class="muted">Every daily brief and weekly review.</p>
+</header>
+{% assign months = site.posts | group_by_exp: "p", "p.date | date: '%B %Y'" %}
+{% for month in months %}
+<section class="archive-month" aria-labelledby="m-{{ forloop.index }}">
+  <h2 id="m-{{ forloop.index }}" class="section-label">{{ month.name }}</h2>
+  <ul class="archive-list">
+    {% for p in month.items %}
+    <li>
+      <span class="mono small muted">{{ p.date | date: "%a %-d" }}</span>
+      <span class="tag">{% if p.edition == "weekly" %}Weekly{% else %}Daily{% endif %}</span>
+      <a href="{{ p.url | relative_url }}">{% if p.headline %}{{ p.headline | escape }}{% else %}{{ p.title | escape }}{% endif %}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endfor %}

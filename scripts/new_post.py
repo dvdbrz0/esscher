@@ -1,0 +1,129 @@
+#!/usr/bin/env python3
+"""Turn a brief written as JSON into a Jekyll post for the Esscher site.
+
+Usage:
+    python3 scripts/new_post.py path/to/brief.json
+
+The JSON format is described in _docs/format.md. The script validates the
+input, cleans links, and writes _posts/YYYY-MM-DD-daily.md or
+_posts/YYYY-MM-DD-weekly.md. It prints the path of the file it wrote.
+"""
+import json
+import sys
+from datetime import datetime
+from pathlib import Path
+from urllib.parse import parse_qs, urlparse
+
+ROOT = Path(__file__).resolve().parent.parent
+LIST_KEYS = ["ai", "markets", "economy", "mathematics", "voices", "papers",
+             "mattered", "canon", "read", "debates", "watch"]
+
+
+def fail(msg):
+    sys.stderr.write("new_post.py: " + msg + "\n")
+    sys.exit(1)
+
+
+def clean_url(url):
+    """Unwrap tracking redirects (for example Gmail's google.com/url?q=...)."""
+    if not isinstance(url, str):
+        return url
+    url = url.strip()
+    parsed = urlparse(url)
+    if parsed.netloc.endswith("google.com") and parsed.path == "/url":
+        q = parse_qs(parsed.query).get("q")
+        if q:
+            return q[0]
+    return url
+
+
+def clean(obj):
+    if isinstance(obj, dict):
+        out = {}
+        for k, v in obj.items():
+            if k == "url":
+                v = clean_url(v)
+            out[k] = clean(v)
+        return out
+    if isinstance(obj, list):
+        return [clean(x) for x in obj]
+    if isinstance(obj, str):
+        return obj.strip()
+    return obj
+
+
+def check_sources(items, where):
+    for i, it in enumerate(items or []):
+        for s in it.get("sources", []) or []:
+            if not s.get("name") or not str(s.get("url", "")).startswith("http"):
+                fail(f"{where}[{i}] has a source without a name or an http(s) url")
+
+
+def main():
+    if len(sys.argv) != 2:
+        fail("give exactly one argument: the JSON file")
+    data = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+    data = clean(data)
+
+    edition = data.get("edition")
+    if edition not in ("daily", "weekly"):
+        fail('"edition" must be "daily" or "weekly"')
+    try:
+        day = datetime.strptime(data.get("date", ""), "%Y-%m-%d")
+    except ValueError:
+        fail('"date" must look like 2026-10-12')
+
+    for k in LIST_KEYS:
+        if k in data and not isinstance(data[k], list):
+            fail(f'"{k}" must be a list')
+
+    if edition == "daily":
+        lines = data.get("three_lines")
+        if not isinstance(lines, list) or len(lines) != 3:
+            fail('"three_lines" must be a list of exactly 3 strings')
+        if not data.get("ai"):
+            fail('"ai" must have at least one item')
+        for k in ("ai", "markets", "economy", "mathematics"):
+            check_sources(data.get(k), k)
+            for i, it in enumerate(data.get(k) or []):
+                if not it.get("headline") or not it.get("summary"):
+                    fail(f"{k}[{i}] needs a headline and a summary")
+        for i, p in enumerate(data.get("papers") or []):
+            if not p.get("title") or not p.get("summary"):
+                fail(f"papers[{i}] needs a title and a summary")
+        headline = (data.get("must_read") or {}).get("headline") or data["ai"][0]["headline"]
+        description = " ".join(lines)
+        front = {"layout": "brief", "title": "Daily Brief"}
+    else:
+        lines = data.get("five_lines")
+        if not isinstance(lines, list) or not lines:
+            fail('"five_lines" must be a non-empty list')
+        for k in ("mattered", "debates", "markets", "economy", "mathematics"):
+            check_sources(data.get(k), k)
+        headline = data.get("headline") or ("Week of " + data.get("week_of", ""))
+        description = " ".join(lines)
+        front = {"layout": "weekly", "title": "Weekly Review"}
+
+    hour = "05:00:00" if edition == "daily" else "08:00:00"
+    front.update({
+        "edition": edition,
+        "date": f'{day.strftime("%Y-%m-%d")} {hour} +0300',
+        "headline": headline,
+        "description": description,
+    })
+    for k, v in data.items():
+        if k not in ("edition", "date"):
+            front[k] = v
+
+    # JSON is valid YAML, so the front matter is written as JSON: no quoting pitfalls.
+    body_lines = "\n".join("- " + l for l in lines)
+    text = "---\n" + json.dumps(front, ensure_ascii=False, indent=1) + "\n---\n\n" + body_lines + "\n"
+
+    out = ROOT / "_posts" / f'{day.strftime("%Y-%m-%d")}-{edition}.md'
+    out.parent.mkdir(exist_ok=True)
+    out.write_text(text, encoding="utf-8")
+    print(out)
+
+
+if __name__ == "__main__":
+    main()

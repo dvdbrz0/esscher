@@ -1,0 +1,124 @@
+---
+layout: default
+---
+{% assign w = page %}
+<header class="weekly-head">
+  <span class="label-sm accent">The Weekly Review</span>
+  <h1 class="lead-title">{% if w.headline %}{{ w.headline | escape }}{% else %}Week of {{ w.week_of | escape }}{% endif %}</h1>
+  {% if w.week_of %}<span class="muted">Week of {{ w.week_of | escape }}</span>{% endif %}
+</header>
+
+{% if w.five_lines %}
+<section class="three-lines" aria-labelledby="five-h">
+  <h2 id="five-h" class="label">The week in five lines</h2>
+  <ol class="five-list">
+    {% for line in w.five_lines %}<li><span class="num">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span><p>{{ line | escape }}</p></li>{% endfor %}
+  </ol>
+</section>
+{% endif %}
+
+{% if w.mattered %}
+<section class="weekly-section" aria-labelledby="mattered-h">
+  <h2 id="mattered-h" class="section-label">What actually mattered</h2>
+  {% for s in w.mattered %}
+  <div class="story story-long">
+    <h3>{{ s.headline | escape }}</h3>
+    <p>{{ s.body | escape }}</p>
+    {% include sources.html sources=s.sources %}
+  </div>
+  {% endfor %}
+</section>
+{% endif %}
+
+{% if w.read %}
+<section class="weekly-section read-box" aria-labelledby="read-h">
+  <h2 id="read-h" class="section-label">Read this week</h2>
+  {% for p in w.read %}
+  <div class="story story-long">
+    <h3>{{ p.title | escape }}</h3>
+    {% if p.authors %}<span class="muted small">{{ p.authors | escape }}</span>{% endif %}
+    <p>{{ p.why | escape }}</p>
+    <dl class="read-meta">
+      {% if p.prerequisites %}<div><dt>Prerequisites</dt><dd>{{ p.prerequisites | escape }}</dd></div>{% endif %}
+      {% if p.focus %}<div><dt>Focus on</dt><dd>{{ p.focus | escape }}</dd></div>{% endif %}
+      {% if p.time %}<div><dt>Reading time</dt><dd>{{ p.time | escape }}</dd></div>{% endif %}
+    </dl>
+    {% if p.arxiv %}<a class="mono small" href="https://arxiv.org/abs/{{ p.arxiv | escape }}">arXiv:{{ p.arxiv | escape }}</a>{% elsif p.url %}<a class="small" href="{{ p.url | escape }}">Read the paper</a>{% endif %}
+  </div>
+  {% endfor %}
+</section>
+{% endif %}
+
+{% if w.canon %}
+<section class="papers" aria-labelledby="canon-h">
+  <div class="section-head"><h2 id="canon-h" class="section-label-inline">Papers that became canon</h2></div>
+  <div class="paper-grid">
+    {% for p in w.canon %}
+    <div class="paper">
+      {% if p.tag %}<span class="tag">{{ p.tag | escape }}</span>{% endif %}
+      <h3>{{ p.title | escape }}</h3>
+      {% if p.authors %}<span class="muted small">{{ p.authors | escape }}</span>{% endif %}
+      <p>{{ p.summary | escape }}</p>
+      {% if p.arxiv %}<a class="mono small" href="https://arxiv.org/abs/{{ p.arxiv | escape }}">arXiv:{{ p.arxiv | escape }}</a>{% elsif p.url %}<a class="small" href="{{ p.url | escape }}">Read the paper</a>{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if w.debates %}
+<section class="weekly-section" aria-labelledby="debates-h">
+  <h2 id="debates-h" class="section-label">The debates</h2>
+  <div class="story-grid">
+    {% for s in w.debates %}
+    <div class="story">
+      <h3>{{ s.headline | escape }}</h3>
+      <p>{{ s.body | escape }}</p>
+      {% include sources.html sources=s.sources %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<div class="columns">
+  {% if w.markets %}
+  <section class="col-main" aria-labelledby="wm-h">
+    <h2 id="wm-h" class="section-label">Quantitative finance and markets</h2>
+    <div class="story-grid">
+      {% for s in w.markets %}
+      <div class="story"><h3>{{ s.headline | escape }}</h3><p>{{ s.body | default: s.summary | escape }}</p>{% include sources.html sources=s.sources %}</div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+  <div class="col-rail">
+    {% if w.economy %}
+    <section aria-labelledby="we-h">
+      <h2 id="we-h" class="section-label">Economy</h2>
+      {% for s in w.economy %}
+      <div class="story story-sm"><h3>{{ s.headline | escape }}</h3><p>{{ s.body | default: s.summary | escape }}</p>{% include sources.html sources=s.sources %}</div>
+      {% endfor %}
+    </section>
+    {% endif %}
+    {% if w.mathematics %}
+    <section aria-labelledby="wmath-h">
+      <h2 id="wmath-h" class="section-label">Mathematics</h2>
+      {% for s in w.mathematics %}
+      <div class="story story-sm"><h3>{{ s.headline | escape }}</h3><p>{{ s.body | default: s.summary | escape }}</p>{% include sources.html sources=s.sources %}</div>
+      {% endfor %}
+    </section>
+    {% endif %}
+  </div>
+</div>
+
+{% if w.watch %}
+<section class="weekly-section" aria-labelledby="watch-h">
+  <h2 id="watch-h" class="section-label">Next week to watch</h2>
+  <ul class="watch-list">
+    {% for x in w.watch %}<li><span class="mono small">{{ x.date | escape }}</span><span>{{ x.item | escape }}</span></li>{% endfor %}
+  </ul>
+</section>
+{% endif %}
+
+{% include brief-nav.html %}
