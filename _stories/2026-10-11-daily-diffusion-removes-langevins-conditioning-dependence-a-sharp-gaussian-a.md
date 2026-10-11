@@ -1,7 +1,7 @@
 ---
 {
  "layout": "story",
- "title": "Diffusion Removes Langevin's Conditioning Dependence: A Sharp Gaussian Analysis",
+ "title": "Diffusion Removes Langevin’s Conditioning Dependence: A Sharp Gaussian Analysis",
  "kind": "paper",
  "section": "Papers",
  "edition": "daily",

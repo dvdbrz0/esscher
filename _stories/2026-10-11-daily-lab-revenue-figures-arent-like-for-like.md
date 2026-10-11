@@ -1,7 +1,7 @@
 ---
 {
  "layout": "story",
- "title": "Lab revenue figures aren't like-for-like",
+ "title": "Lab revenue figures aren’t like-for-like",
  "kind": "story",
  "section": "AI and machine learning",
  "edition": "daily",
@@ -10,7 +10,7 @@
  "summary": "Anthropic books gross cloud-partner sales while OpenAI reports its net share, which makes headline comparisons misleading.",
  "body": [
   "Bloomberg reports that Anthropic and OpenAI count revenue differently. Anthropic books the gross value of sales made through its cloud partners, while OpenAI reports only its net share, so headline figures for the two companies cannot be compared directly.",
-  "Separately, the Wall Street Journal reports that Meta turned down a request for computing capacity from Anthropic's chief executive, Dario Amodei, earlier this year. Read together, the reports say two things: revenue figures need careful reading, and compute remains the binding constraint."
+  "Separately, the Wall Street Journal reports that Meta turned down a request for computing capacity from Anthropic’s chief executive, Dario Amodei, earlier this year. Read together, the reports say two things: revenue figures need careful reading, and compute remains the binding constraint."
  ],
  "sources": [
   {

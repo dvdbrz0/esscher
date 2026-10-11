@@ -19,6 +19,7 @@ from urllib.parse import parse_qs, urlparse
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import chart  # noqa: E402
 import share_card  # noqa: E402
+import typography  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 WRITTEN = []
@@ -82,7 +83,7 @@ SECTIONS = {
     "daily": [("must_read", "Must-read", "story"), ("ai", "AI and machine learning", "story"),
               ("markets", "Markets", "story"), ("economy", "Economy", "story"),
               ("mathematics", "Mathematics", "story"), ("papers", "Papers", "paper")],
-    "weekly": [("mattered", "What actually mattered", "story"), ("maths", "The maths behind the news", "explainer"),
+    "weekly": [("mattered", "What mattered", "story"), ("maths", "The maths behind the news", "explainer"),
                ("read", "Read this week", "paper"),
                ("canon", "Papers that became canon", "paper"), ("debates", "The debates", "story"),
                ("markets", "Quantitative finance and markets", "story"), ("economy", "Economy", "story"),
@@ -272,6 +273,7 @@ def main():
         fail("give exactly one argument: the JSON file")
     data = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
     data = clean(data)
+    data = typography.apply(data)
 
     edition = data.get("edition")
     if edition not in ("daily", "weekly"):

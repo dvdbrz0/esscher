@@ -10,7 +10,7 @@
  "summary": "The S&P 500 gained 1.2%; the 10-year yield eased to about 5.25% after touching 5.37%.",
  "body": [
   "The S&P 500 closed Friday at 7,811.54, up 1.2 percent on the week; the Dow ended at 51,654.95 and the Nasdaq at 27,366.17. The 10-year Treasury yield finished just under 5.25 percent after touching about 5.37 percent on Wednesday, its highest level in 24 years. Gold traded near 4,220 dollars.",
-  "Equities are absorbing the highest long-term rates since 2002 ahead of Wednesday's September inflation report. US bond markets are closed on Monday."
+  "Equities are absorbing the highest long-term rates since 2002 ahead of Wednesday’s September inflation report. US bond markets are closed on Monday."
  ],
  "sources": [
   {

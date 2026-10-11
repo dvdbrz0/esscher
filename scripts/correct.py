@@ -87,6 +87,11 @@ def main():
     if m:
         edition_file = ROOT / "_posts" / f"{m.group(1)}-{m.group(2)}-{m.group(3)}-{m.group(4)}.md"
 
+    # Stored text uses typographer's quotes (see typography.py); match it the same way.
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import typography
+    a.replace = [(typography.smart_quotes(o), typography.smart_quotes(n)) for o, n in a.replace]
+    a.note = typography.smart_quotes(a.note)
     old_title = story.get("title")
     count = [0]
     for old, new in a.replace:

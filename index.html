@@ -17,11 +17,12 @@ title: Esscher
   <div class="weekly-teaser-text">
     <span class="label-sm">Every Sunday</span>
     <h2 id="weekly-teaser-h">The Weekly Review</h2>
-    <p>What actually mattered, which papers became canon, what is worth reading in full, and the maths behind one story of the week.</p>
+    <p>The stories that mattered, the papers that became canon, what to read in full, and the maths behind one story of the week.</p>
   </div>
   {% if latest_weekly %}
   <a class="button" href="{{ latest_weekly.url | relative_url }}">Read the latest review</a>
   {% else %}
-  <span class="button button-quiet">First review this Sunday</span>
+  {% assign wd = site.time | date: "%w" | plus: 0 %}{% if wd == 0 %}{% assign first_weekly = "today" %}{% else %}{% assign add = 7 | minus: wd | times: 86400 %}{% capture first_weekly %}on {{ site.time | date: "%s" | plus: add | date: "%A %-d %B" }}{% endcapture %}{% endif %}
+  <span class="button button-quiet">First review {{ first_weekly }}</span>
   {% endif %}
 </section>

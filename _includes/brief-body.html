@@ -23,16 +23,13 @@
     <div class="kicker"><span class="accent">Must-read</span>{% if m.section %}<span class="muted">{{ m.section | escape }}</span>{% endif %}</div>
     <h1 id="lead-h" class="lead-title">{% if m.story %}<a href="{{ m.story | relative_url }}">{{ m.headline | escape }}</a>{% else %}{{ m.headline | escape }}{% endif %}</h1>
     {% if m.dek %}<p class="dek">{{ m.dek | escape }}</p>{% endif %}
-    {% if m.story %}<a class="read-more" href="{{ m.story | relative_url }}">Read the full summary</a>{% elsif m.body %}<p class="lead-body">{{ m.body | escape }}</p>{% endif %}
+    {% if m.story %}<a class="read-more" href="{{ m.story | relative_url }}">Full story</a>{% elsif m.body %}<p class="lead-body">{{ m.body | escape }}</p>{% endif %}
   </div>
   <aside class="lead-aside">
     {% if m.why %}
-    <div class="why-box">
-      <span class="label-sm muted">Why it matters</span>
-      <p>{{ m.why | escape }}</p>
-    </div>
+    <p class="why">{{ m.why | escape }}</p>
     {% endif %}
-    {% if m.status %}<span class="status">{{ m.status | escape }}</span>{% endif %}
+    {% if m.status %}<p class="status">{{ m.status | escape }}</p>{% endif %}
     {% if m.links %}
     <ul class="link-list">
       {% for l in m.links %}<li><a href="{{ l.url | escape }}">{{ l.label | escape }}</a></li>{% endfor %}

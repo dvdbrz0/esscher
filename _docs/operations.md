@@ -23,6 +23,7 @@ A map of the moving parts, for whoever works on the site next. The house style i
 | `scripts/fred.py SERIES START` | Downloads a FRED series as chart points. |
 | `scripts/share_card.py` | Draws the 1200x630 image shown when a page is shared. Fonts in `scripts/fonts/` (SIL Open Font License). The wordmark comes from `scripts/brand/wordmark-white.png`. Needs Pillow; without it pages use `assets/share.png`. |
 | `scripts/brand.py` | Redraws the wordmark, the mark and `assets/favicon.svg` from Newsreader (`scripts/fonts/`). Only needed if the brand changes; needs fonttools and uharfbuzz. The PNG icons and `scripts/brand/wordmark-white.png` are rendered from those SVGs. |
+| `scripts/typography.py` | Typographer's quotes for edition text, used by `new_post.py` and `correct.py`; formulas are left alone. Run it on its own to test it. |
 | `scripts/newsletter.py POST [--send]` | Builds the newsletter email from an edition and sends it through Buttondown. |
 | `scripts/publish.sh MESSAGE` | Commit and push everything an edition produces. |
 
@@ -55,6 +56,9 @@ data (NewsArticle, WebSite, Organization), per-page share images, dark mode, KaT
 formulas (self-hosted), self-hosted fonts: Newsreader for headlines (the face the wordmark
 is drawn from), Source Serif 4 for reading text, Source Sans 3 for interface. Accent colour
 #1D4F91 (ink blue; #8AB4F8 in dark mode), used for labels, links and charts.
+
+Times are written in UTC in the page; `assets/js/local-time.js` shows them in the
+reader's own time zone (the UTC text stays for readers without scripts).
 
 Masthead: one compact row (drawn wordmark, sections, search; a Menu on phones) above a
 thin row with the date, the edition number ("No. N", counted from the first daily

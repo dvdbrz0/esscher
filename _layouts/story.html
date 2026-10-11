@@ -12,16 +12,14 @@ layout: default
     {% if st.authors %}<p class="muted">{{ st.authors | escape }}</p>{% endif %}
     {% if st.summary %}<p class="dek">{{ st.summary | escape }}</p>{% endif %}
     <p class="story-dates small muted">
-      {% if st.published %}Source published <time datetime="{{ st.published | escape }}">{% if st.published contains "T" %}{{ st.published | date: "%-d %B %Y, %H:%M UTC" }}{% else %}{{ st.published | date: "%-d %B %Y" }}{% endif %}</time> · {% endif %}
+      {% if st.published %}Source published <time datetime="{{ st.published | escape }}"{% if st.published contains "T" %} data-local="full-date-time"{% endif %}>{% if st.published contains "T" %}{{ st.published | date: "%-d %B %Y, %H:%M UTC" }}{% else %}{{ st.published | date: "%-d %B %Y" }}{% endif %}</time> · {% endif %}
       In the <a href="{{ st.edition_url | relative_url }}">{% if st.edition == "weekly" %}Weekly Review{% else %}Daily Brief{% endif %} of {{ st.date | date: "%-d %B %Y" }}</a>{% if st.corrections.size > 0 %} · <a href="#corrections">Corrected</a>{% endif %}
     </p>
     {% if st.topics.size > 0 %}
-    <nav class="topic-chips" aria-label="Topics">
-      {% for name in st.topics %}{% assign tt = site.data.topics | where: "name", name | first %}{% if tt %}<a href="{{ '/topics/' | append: tt.slug | append: '/' | relative_url }}">{{ tt.name | escape }}</a>{% endif %}{% endfor %}
-    </nav>
+    <p class="topic-line small">Filed under {% for name in st.topics %}{% assign tt = site.data.topics | where: "name", name | first %}{% if tt %}<a href="{{ '/topics/' | append: tt.slug | append: '/' | relative_url }}">{{ tt.name | escape }}</a>{% unless forloop.last %}, {% endunless %}{% endif %}{% endfor %}</p>
     {% endif %}
     <div class="story-body">
-      {% for para in st.body %}<p>{{ para | escape }}</p>{% endfor %}
+      {% for para in st.body %}<p>{{ para | escape }}{% if forloop.last %}<span class="end-mark" aria-hidden="true">{% include brand/mark.svg %}</span>{% endif %}</p>{% endfor %}
     </div>
     {% if st.corrections.size > 0 %}
     <div class="correction-box" id="corrections">
@@ -34,12 +32,9 @@ layout: default
 
   <aside class="story-page-aside">
     {% if st.why %}
-    <div class="why-box">
-      <span class="label-sm muted">Why it matters</span>
-      <p>{{ st.why | escape }}</p>
-    </div>
+    <p class="why">{{ st.why | escape }}</p>
     {% endif %}
-    {% if st.status %}<span class="status">{{ st.status | escape }}</span>{% endif %}
+    {% if st.status %}<p class="status">{{ st.status | escape }}</p>{% endif %}
 
     {% if st.kind == "paper" %}
       {% if st.arxiv %}

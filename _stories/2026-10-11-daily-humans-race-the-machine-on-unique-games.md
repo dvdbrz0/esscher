@@ -10,7 +10,7 @@
  "summary": "Dor Minzer and co-authors posted a weaker four-colour version of the 2-to-1 games conjecture days before OpenAI claimed the full conjecture, which is not yet reviewed.",
  "body": [
   "Dor Minzer and co-authors rushed out a proof of a weaker, four-colour version of the 2-to-1 games conjecture shortly before OpenAI announced a machine-generated proof of the full unique games conjecture.",
-  "OpenAI's proof has not yet been independently reviewed. If it holds, it would settle a central conjecture of hardness of approximation, the theory of how well hard optimisation problems can be approximated efficiently."
+  "OpenAI’s proof has not yet been independently reviewed. If it holds, it would settle a central conjecture of hardness of approximation, the theory of how well hard optimisation problems can be approximated efficiently."
  ],
  "sources": [
   {

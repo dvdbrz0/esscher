@@ -10,7 +10,7 @@
  "summary": "Brent fell to around $103–104; the World Economic Outlook lands on 13 October.",
  "body": [
   "Brent crude fell to around 103 to 104 dollars a barrel after President Trump ruled out striking Iran before the midterm elections and announced a deal on Russian diesel. Sources differ on the exact level.",
-  "The International Monetary Fund publishes its October World Economic Outlook on 13 October. Energy prices are behind much of the inflation that drove both the Federal Reserve's and the European Central Bank's latest hikes."
+  "The International Monetary Fund publishes its October World Economic Outlook on 13 October. Energy prices are behind much of the inflation that drove both the Federal Reserve’s and the European Central Bank’s latest hikes."
  ],
  "sources": [
   {

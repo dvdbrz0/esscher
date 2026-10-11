@@ -22,7 +22,7 @@ layout: default
 
 {% if w.mattered %}
 <section class="weekly-section" aria-labelledby="mattered-h">
-  <h2 id="mattered-h" class="section-label">What actually mattered</h2>
+  <h2 id="mattered-h" class="section-label">What mattered</h2>
   {% for s in w.mattered %}
   <div class="story story-long">
     <h3>{% if s.story %}<a href="{{ s.story | relative_url }}">{{ s.headline | escape }}</a>{% else %}{{ s.headline | escape }}{% endif %}</h3>

@@ -25,6 +25,19 @@ move, sent shockwaves, amid (more than once per edition), "not just X but Y",
 lists of three adjectives, and sentences built around a colon or a dash for
 drama. Use at most one dash-pair aside per story.
 
+Patterns that make text read as machine-written even when every word is fine:
+
+- Inflated significance: "marks a turning point", "a pivotal moment",
+  "underscores", "highlights the importance of", "reflects a broader trend".
+- Sentences that trail off in a vague participle clause: "..., highlighting
+  the risks", "..., reflecting growing concern", "..., signalling a shift".
+- Groups of three for rhythm (adjectives, parallel clauses) when the facts do
+  not come in threes.
+- "Actually", "really", "truly", "Here's", "In short", "The upshot", "The
+  takeaway", "It's not X, it's Y", and openings that restate the headline.
+- Every item in a section built the same way. Vary length and shape: some
+  items are one sentence, some lead with a number, some with a name.
+
 ## Spelling and grammar
 
 - British English with -ise endings: optimise, generalisation, randomised,
@@ -43,6 +56,9 @@ drama. Use at most one dash-pair aside per story.
 - Digits for all numbers: "722 papers", "3 labs".
 - A question headline only when the piece itself is an open question.
 - No "BREAKING", no "Here's why", no "everything you need to know".
+- The must-read headline states the news as a sentence with a verb. Never
+  build it as topic, colon, verdict ("X: the hard part is Y"), the most
+  recognisable machine-written headline shape.
 
 ## Summaries and three lines
 
@@ -62,6 +78,11 @@ drama. Use at most one dash-pair aside per story.
 - Dates: "9 October 2026"; with weekday "Tuesday 13 October". No ordinals
   ("13th"). Times in 24-hour UTC: "14:30 UTC".
 - Ranges: "8–13%" with an en dash.
+- Times stay in UTC in the JSON; the site shows each reader the time in their
+  own zone.
+- Quotation marks: type plain quotes and apostrophes in the JSON.
+  `scripts/new_post.py` turns them into typographer's quotes (“ ” ‘ ’)
+  everywhere except inside formulas.
 
 ## Names and attribution
 

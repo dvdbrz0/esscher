@@ -1,7 +1,7 @@
 ---
 {
  "layout": "story",
- "title": "OpenAI's 722 machine-generated maths papers: the hard part is now checking them",
+ "title": "OpenAI’s 722 machine-generated maths papers: the hard part is now checking them",
  "kind": "story",
  "section": "Must-read · Mathematics · AI",
  "edition": "daily",
