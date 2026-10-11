@@ -18,6 +18,8 @@ layout: default
 </section>
 {% endif %}
 
+{% include chart-day.html c=w.chart label="Chart of the week" %}
+
 {% if w.mattered %}
 <section class="weekly-section" aria-labelledby="mattered-h">
   <h2 id="mattered-h" class="section-label">What actually mattered</h2>

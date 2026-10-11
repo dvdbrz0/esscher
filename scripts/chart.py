@@ -28,7 +28,7 @@ def nice_step(span, target=5):
 
 def fmt(v, decimals, prefix="", suffix=""):
     s = f"{abs(v):,.{decimals}f}"
-    sign = "-" if v < 0 else ""
+    sign = "\u2212" if v < 0 else ""  # a true minus sign, as in print
     return f"{sign}{prefix}{s}{suffix}"
 
 
@@ -127,8 +127,10 @@ def bar_chart(spec):
     row, label_w, value_w = 34, 190, 70
     H = row * len(pts) + 12
     lo, hi = min(0, min(v for _, v in pts)), max(0, max(v for _, v in pts))
-    pw = W - label_w - value_w * (2 if lo < 0 else 1)
-    start = label_w + (value_w if lo < 0 else 0)
+    pad_left = value_w if lo < 0 else 0
+    pad_right = value_w if hi > 0 else 8
+    pw = W - label_w - pad_left - pad_right
+    start = label_w + pad_left
 
     def X(v):
         return start + (v - lo) / ((hi - lo) or 1) * pw

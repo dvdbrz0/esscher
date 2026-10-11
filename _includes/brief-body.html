@@ -42,23 +42,7 @@
 </article>
 {% endif %}
 
-{% if b.chart and b.chart.svg %}
-{% assign c = b.chart %}
-<section class="chart-day" id="chart" aria-labelledby="chart-h">
-  <h2 id="chart-h" class="section-label">Chart of the day</h2>
-  <div class="chart-day-inner">
-    <figure class="chart-figure">
-      <figcaption class="chart-head">
-        <span class="chart-title">{{ c.title | escape }}</span>
-        {% if c.subtitle %}<span class="chart-subtitle">{{ c.subtitle | escape }}</span>{% endif %}
-      </figcaption>
-      {% include {{ c.svg }} %}
-      <p class="chart-source">Source: <a href="{{ c.source_url | escape }}">{{ c.source | escape }}</a>{% if c.latest_date %}. Latest data: {{ c.latest_date | date: "%-d %B %Y" }}{% endif %}.</p>
-    </figure>
-    {% if c.note %}<p class="chart-note">{{ c.note | escape }}</p>{% endif %}
-  </div>
-</section>
-{% endif %}
+{% include chart-day.html c=b.chart %}
 
 <div class="columns">
   {% if b.ai and b.ai.size > 0 %}
