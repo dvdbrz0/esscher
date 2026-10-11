@@ -11,6 +11,7 @@ the day in _includes/charts/. It prints every file it wrote.
 """
 import json
 import re
+import unicodedata
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -20,6 +21,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import chart  # noqa: E402
 import share_card  # noqa: E402
 import typography  # noqa: E402
+import mathtext  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 WRITTEN = []
@@ -92,6 +94,8 @@ SECTIONS = {
 
 
 def slugify(text, limit=70):
+    # "L²" becomes "l2", "Erdős" becomes "erdos".
+    text = unicodedata.normalize("NFKD", unicodedata.normalize("NFKC", text)).encode("ascii", "ignore").decode()
     text = text.lower().replace("'", "").replace("’", "")
     text = re.sub(r"[^a-z0-9]+", "-", text).strip("-")
     return text[:limit].rstrip("-") or "story"
@@ -125,6 +129,21 @@ def pick_topics(it, key, allowed):
         else:
             good = DEFAULT_TOPICS.get(key, [])
     return good[:3]
+
+
+def plain_titles(obj):
+    """Headlines and titles cannot be typeset (page titles, share images, feeds): Unicode mathematics only."""
+    if isinstance(obj, dict):
+        out = {}
+        for k, v in obj.items():
+            if k in ("headline", "title") and isinstance(v, str) and ("\\(" in v or "\\[" in v):
+                sys.stderr.write(f"new_post.py: LaTeX in a {k} written as Unicode: {v!r}\n")
+                v = mathtext.to_plain(v)
+            out[k] = plain_titles(v)
+        return out
+    if isinstance(obj, list):
+        return [plain_titles(x) for x in obj]
+    return obj
 
 
 def has_math(obj):
@@ -189,6 +208,8 @@ def write_stories(front, edition, day):
                 it["topics"] = topics
             if has_math(story):
                 story["math"] = True
+            if has_math(story["summary"]):
+                story["summary_plain"] = mathtext.to_plain(story["summary"])
             if key == "must_read" and it.get("section"):
                 story["section"] = "Must-read · " + it["section"]
             if kind == "paper":
@@ -246,7 +267,7 @@ def feed_body(front, edition):
     out = []
     lines = front.get("three_lines") or front.get("five_lines") or []
     for i, l in enumerate(lines, 1):
-        out.append(f"{i}. {l}")
+        out.append(f"{i}. {mathtext.to_plain(l)}")
     out.append("")
     for key, label, _ in SECTIONS[edition]:
         items = front.get(key)
@@ -261,7 +282,7 @@ def feed_body(front, edition):
             if not title:
                 continue
             link = base + it["story"] if it.get("story") else None
-            summary = it.get("summary") or it.get("dek") or it.get("why") or ""
+            summary = mathtext.to_plain(it.get("summary") or it.get("dek") or it.get("why") or "")
             head = f"[{title}]({link})" if link else title
             out.append(f"- {head}" + (f": {summary}" if summary else ""))
         out.append("")
@@ -274,6 +295,7 @@ def main():
     data = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
     data = clean(data)
     data = typography.apply(data)
+    data = plain_titles(data)
 
     edition = data.get("edition")
     if edition not in ("daily", "weekly"):
@@ -303,7 +325,7 @@ def main():
             if not p.get("title") or not p.get("summary"):
                 fail(f"papers[{i}] needs a title and a summary")
         headline = (data.get("must_read") or {}).get("headline") or data["ai"][0]["headline"]
-        description = " ".join(lines)
+        description = mathtext.to_plain(" ".join(lines))
         front = {"layout": "brief", "title": "Daily Brief"}
     else:
         lines = data.get("five_lines")
@@ -317,7 +339,7 @@ def main():
                 fail('"maths" must be one object with a headline, a summary and a body')
             check_sources([mx], "maths")
         headline = data.get("headline") or ("Week of " + data.get("week_of", ""))
-        description = " ".join(lines)
+        description = mathtext.to_plain(" ".join(lines))
         front = {"layout": "weekly", "title": "Weekly Review"}
 
     hour = "05:00:00" if edition == "daily" else "08:00:00"

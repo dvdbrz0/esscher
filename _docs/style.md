@@ -117,6 +117,20 @@ Patterns that make text read as machine-written even when every word is fine:
   of them visible in the data.
 - Leave the chart out when nothing in the day's news has data worth showing.
 
+## Mathematical notation
+
+- Notation is typeset, never typed: every variable, rate, bound or formula goes
+  in LaTeX between `\( \)` (see "Mathematics" in format.md), in summaries and
+  the lines of the day as much as in story bodies. "An error of order
+  \(\sqrt{d}/N\)", not "an error of order sqrt(d)/N" and not "of order root d
+  over N".
+- Name a quantity in words the first time, then use its symbol: "the VC
+  dimension \(d\)", "the noise level \(s\)".
+- Use the notation of the paper being described, with its symbols and its
+  conventions.
+- Headlines carry no LaTeX: when a headline needs a symbol, use the Unicode
+  character (√n, ε, ≤).
+
 ## The maths behind the news
 
 - The tone of a good lecture: precise, unhurried, no jokes, no "simply" or

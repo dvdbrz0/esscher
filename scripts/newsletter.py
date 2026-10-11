@@ -21,6 +21,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from new_post import SECTIONS, site_url  # noqa: E402
+import mathtext  # noqa: E402
 
 
 def load(path):
@@ -32,7 +33,8 @@ def load(path):
 
 
 def strip_math(s):
-    return re.sub(r"\\\(|\\\)|\\\[|\\\]", "", s or "")
+    """Formulas as Unicode mathematics: email cannot typeset LaTeX."""
+    return mathtext.to_plain(s or "")
 
 
 def build(front):
@@ -52,7 +54,7 @@ def build(front):
 
     out = [f"*{kicker}* · [Read on esscher.com]({url})", "", f"## {lines_title}", ""]
     for i, l in enumerate(lines, 1):
-        out.append(f"{i}. {l}")
+        out.append(f"{i}. {strip_math(l)}")
     out.append("")
     after_lines = len(out)
 

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {% if page.layout == "story" %}{% assign doc_title = page.title %}{% elsif page.title and page.url != "/" %}{% capture doc_title %}{{ page.title }}{% if page.date %}, {{ page.date | date: "%-d %B %Y" }}{% endif %}{% endcapture %}{% else %}{% assign doc_title = "" %}{% endif %}
-{% if page.summary %}{% assign doc_desc = page.summary %}{% elsif page.description %}{% assign doc_desc = page.description %}{% elsif page.url == "/" %}{% assign home_latest = site.posts | where: "edition", "daily" | first %}{% assign doc_desc = home_latest.description | default: site.description %}{% else %}{% assign doc_desc = site.description %}{% endif %}
+{% if page.summary_plain %}{% assign doc_desc = page.summary_plain %}{% elsif page.summary %}{% assign doc_desc = page.summary %}{% elsif page.description %}{% assign doc_desc = page.description %}{% elsif page.url == "/" %}{% assign home_latest = site.posts | where: "edition", "daily" | first %}{% assign doc_desc = home_latest.description | default: site.description %}{% else %}{% assign doc_desc = site.description %}{% endif %}
 {% assign doc_desc = doc_desc | strip_html | strip_newlines | truncate: 200 %}
 <title>{% if doc_title != "" %}{{ doc_title | escape }} · Esscher{% else %}Esscher: {{ site.tagline | escape }}{% endif %}</title>
 <meta name="description" content="{{ doc_desc | escape }}">
@@ -124,6 +124,7 @@
 </footer>
 <script src="{{ '/assets/js/sparklines.js' | relative_url }}" defer></script>
 <script src="{{ '/assets/js/local-time.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/math.js' | relative_url }}" data-base="{{ '/assets/katex/' | relative_url }}" defer></script>
 <script>
 (function () {
   // Fade the right edge of the markets row while part of it is hidden; it scrolls sideways.

@@ -44,7 +44,7 @@ picture before deciding to open the original. Rules for `body`:
   reader needs. Do not retell the source paragraph by paragraph, and do not quote.
 - For a paywalled source, use what is publicly visible and other coverage of the
   same story; if that is too thin, keep the body short rather than invent.
-- Optional per item: `"why"`, one sentence on why it matters (shown in a box).
+- Optional per item: `"why"`, one sentence on why it matters (shown beside the story).
 
 Topics: every story and paper carries `"topics"`, a list of 1 to 3 names taken
 exactly from this list (each has its own page on the site):
@@ -54,11 +54,24 @@ Quantitative finance, Market microstructure, Credit risk, Markets, Economy,
 Mathematics. For papers, `"tag"` should also be one of these names. Unknown names
 are dropped by the script.
 
-Mathematics: write formulas in LaTeX inside `"body"` (and `"why"` if needed), with
-`\( ... \)` for inline formulas and `\[ ... \]` for displayed ones. Remember
-that in JSON every backslash is doubled: `"\\(\\sqrt{d \\lambda_{\\max}}\\)"`.
-Never use dollar signs for math (prices use them). Keep headlines, summaries and
-`"three_lines"` free of LaTeX: they also appear in link previews.
+Mathematics: every piece of mathematical notation is written in LaTeX, everywhere
+except headlines: variables, functions, rates, bounds, probabilities and formulas,
+in `"summary"`, `"three_lines"`, `"five_lines"`, `"dek"`, `"why"`, `"voices"`,
+the chart `"note"` and `"body"`. Use `\( ... \)` inline everywhere and
+`\[ ... \]` for displayed formulas, only in `"body"`. Never write mathematics as
+plain text (`n^2`, `sqrt(n)`, `O(1/n)`, `eps`, `lambda_max`, `<=`) and never as
+Unicode in these fields: `\(n^2\)`, `\(\sqrt{n}\)`, `\(O(1/n)\)`,
+`\(\varepsilon\)`, `\(\lambda_{\max}\)`, `\(\le\)`. Plain quantities are not
+formulas: percentages, prices, dates and counts stay as text ("5.31%", "$30bn",
+"722 papers"). Remember that in JSON
+every backslash is doubled: `"\\(\\sqrt{d \\lambda_{\\max}}\\)"`. Never use
+dollar signs for math (prices use them).
+
+Headlines and paper titles are shown where nothing can be typeset (page titles,
+share images, feeds), so they contain no LaTeX: write the mathematics in them with
+Unicode characters (√n, ε², ≤, ℝᵈ, λₘₐₓ). `new_post.py` converts any LaTeX left in
+a headline and warns. Link previews, search engines, the feed and the newsletter
+get a Unicode version of every formula automatically (`scripts/mathtext.py`).
 
 ## Daily brief
 
@@ -127,7 +140,7 @@ own page and listed at /maths/. Rules:
 - Only standard, well-established mathematics, stated correctly with its assumptions. If a
   number is used, it comes from a source in `sources`. No speculation dressed as derivation.
 - Pitched at a reader comfortable with undergraduate probability and calculus.
-- `headline` and `summary` contain no LaTeX.
+- `headline` contains no LaTeX (Unicode mathematics only); `summary` may use inline `\( \)`.
 
 ## Chart of the day
 

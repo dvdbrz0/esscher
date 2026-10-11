@@ -75,7 +75,7 @@ sup { font-size: 0.7em; }
 @media (max-width: 640px) {
   .mh-row { min-height: 56px; gap: 16px; }
   .wm { height: 27px; }
-  .mh-sub-inner { flex-wrap: wrap; gap: 0 16px; padding: 6px 0; min-height: 0; }
+  .mh-sub-inner { flex-wrap: wrap; gap: 0 16px; padding-top: 4px; padding-bottom: 4px; min-height: 0; }
   .mh-date { flex-basis: 100%; padding: 2px 0 4px; }
   .ticker { padding: 2px 0; }
 }
@@ -194,7 +194,7 @@ sup { font-size: 0.7em; }
 .footer-col { display: flex; flex-direction: column; gap: 10px; min-width: 150px; }
 
 @media (max-width: 640px) {
-  .wrap { padding: 0 16px; }
+  .wrap { padding-left: 16px; padding-right: 16px; }
   .lead-title { font-size: 33px; line-height: 1.08; }
   .dek { font-size: 19px; }
   .story-lg h3 { font-size: 26px; }
