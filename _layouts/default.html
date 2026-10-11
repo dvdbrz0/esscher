@@ -40,7 +40,7 @@
 {% feed_meta %}
 {% include schema.html %}
 </head>
-<body>
+<body{% if site.proto_classes %} class="{{ site.proto_classes }}"{% endif %}>
 {% if page.ticker %}{% assign tick_page = page %}{% else %}{% assign tick_page = site.posts | where: "edition", "daily" | first %}{% endif %}
 {% assign dailies_all = site.posts | where: "edition", "daily" %}{% assign ed_no = nil %}{% for d in dailies_all %}{% if d.url == tick_page.url %}{% assign ed_no = dailies_all.size | minus: forloop.index0 %}{% endif %}{% endfor %}
 <header class="site-header">
