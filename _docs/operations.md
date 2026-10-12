@@ -9,8 +9,8 @@ A map of the moving parts, for whoever works on the site next. The house style i
   Sundays before 08:00) and turned into pages by `scripts/new_post.py`.
 - `scripts/publish.sh "message"` commits `_posts`, `_stories`, `_includes/charts` and
   `assets/og`, then pushes to `main`. GitHub Pages rebuilds the site in about a minute.
-- After publishing, the scheduled run calls `scripts/check_live.py`, looks at its
-  screenshots and emails the owner a one-line status (subject "Esscher status - <date> -
+- About 45 minutes after each publishing run, a separate scheduled check runs `scripts/check_live.py`, looks at its
+  screenshots, confirms the private brief went out and emails the owner a one-line status (subject "Esscher status - <date> -
   OK" or "- PROBLEMA"). The check only reads; it never fixes or pushes anything.
 - The site is Jekyll 3.10 on GitHub Pages (branch `main`, root folder), custom domain
   in `CNAME`, HTTPS enforced. `future: true` lets an edition dated 05:00 appear as soon

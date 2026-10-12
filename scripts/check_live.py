@@ -11,7 +11,8 @@ Usage:
   python3 scripts/check_live.py                      # today's edition (Bucharest date)
   python3 scripts/check_live.py 2026-10-12 daily     # a given edition
   options: --wait SECONDS (default 900), --shots DIR (default /tmp/esscher-check),
-           --commit REV (the publish commit to inspect for deleted files, default HEAD)
+           --commit REV (the publish commit to inspect for deleted files; default: the
+           last commit that wrote the edition)
 
 Exit code 0 when every check passed, 1 when something is wrong, 2 when the
 edition never appeared. The last line printed is a one-line summary.
@@ -178,7 +179,7 @@ def main():
     ap.add_argument("edition", nargs="?", choices=["daily", "weekly"])
     ap.add_argument("--wait", type=int, default=900)
     ap.add_argument("--shots", default="/tmp/esscher-check")
-    ap.add_argument("--commit", default="HEAD")
+    ap.add_argument("--commit", default="auto")
     a = ap.parse_args()
 
     now = dt.datetime.now(ZoneInfo("Europe/Bucharest"))
@@ -264,9 +265,14 @@ def main():
             problems.append("the chart is in the edition but not on the page")
 
     # 6. Nothing lost: no deleted files in the publish commit, older pages still served.
+    commit = a.commit
+    if commit == "auto":
+        # The last commit that wrote this edition (later commits, such as markets band updates, are skipped).
+        commit = subprocess.run(["git", "-C", str(ROOT), "log", "-1", "--format=%H", "--",
+                                 str(post.relative_to(ROOT))], capture_output=True, text=True).stdout.strip() or "HEAD"
     try:
         deleted = subprocess.run(["git", "-C", str(ROOT), "show", "--diff-filter=D", "--name-only",
-                                  "--format=", a.commit], capture_output=True, text=True, timeout=60).stdout.split()
+                                  "--format=", commit], capture_output=True, text=True, timeout=60).stdout.split()
     except Exception:
         deleted = []
     if deleted:
