@@ -20,6 +20,7 @@
  "topics": [
   "Agents",
   "Large language models"
- ]
+ ],
+ "image": "/assets/og/2026-10-12-daily-h-jepa-end-to-end-learning-of-hierarchical-world-models-for-visual-pla.png"
 }
 ---

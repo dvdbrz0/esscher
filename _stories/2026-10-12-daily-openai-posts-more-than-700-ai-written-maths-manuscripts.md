@@ -29,6 +29,7 @@
   "Mathematics",
   "Large language models",
   "AI industry"
- ]
+ ],
+ "image": "/assets/og/2026-10-12-daily-openai-posts-more-than-700-ai-written-maths-manuscripts.png"
 }
 ---

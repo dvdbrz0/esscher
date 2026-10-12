@@ -21,6 +21,7 @@
  "published": "2026-10-09",
  "topics": [
   "Markets"
- ]
+ ],
+ "image": "/assets/og/2026-10-12-daily-us-stocks-end-the-week-near-record-highs.png"
 }
 ---

@@ -28,6 +28,7 @@
  "topics": [
   "Agents",
   "Large language models"
- ]
+ ],
+ "image": "/assets/og/2026-10-12-daily-h-jepa-stacks-world-models-to-plan-far-ahead-from-video.png"
 }
 ---

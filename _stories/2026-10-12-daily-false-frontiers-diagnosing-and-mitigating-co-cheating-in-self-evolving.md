@@ -21,6 +21,7 @@
   "Reasoning and inference",
   "Agents",
   "Learning theory"
- ]
+ ],
+ "image": "/assets/og/2026-10-12-daily-false-frontiers-diagnosing-and-mitigating-co-cheating-in-self-evolving.png"
 }
 ---

@@ -22,6 +22,7 @@
  "topics": [
   "Economy",
   "Markets"
- ]
+ ],
+ "image": "/assets/og/2026-10-12-daily-bank-earnings-and-us-inflation-data-headline-a-busy-week.png"
 }
 ---
