@@ -98,6 +98,15 @@ Patterns that make text read as machine-written even when every word is fine:
 - Unconfirmed claims say so: "not yet independently reviewed",
   "reportedly, according to Bloomberg". Never repeat a rumour without a named
   source.
+- Posts by leading figures. A post on X by a leading researcher, founder,
+  executive or mathematician is its own source for what that person said, and
+  belongs in the edition: under "voices" when it is an argument or an
+  observation, as a story when the post itself announces something. Report it
+  as their statement, in our own words ("Andrej Karpathy argued that..."), and
+  link the post. A factual claim inside the post stays attributed to its
+  author ("Altman said the model would ship in November"), never stated as
+  established fact. Posts from anonymous or minor accounts, and posts known
+  only secondhand without a link, are not sources.
 - Papers: "Hanneke et al." for three or more authors, both surnames for two.
 
 ## Markets band
