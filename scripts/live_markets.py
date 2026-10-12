@@ -146,13 +146,13 @@ def fmt(m, q):
     item = {"label": m["label"], "value": value, "time": q["time"].astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}
     if prev:
         if kind == "yield":
-            bp = round((last - prev) * 100)
-            change, d = f"{'+' if bp >= 0 else MINUS}{abs(bp)} bp", bp
+            d = round((last - prev) * 100)
+            change = f"{'+' if d > 0 else MINUS if d < 0 else ''}{abs(d)} bp"
         else:
-            pct = (last / prev - 1) * 100
-            change, d = f"{'+' if pct >= 0 else MINUS}{abs(pct):.1f}%", pct
+            d = round((last / prev - 1) * 100, 1)
+            change = f"{'+' if d > 0 else MINUS if d < 0 else ''}{abs(d):.1f}%"
         item["change"] = change
-        item["dir"] = "down" if d < 0 else "up"
+        item["dir"] = "down" if d < 0 else "up" if d > 0 else "flat"
     return item
 
 

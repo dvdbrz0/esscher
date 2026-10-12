@@ -36,7 +36,7 @@
       if (value) value.textContent = q.value;
       if (change) {
         change.textContent = q.change || "";
-        change.className = "tick-change" + (q.change ? (q.dir === "down" ? " down" : " up") : "");
+        change.className = "tick-change" + (q.dir === "down" ? " down" : q.dir === "up" ? " up" : "");
       }
       var t = new Date(q.time);
       if (!isNaN(t.getTime())) tick.setAttribute("title", q.label + " at " + when(t) + ", delayed. Opens the full quote.");
