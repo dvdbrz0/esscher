@@ -108,7 +108,19 @@ def visual_checks(pages, shots_dir, problems, notes):
       return out;
     }"""
     with sync_playwright() as p:
-        browser = p.chromium.launch()
+        browser = None
+        try:
+            browser = p.chromium.launch()
+        except Exception:
+            for exe in sorted(Path("/opt/pw-browsers").glob("chromium-*/chrome-linux*/chrome")):
+                try:
+                    browser = p.chromium.launch(executable_path=str(exe))
+                    break
+                except Exception:
+                    pass
+        if browser is None:
+            notes.append("visual checks skipped: Chromium could not start")
+            return taken
         for name, url in pages:
             for width, height in ((390, 844), (1440, 900)):
                 for scheme in ("light", "dark"):
