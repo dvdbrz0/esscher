@@ -1,0 +1,10 @@
+[
+  {"label": "S&P 500", "kind": "index", "url": "https://www.cnbc.com/quotes/.SPX", "cnbc": ".SPX", "yahoo": "^GSPC"},
+  {"label": "Dow", "kind": "index", "url": "https://www.cnbc.com/quotes/.DJI", "cnbc": ".DJI", "yahoo": "^DJI"},
+  {"label": "Nasdaq", "kind": "index", "url": "https://www.cnbc.com/quotes/.IXIC", "cnbc": ".IXIC", "yahoo": "^IXIC"},
+  {"label": "US 10Y", "kind": "yield", "url": "https://www.cnbc.com/quotes/US10Y", "cnbc": "US10Y", "yahoo": "^TNX"},
+  {"label": "Gold", "kind": "dollars", "decimals": 0, "url": "https://www.cnbc.com/quotes/@GC.1", "cnbc": "@GC.1", "yahoo": "GC=F"},
+  {"label": "Brent", "kind": "dollars", "decimals": 2, "url": "https://www.cnbc.com/quotes/@LCO.1", "cnbc": "@LCO.1", "yahoo": "BZ=F"},
+  {"label": "Fed funds", "url": "https://www.federalreserve.gov/monetarypolicy/openmarket.htm"},
+  {"label": "ECB", "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/key_ecb_interest_rates/html/index.en.html"}
+]

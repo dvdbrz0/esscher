@@ -1,0 +1,16 @@
+name: Markets test
+on:
+  push:
+    branches: [markets-test]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/live_markets.py --check
+      - run: python3 scripts/live_markets.py && cat live.json
+      - name: Quote pages
+        run: |
+          for u in $(python3 -c "import json;print(' '.join(m['url'] for m in json.load(open('_data/markets.json'))))"); do
+            echo "$(curl -s -o /dev/null -w '%{http_code}' -A 'Mozilla/5.0' -L "$u") $u"
+          done
