@@ -1,13 +1,14 @@
 # Refreshes live.json, the delayed quotes in the markets band, on weekdays while markets
-# are open (13:00-21:45 UTC every 15 minutes; hourly in the European morning). Commits only
+# are open (every 15 minutes from 13:07 to 21:52 UTC, off the quarter hours that GitHub
+# schedules late under load; hourly in the European morning). Commits only
 # when a quote changed. The band falls back to the edition's closing levels when live.json
 # is older than the edition. Run it by hand with "check" to see what each source returns.
 name: Markets band
 
 on:
   schedule:
-    - cron: "*/15 13-21 * * 1-5"
-    - cron: "5 6-12 * * 1-5"
+    - cron: "7,22,37,52 13-21 * * 1-5"
+    - cron: "11 6-12 * * 1-5"
   workflow_dispatch:
     inputs:
       check:

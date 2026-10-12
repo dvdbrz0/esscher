@@ -43,8 +43,8 @@ A map of the moving parts, for whoever works on the site next. The house style i
   waits two minutes for Pages, then sends it to subscribers through Buttondown (secret
   `BUTTONDOWN_API_KEY`). Does nothing while `newsletter` is empty in `_config.yml`.
   Run it by hand with no input to check the API key; with a post path to resend one edition.
-- `.github/workflows/markets.yml`: on weekdays every 15 minutes from 13:00 to 21:45 UTC,
-  and hourly from 06:05 to 12:05 UTC, runs `scripts/live_markets.py` and commits
+- `.github/workflows/markets.yml`: on weekdays every 15 minutes from 13:07 to 21:52 UTC,
+  and hourly from 06:11 to 12:11 UTC, runs `scripts/live_markets.py` and commits
   `live.json` when a quote changed. Run it by hand with "check" to see what each source
   returns without changing anything.
 - `.github/workflows/edition-check.yml`: on weekdays at 03:40 UTC and Sundays at 07:30 UTC,
