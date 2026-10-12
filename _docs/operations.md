@@ -9,6 +9,9 @@ A map of the moving parts, for whoever works on the site next. The house style i
   Sundays before 08:00) and turned into pages by `scripts/new_post.py`.
 - `scripts/publish.sh "message"` commits `_posts`, `_stories`, `_includes/charts` and
   `assets/og`, then pushes to `main`. GitHub Pages rebuilds the site in about a minute.
+- After publishing, the scheduled run calls `scripts/check_live.py`, looks at its
+  screenshots and emails the owner a one-line status (subject "Esscher status - <date> -
+  OK" or "- PROBLEMA"). The check only reads; it never fixes or pushes anything.
 - The site is Jekyll 3.10 on GitHub Pages (branch `main`, root folder), custom domain
   in `CNAME`, HTTPS enforced. `future: true` lets an edition dated 05:00 appear as soon
   as it is pushed.
@@ -26,6 +29,7 @@ A map of the moving parts, for whoever works on the site next. The house style i
 | `scripts/typography.py` | Typographer's quotes for edition text, used by `new_post.py` and `correct.py`; formulas are left alone. Run it on its own to test it. |
 | `scripts/newsletter.py POST [--send]` | Builds the newsletter email from an edition and sends it through Buttondown. |
 | `scripts/publish.sh MESSAGE` | Commit and push everything an edition produces. |
+| `scripts/check_live.py [DATE] [daily\|weekly]` | After a publish: waits for Pages to serve the edition (up to 15 minutes, cache-busted requests), then checks that the front page links to it, every new story page answers and shows its headline and is listed on the edition, share images and the chart are served, the publish commit deleted nothing, the sitemap lists every page and the previous edition still answers. In Chromium (Playwright) it opens the front page, the edition and one story at 390 and 1440 pixels, light and dark, and reports JavaScript errors, failed requests, sideways scrolling, broken images, raw LaTeX, formula errors, unloaded fonts and empty sections; screenshots go to `/tmp/esscher-check/`. Last line: `SUMMARY: OK ...` or `SUMMARY: PROBLEM ...`; exit code 0, 1 (problems) or 2 (edition never appeared). |
 | `scripts/live_markets.py [--check]` | Fetches delayed quotes for the markets band (CNBC, then Yahoo Finance) and writes `live.json` when a quote changed. Instruments, symbols and quote links are in `_data/markets.json`. |
 
 ## Switches in `_config.yml`
