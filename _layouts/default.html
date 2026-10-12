@@ -76,11 +76,15 @@
     <div class="wrap mh-sub-inner">
       <span class="mh-date">{% if page.date %}{{ page.date | date: "%A %-d %B %Y" }}{% elsif tick_page %}{{ tick_page.date | date: "%A %-d %B %Y" }}{% endif %}{% if ed_no and page.layout != "story" %}<span class="mh-no">No. {{ ed_no }}</span>{% endif %}</span>
       {% if tick_page.ticker %}
-      <div class="ticker" aria-label="Markets" data-markets="{{ '/markets.json' | relative_url }}" data-date="{{ tick_page.date | date: '%Y-%m-%d' }}">
+      {% assign latest_daily = dailies_all | first %}
+      <div class="ticker" aria-label="Markets" data-markets="{{ '/markets.json' | relative_url }}" data-date="{{ tick_page.date | date: '%Y-%m-%d' }}"{% if tick_page.url == latest_daily.url %} data-live="{{ '/live.json' | relative_url }}" data-asof="{{ tick_page.ticker_asof | default: '' }}"{% endif %}>
         <span class="ticker-label"{% if tick_page.ticker_asof or tick_page.ticker_source %} title="{% if tick_page.ticker_asof %}As of {{ tick_page.ticker_asof | date: '%-d %B %Y' }}.{% endif %}{% if tick_page.ticker_source %} Source: {{ tick_page.ticker_source | escape }}.{% endif %}"{% endif %}>{% if tick_page.ticker_label %}{{ tick_page.ticker_label | escape }}{% else %}Latest close{% endif %}</span>
-        {% for t in tick_page.ticker %}
-        <span class="tick" data-label="{{ t.label | escape }}"><span class="tick-name">{{ t.label | escape }}</span> {{ t.value | escape }}{% if t.change %} <span class="tick-change {% if t.dir == 'down' %}down{% else %}up{% endif %}">{{ t.change | escape }}</span>{% endif %}</span>
-        {% endfor %}
+        {% for m in site.data.markets %}{% assign t = tick_page.ticker | where: "label", m.label | first %}{% if t or m.cnbc %}
+        <a class="tick{% unless t %} is-empty{% endunless %}" href="{{ m.url | escape }}" data-label="{{ m.label | escape }}" title="{{ m.label | escape }}: full quote{% if m.cnbc %} on CNBC{% endif %}"><span class="tick-name">{{ m.label | escape }}</span><span class="tick-value">{% if t %}{{ t.value | escape }}{% endif %}</span><span class="tick-change{% if t.change %}{% if t.dir == 'down' %} down{% else %} up{% endif %}{% endif %}">{% if t.change %}{{ t.change | escape }}{% endif %}</span></a>
+        {% endif %}{% endfor %}
+        {% for t in tick_page.ticker %}{% assign known = site.data.markets | where: "label", t.label | first %}{% unless known %}
+        <span class="tick" data-label="{{ t.label | escape }}"><span class="tick-name">{{ t.label | escape }}</span><span class="tick-value">{{ t.value | escape }}</span>{% if t.change %}<span class="tick-change {% if t.dir == 'down' %}down{% else %}up{% endif %}">{{ t.change | escape }}</span>{% endif %}</span>
+        {% endunless %}{% endfor %}
         {% if tick_page.ticker_asof or tick_page.ticker_source %}<span class="ticker-source">{% if tick_page.ticker_asof %}As of {{ tick_page.ticker_asof | date: "%-d %B" }}.{% endif %}{% if tick_page.ticker_source %} {{ tick_page.ticker_source | escape }}.{% endif %}</span>{% endif %}
       </div>
       {% endif %}
@@ -123,6 +127,7 @@
   </div>
 </footer>
 <script src="{{ '/assets/js/sparklines.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/live-markets.js' | relative_url }}" defer></script>
 <script src="{{ '/assets/js/local-time.js' | relative_url }}" defer></script>
 <script src="{{ '/assets/js/math.js' | relative_url }}" data-base="{{ '/assets/katex/' | relative_url }}" defer></script>
 <script>

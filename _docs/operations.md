@@ -26,6 +26,7 @@ A map of the moving parts, for whoever works on the site next. The house style i
 | `scripts/typography.py` | Typographer's quotes for edition text, used by `new_post.py` and `correct.py`; formulas are left alone. Run it on its own to test it. |
 | `scripts/newsletter.py POST [--send]` | Builds the newsletter email from an edition and sends it through Buttondown. |
 | `scripts/publish.sh MESSAGE` | Commit and push everything an edition produces. |
+| `scripts/live_markets.py [--check]` | Fetches delayed quotes for the markets band (CNBC, then Yahoo Finance) and writes `live.json` when a quote changed. Instruments, symbols and quote links are in `_data/markets.json`. |
 
 ## Switches in `_config.yml`
 
@@ -42,6 +43,10 @@ A map of the moving parts, for whoever works on the site next. The house style i
   waits two minutes for Pages, then sends it to subscribers through Buttondown (secret
   `BUTTONDOWN_API_KEY`). Does nothing while `newsletter` is empty in `_config.yml`.
   Run it by hand with no input to check the API key; with a post path to resend one edition.
+- `.github/workflows/markets.yml`: on weekdays every 15 minutes from 13:00 to 21:45 UTC,
+  and hourly from 06:05 to 12:05 UTC, runs `scripts/live_markets.py` and commits
+  `live.json` when a quote changed. Run it by hand with "check" to see what each source
+  returns without changing anything.
 - `.github/workflows/edition-check.yml`: on weekdays at 03:40 UTC and Sundays at 07:30 UTC,
   opens an issue labelled `missing-edition` (GitHub then emails the owner) when the day's
   edition is missing; closes it when the edition is pushed.
@@ -49,7 +54,9 @@ A map of the moving parts, for whoever works on the site next. The house style i
 ## Site features
 
 Daily Brief and Weekly Review pages, a page per story and paper, chart of the day,
-markets band with date, source and sparklines, topics (`_data/topics.yml`), archive,
+markets band with date, source, sparklines, a link from each figure to its full quote, and
+delayed quotes from `live.json` on the front page and the latest edition (`assets/js/live-markets.js`;
+used only when newer than the edition's close, so the edition's figures stay as the record), topics (`_data/topics.yml`), archive,
 search (`search.json`), The maths behind the news (/maths/), corrections (/corrections/),
 About and editorial standards, privacy notice, 404 page, RSS feed, sitemap, structured
 data (NewsArticle, WebSite, Organization), per-page share images, dark mode, KaTeX

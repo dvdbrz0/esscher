@@ -54,7 +54,7 @@
         dot.setAttribute("r", "1.8");
         dot.setAttribute("class", series[series.length - 1] >= series[series.length - 2] ? "spark-end up" : "spark-end down");
         svg.appendChild(dot);
-        tick.setAttribute("title", label + ", last " + series.length + " editions");
+        if (!tick.getAttribute("title")) tick.setAttribute("title", label + ": closing levels in the last " + series.length + " editions");
         tick.appendChild(svg);
       });
     })

@@ -124,6 +124,9 @@ get a Unicode version of every formula automatically (`scripts/mathtext.py`).
 - `must_read` is optional: leave it out when nothing qualifies.
 - The first item of `ai` is shown largest: put the most important story first.
 - `ticker` holds only figures taken from a source; leave out anything you do not have. `dir` is "up" or "down".
+  Use the labels in `_data/markets.json` (S&P 500, Dow, Nasdaq, US 10Y, Gold, Brent, Fed funds, ECB):
+  they give each figure its link to a full quote, and on the front page the band replaces the
+  closes with delayed quotes from `live.json` once those are newer. The edition keeps the closes.
   `ticker_asof` is the date the figures refer to (the last close), `ticker_source` names where they come from.
 - `chart` is optional; see "Chart of the day" below.
 - `voices`, `mathematics`, `papers_note`, `status` are optional.

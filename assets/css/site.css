@@ -251,6 +251,9 @@ sup { font-size: 0.7em; }
 
 /* Sparklines in the markets band */
 .tick { display: inline-flex; align-items: baseline; gap: 6px; }
+a.tick { text-decoration: none; }
+a.tick:hover .tick-name { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.tick.is-empty, .tick-value:empty, .tick-change:empty { display: none; }
 .spark { align-self: center; color: var(--muted); overflow: visible; }
 .spark-end.up { fill: var(--up); }
 .spark-end.down { fill: var(--down); }
