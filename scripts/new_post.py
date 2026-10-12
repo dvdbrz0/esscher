@@ -82,7 +82,8 @@ def check_sources(items, where):
 
 
 SECTIONS = {
-    "daily": [("must_read", "Must-read", "story"), ("ai", "AI and machine learning", "story"),
+    "daily": [("must_read", "Must-read", "story"), ("voices", "What researchers are saying", "voice"),
+              ("ai", "AI and machine learning", "story"),
               ("markets", "Markets", "story"), ("economy", "Economy", "story"),
               ("mathematics", "Mathematics", "story"), ("papers", "Papers", "paper")],
     "weekly": [("mattered", "What mattered", "story"), ("maths", "The maths behind the news", "explainer"),
@@ -200,8 +201,17 @@ def write_stories(front, edition, day):
                 "body": body,
             }
             for k in ("why", "sources", "links", "published", "authors", "arxiv", "url", "tag", "status"):
-                if it.get(k):
+                if it.get(k) and not (kind == "voice" and k == "url"):
                     story[k] = it[k]
+            if kind == "voice":
+                # A post by a leading figure is its own source: link it as the original.
+                story["person"] = it.get("name", "")
+                if it.get("role"):
+                    story["role"] = it["role"]
+                if not story.get("sources") and it.get("url"):
+                    on_x = "x.com/" in it["url"] or "twitter.com/" in it["url"]
+                    story["sources"] = [{"name": f'{it.get("name", "The author")} on X' if on_x else it.get("name", "Source"),
+                                         "url": it["url"]}]
             topics = pick_topics(it, key, allowed)
             if topics:
                 story["topics"] = topics
@@ -324,6 +334,13 @@ def main():
         for i, p in enumerate(data.get("papers") or []):
             if not p.get("title") or not p.get("summary"):
                 fail(f"papers[{i}] needs a title and a summary")
+        for i, v in enumerate(data.get("voices") or []):
+            if not v.get("name") or not v.get("summary"):
+                fail(f"voices[{i}] needs a name and a summary")
+            if not v.get("url") and not v.get("sources"):
+                fail(f"voices[{i}] needs the link to the post in \"url\"")
+            if v.get("body") and not v.get("headline"):
+                fail(f"voices[{i}] has a body, so it needs a headline for its page")
         headline = (data.get("must_read") or {}).get("headline") or data["ai"][0]["headline"]
         description = mathtext.to_plain(" ".join(lines))
         front = {"layout": "brief", "title": "Daily Brief"}

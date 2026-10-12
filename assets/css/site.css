@@ -143,10 +143,18 @@ sup { font-size: 0.7em; }
 .paper a { text-decoration: underline; }
 .tag { font-size: 15px; font-weight: 600; color: var(--accent); }
 
-.voice { display: flex; flex-direction: column; gap: 8px; padding: 20px 0; }
-.voice-name { font-weight: 700; font-size: 17px; }
-.voice p { font-family: var(--serif); font-size: 16px; line-height: 1.55; color: var(--ink-2); }
-.voice a { text-decoration: underline; }
+.voices-top { padding: 44px 0; border-bottom: 1px solid var(--rule); }
+.voice { display: flex; flex-direction: column; gap: 8px; padding: 20px 0; border-bottom: 1px solid var(--rule); }
+.voice-name { font-weight: 700; font-size: 16px; }
+.voice-role { font-weight: 400; color: var(--muted); }
+.voice-role::before { content: " · "; }
+.voice h3 { font-family: var(--head); font-weight: 600; font-size: 22px; line-height: 1.2; letter-spacing: -0.005em; }
+.voice h3 a { text-decoration: none; }
+.voice h3 a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.voice h3 a:visited { color: var(--muted); }
+.voice p { font-family: var(--serif); font-size: 16px; line-height: 1.55; color: var(--ink-2); max-width: 46rem; }
+.voice .voice-links { display: flex; flex-wrap: wrap; gap: 6px 18px; font-family: var(--text); }
+.voice .voice-links a.muted { text-decoration: underline; }
 
 .edition-link { padding: 8px 0 32px; font-size: 15px; color: var(--muted); }
 .edition-link a { text-decoration: underline; }

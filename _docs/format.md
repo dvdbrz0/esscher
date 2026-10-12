@@ -110,7 +110,7 @@ get a Unicode version of every formula automatically (`scripts/mathtext.py`).
   "ai": [
     {"headline": "...", "summary": "One or two sentences.", "body": ["Paragraph one.", "Paragraph two."], "why": "Optional.", "topics": ["AI safety", "Agents"], "published": "2026-10-09", "sources": [{"name": "TechCrunch", "url": "https://..."}]}
   ],
-  "voices": [{"name": "Yann LeCun", "summary": "...", "url": "https://x.com/..."}],
+  "voices": [{"name": "Yann LeCun", "role": "chief AI scientist at Meta", "headline": "...", "summary": "One or two sentences.", "body": ["Paragraph one.", "Paragraph two."], "url": "https://x.com/...", "published": "2026-10-11"}],
   "papers_note": "New on arXiv today",
   "papers": [
     {"tag": "Learning theory", "title": "...", "authors": "Hanneke et al.", "summary": "Main result in words.", "body": ["The question.", "The main result in words, and why it matters."], "topics": ["Learning theory", "Reasoning and inference"], "arxiv": "2610.10600", "published": "2026-10-09"}
@@ -127,6 +127,11 @@ get a Unicode version of every formula automatically (`scripts/mathtext.py`).
   `ticker_asof` is the date the figures refer to (the last close), `ticker_source` names where they come from.
 - `chart` is optional; see "Chart of the day" below.
 - `voices`, `mathematics`, `papers_note`, `status` are optional.
+- `voices` are posts and public statements by leading figures (see "Posts by leading figures"
+  in style.md). They appear near the top of the edition, under "What researchers are saying".
+  Each needs `name`, `summary` and `url` (the post itself). With a `headline` and a `body` of
+  two or three paragraphs, a voice gets its own page, like a story, with the post as its
+  source; give every substantive post one. `role` is optional (a few words, no capitals).
 
 ## The maths behind the news (weekly)
 

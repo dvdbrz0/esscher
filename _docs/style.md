@@ -107,6 +107,10 @@ Patterns that make text read as machine-written even when every word is fine:
   author ("Altman said the model would ship in November"), never stated as
   established fact. Posts from anonymous or minor accounts, and posts known
   only secondhand without a link, are not sources.
+- A voice's headline says what the person argued, with the surname as the
+  subject: "Karpathy describes a steep funnel in how people understand AI".
+  Its page explains the argument in full, in our own words, and says which
+  figures are the author's own estimates.
 - Papers: "Hanneke et al." for three or more authors, both surnames for two.
 
 ## Markets band

@@ -41,6 +41,23 @@
 
 {% include chart-day.html c=b.chart %}
 
+{% if b.voices and b.voices.size > 0 %}
+<section id="voices" class="voices-top" aria-labelledby="voices-h">
+  <h2 id="voices-h" class="section-label">What researchers are saying</h2>
+  <div class="story-grid">
+    {% for v in b.voices %}
+    <div class="voice">
+      <span class="voice-name">{{ v.name | escape }}{% if v.role %}<span class="voice-role">{{ v.role | escape }}</span>{% endif %}</span>
+      {% if v.headline %}<h3>{% if v.story %}<a href="{{ v.story | relative_url }}">{{ v.headline | escape }}</a>{% else %}{{ v.headline | escape }}{% endif %}</h3>{% endif %}
+      <p>{{ v.summary | escape }}</p>
+      <p class="voice-links small">{% if v.story %}<a class="read-more" href="{{ v.story | relative_url }}">Full story</a>{% endif %}{% if v.url %}<a class="muted" href="{{ v.url | escape }}">{% if v.url contains "x.com/" or v.url contains "twitter.com/" %}The post on X{% else %}Source{% endif %}</a>{% endif %}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+
 <div class="columns">
   {% if b.ai and b.ai.size > 0 %}
   <section id="ai" class="col-main" aria-labelledby="ai-h">
@@ -113,35 +130,19 @@
 </section>
 {% endif %}
 
-{% if b.voices.size > 0 or b.mathematics.size > 0 %}
+{% if b.mathematics and b.mathematics.size > 0 %}
 <div class="columns columns-last">
-  {% if b.voices and b.voices.size > 0 %}
-  <section class="col-main" aria-labelledby="voices-h">
-    <h2 id="voices-h" class="section-label">What researchers are saying</h2>
+  <section id="mathematics" class="col-main" aria-labelledby="math-h">
+    <h2 id="math-h" class="section-label">Mathematics</h2>
     <div class="story-grid">
-      {% for v in b.voices %}
-      <div class="voice">
-        <span class="voice-name">{{ v.name | escape }}</span>
-        <p>{{ v.summary | escape }}</p>
-        {% if v.url %}<a class="muted small" href="{{ v.url | escape }}">{% if v.url contains "x.com" %}On X{% else %}Source{% endif %}</a>{% endif %}
-      </div>
-      {% endfor %}
-    </div>
-  </section>
-  {% endif %}
-  {% if b.mathematics and b.mathematics.size > 0 %}
-  <div class="col-rail">
-    <section id="mathematics" aria-labelledby="math-h">
-      <h2 id="math-h" class="section-label">Mathematics</h2>
       {% for s in b.mathematics %}
-      <div class="story story-sm">
+      <div class="story">
         <h3>{% if s.story %}<a href="{{ s.story | relative_url }}">{{ s.headline | escape }}</a>{% else %}{{ s.headline | escape }}{% endif %}</h3>
         <p>{{ s.summary | escape }}</p>
         {% include item-meta.html it=s %}
       </div>
       {% endfor %}
-    </section>
-  </div>
-  {% endif %}
+    </div>
+  </section>
 </div>
 {% endif %}

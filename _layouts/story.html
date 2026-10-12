@@ -10,6 +10,7 @@ layout: default
     </div>
     <h1 id="story-h" class="lead-title">{{ st.title | escape }}</h1>
     {% if st.authors %}<p class="muted">{{ st.authors | escape }}</p>{% endif %}
+    {% if st.person %}<p class="muted">{{ st.person | escape }}{% if st.role %}, {{ st.role | escape }}{% endif %}</p>{% endif %}
     {% if st.summary %}<p class="dek">{{ st.summary | escape }}</p>{% endif %}
     <p class="story-dates small muted">
       {% if st.published %}Source published <time datetime="{{ st.published | escape }}"{% if st.published contains "T" %} data-local="full-date-time"{% endif %}>{% if st.published contains "T" %}{{ st.published | date: "%-d %B %Y, %H:%M UTC" }}{% else %}{{ st.published | date: "%-d %B %Y" }}{% endif %}</time> · {% endif %}
@@ -45,7 +46,8 @@ layout: default
       {% endif %}
     {% else %}
       {% assign primary = st.sources | first %}
-      {% if primary %}<a class="button" href="{{ primary.url | escape }}">Read the original at {{ primary.name | escape }}</a>{% endif %}
+      {% if primary and st.kind == "voice" %}<a class="button" href="{{ primary.url | escape }}">{% if primary.url contains "x.com/" or primary.url contains "twitter.com/" %}Read the post on X{% else %}Read the original{% endif %}</a>
+      {% elsif primary %}<a class="button" href="{{ primary.url | escape }}">Read the original at {{ primary.name | escape }}</a>{% endif %}
     {% endif %}
 
     {% if st.sources.size > 0 or st.links.size > 0 %}
