@@ -12,6 +12,8 @@ A map of the moving parts, for whoever works on the site next. The house style i
 - About 45 minutes after each publishing run, a separate scheduled check runs `scripts/check_live.py`, looks at its
   screenshots, confirms the private brief went out and emails the owner a one-line status (subject "Esscher status - <date> -
   OK" or "- PROBLEMA"). The check only reads; it never fixes or pushes anything.
+  The scheduled check does not run code from its clone (that was refused): its instructions
+  carry a copy of `check_live.py`, so a change to the script must be copied into them too.
 - The site is Jekyll 3.10 on GitHub Pages (branch `main`, root folder), custom domain
   in `CNAME`, HTTPS enforced. `future: true` lets an edition dated 05:00 appear as soon
   as it is pushed.
