@@ -58,9 +58,12 @@
 {% endif %}
 
 
+{% assign has_main = false %}{% if b.ai.size > 0 or b.papers.size > 0 or b.mathematics.size > 0 %}{% assign has_main = true %}{% endif %}
 <div class="columns">
+  {% if has_main %}
+  <div class="col-main">
   {% if b.ai and b.ai.size > 0 %}
-  <section id="ai" class="col-main" aria-labelledby="ai-h">
+  <section id="ai" aria-labelledby="ai-h">
     <h2 id="ai-h" class="section-label">AI and machine learning</h2>
     {% assign first = b.ai | first %}
     <div class="story story-lg">
@@ -81,7 +84,41 @@
     {% endif %}
   </section>
   {% endif %}
-
+{% if b.papers and b.papers.size > 0 %}
+<section id="papers" class="papers" aria-labelledby="papers-h">
+  <div class="section-head">
+    <h2 id="papers-h" class="section-label-inline">Papers</h2>
+    {% if b.papers_note %}<span class="muted small">{{ b.papers_note | escape }}</span>{% endif %}
+  </div>
+  <div class="paper-grid">
+    {% for p in b.papers %}
+    <div class="paper">
+      {% if p.tag %}<span class="tag">{{ p.tag | escape }}</span>{% endif %}
+      <h3>{% if p.story %}<a href="{{ p.story | relative_url }}">{{ p.title | escape }}</a>{% else %}{{ p.title | escape }}{% endif %}</h3>
+      {% if p.authors %}<span class="muted small">{{ p.authors | escape }}</span>{% endif %}
+      <p>{{ p.summary | escape }}</p>
+      <span class="paper-meta">{% if p.arxiv %}<a class="small nums" href="https://arxiv.org/abs/{{ p.arxiv | escape }}">arXiv:{{ p.arxiv | escape }}</a>{% elsif p.url %}<a class="small" href="{{ p.url | escape }}">Read the paper</a>{% endif %}{% if p.published %} <span class="muted small">· <time datetime="{{ p.published | escape }}">{{ p.published | date: "%-d %b %Y" }}</time></span>{% endif %}{% if p.corrected %} <span class="small">· <a class="corrected" href="{{ p.story | relative_url }}#corrections">Corrected</a></span>{% endif %}</span>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% if b.mathematics and b.mathematics.size > 0 %}
+<section id="mathematics" aria-labelledby="math-h">
+    <h2 id="math-h" class="section-label">Mathematics</h2>
+    <div class="story-grid">
+      {% for s in b.mathematics %}
+      <div class="story">
+        <h3>{% if s.story %}<a href="{{ s.story | relative_url }}">{{ s.headline | escape }}</a>{% else %}{{ s.headline | escape }}{% endif %}</h3>
+        <p>{{ s.summary | escape }}</p>
+        {% include item-meta.html it=s %}
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}
+  </div>
+  {% endif %}
   <div class="col-rail">
     {% if b.markets and b.markets.size > 0 %}
     <section id="markets" aria-labelledby="markets-h">
@@ -109,40 +146,3 @@
     {% endif %}
   </div>
 </div>
-
-{% if b.papers and b.papers.size > 0 %}
-<section id="papers" class="papers" aria-labelledby="papers-h">
-  <div class="section-head">
-    <h2 id="papers-h" class="section-label-inline">Papers</h2>
-    {% if b.papers_note %}<span class="muted small">{{ b.papers_note | escape }}</span>{% endif %}
-  </div>
-  <div class="paper-grid">
-    {% for p in b.papers %}
-    <div class="paper">
-      {% if p.tag %}<span class="tag">{{ p.tag | escape }}</span>{% endif %}
-      <h3>{% if p.story %}<a href="{{ p.story | relative_url }}">{{ p.title | escape }}</a>{% else %}{{ p.title | escape }}{% endif %}</h3>
-      {% if p.authors %}<span class="muted small">{{ p.authors | escape }}</span>{% endif %}
-      <p>{{ p.summary | escape }}</p>
-      <span class="paper-meta">{% if p.arxiv %}<a class="small nums" href="https://arxiv.org/abs/{{ p.arxiv | escape }}">arXiv:{{ p.arxiv | escape }}</a>{% elsif p.url %}<a class="small" href="{{ p.url | escape }}">Read the paper</a>{% endif %}{% if p.published %} <span class="muted small">· <time datetime="{{ p.published | escape }}">{{ p.published | date: "%-d %b %Y" }}</time></span>{% endif %}{% if p.corrected %} <span class="small">· <a class="corrected" href="{{ p.story | relative_url }}#corrections">Corrected</a></span>{% endif %}</span>
-    </div>
-    {% endfor %}
-  </div>
-</section>
-{% endif %}
-
-{% if b.mathematics and b.mathematics.size > 0 %}
-<div class="columns columns-last">
-  <section id="mathematics" class="col-main" aria-labelledby="math-h">
-    <h2 id="math-h" class="section-label">Mathematics</h2>
-    <div class="story-grid">
-      {% for s in b.mathematics %}
-      <div class="story">
-        <h3>{% if s.story %}<a href="{{ s.story | relative_url }}">{{ s.headline | escape }}</a>{% else %}{{ s.headline | escape }}{% endif %}</h3>
-        <p>{{ s.summary | escape }}</p>
-        {% include item-meta.html it=s %}
-      </div>
-      {% endfor %}
-    </div>
-  </section>
-</div>
-{% endif %}
