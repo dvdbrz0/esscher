@@ -12,7 +12,8 @@ Usage:
   python3 scripts/check_live.py 2026-10-12 daily     # a given edition
   options: --wait SECONDS (default 900), --shots DIR (default /tmp/esscher-check),
            --commit REV (the publish commit to inspect for deleted files; default: the
-           last commit that wrote the edition)
+           last commit that wrote the edition), --repo DIR (a clone of the repository,
+           default: the one this script sits in)
 
 Exit code 0 when every check passed, 1 when something is wrong, 2 when the
 edition never appeared. The last line printed is a one-line summary.
@@ -180,7 +181,11 @@ def main():
     ap.add_argument("--wait", type=int, default=900)
     ap.add_argument("--shots", default="/tmp/esscher-check")
     ap.add_argument("--commit", default="auto")
+    ap.add_argument("--repo")
     a = ap.parse_args()
+    global ROOT
+    if a.repo:
+        ROOT = Path(a.repo).expanduser().resolve()
 
     now = dt.datetime.now(ZoneInfo("Europe/Bucharest"))
     day = a.date or now.strftime("%Y-%m-%d")
@@ -257,7 +262,8 @@ def main():
     own_share = [u for u in images if "/assets/og/" in u]
     expected_share = len(stories) + 1
     if (ROOT / "assets" / "og").exists() and len(own_share) < expected_share:
-        notes.append(f"{len(own_share)} of {expected_share} pages have their own share image (the rest use the default)")
+        problems.append(f"{expected_share - len(own_share)} of {expected_share} pages have no share image of their own "
+                        "(new_post.py made none: Pillow was probably missing)")
 
     # 5. Chart.
     if fm.get("chart"):
