@@ -1,5 +1,5 @@
 {
- "asof": "2026-10-22T21:15:59Z",
+ "asof": "2026-10-23T00:07:40Z",
  "source": "CNBC",
  "note": "Delayed by at least 15 minutes.",
  "quotes": [
@@ -26,24 +26,24 @@
   },
   {
    "label": "US 10Y",
-   "value": "4.96%",
-   "time": "2026-10-22T21:05:00Z",
-   "change": "−18 bp",
-   "dir": "down"
+   "value": "4.95%",
+   "time": "2026-10-23T00:07:40Z",
+   "change": "0 bp",
+   "dir": "flat"
   },
   {
    "label": "Gold",
-   "value": "$4,040",
-   "time": "2026-10-22T20:59:59Z",
-   "change": "−2.7%",
+   "value": "$4,038",
+   "time": "2026-10-22T23:57:58Z",
+   "change": "−0.6%",
    "dir": "down"
   },
   {
    "label": "Brent",
-   "value": "$113.05",
-   "time": "2026-10-22T21:13:37Z",
-   "change": "+3.9%",
-   "dir": "up"
+   "value": "$113.17",
+   "time": "2026-10-22T23:57:59Z",
+   "change": "0.0%",
+   "dir": "flat"
   }
  ]
 }
