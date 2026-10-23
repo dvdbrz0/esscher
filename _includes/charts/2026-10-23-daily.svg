@@ -1,0 +1,21 @@
+<svg class="chart is-bar" viewBox="0 0 720 216" role="img" aria-label="Bar chart of Thursday’s percentage changes: CoreWeave -10.1, Meta -7.0, Tesla -3.1, Nasdaq -2.6, S&amp;P 500 -1.2 and Dow 0.0." preserveAspectRatio="xMinYMin meet">
+<text class="chart-label" x="0" y="26">CoreWeave</text>
+<rect class="chart-bar neg" x="260.0" y="11" width="452.0" height="22"/>
+<text class="chart-value" x="254.0" y="26" text-anchor="end">−10.1%</text>
+<text class="chart-label" x="0" y="60">Meta</text>
+<rect class="chart-bar neg" x="398.7" y="45" width="313.3" height="22"/>
+<text class="chart-value" x="392.7" y="60" text-anchor="end">−7.0%</text>
+<text class="chart-label" x="0" y="94">Tesla</text>
+<rect class="chart-bar neg" x="573.3" y="79" width="138.7" height="22"/>
+<text class="chart-value" x="567.3" y="94" text-anchor="end">−3.1%</text>
+<text class="chart-label" x="0" y="128">Nasdaq</text>
+<rect class="chart-bar neg" x="595.6" y="113" width="116.4" height="22"/>
+<text class="chart-value" x="589.6" y="128" text-anchor="end">−2.6%</text>
+<text class="chart-label" x="0" y="162">S&amp;P 500</text>
+<rect class="chart-bar neg" x="658.3" y="147" width="53.7" height="22"/>
+<text class="chart-value" x="652.3" y="162" text-anchor="end">−1.2%</text>
+<text class="chart-label" x="0" y="196">Dow</text>
+<rect class="chart-bar" x="712.0" y="181" width="1.0" height="22"/>
+<text class="chart-value" x="718.0" y="196">0.0%</text>
+<line class="chart-zero" x1="712.0" x2="712.0" y1="2" y2="214"/>
+</svg>
