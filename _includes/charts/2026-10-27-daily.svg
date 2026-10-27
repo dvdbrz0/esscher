@@ -1,0 +1,15 @@
+<svg class="chart is-bar" viewBox="0 0 720 148" role="img" aria-label="Bar chart comparing Anthropic’s revenue of $4.7bn and $11.6bn with compute costs of $3.4bn and $5.6bn in the first and second quarters of 2026." preserveAspectRatio="xMinYMin meet">
+<text class="chart-label" x="0" y="26">Revenue Q1</text>
+<rect class="chart-bar" x="190.0" y="11" width="186.4" height="22"/>
+<text class="chart-value" x="382.4" y="26">$4.7bn</text>
+<text class="chart-label" x="0" y="60">Revenue Q2</text>
+<rect class="chart-bar" x="190.0" y="45" width="460.0" height="22"/>
+<text class="chart-value" x="656.0" y="60">$11.6bn</text>
+<text class="chart-label" x="0" y="94">Compute Q1</text>
+<rect class="chart-bar" x="190.0" y="79" width="134.8" height="22"/>
+<text class="chart-value" x="330.8" y="94">$3.4bn</text>
+<text class="chart-label" x="0" y="128">Compute Q2</text>
+<rect class="chart-bar" x="190.0" y="113" width="222.1" height="22"/>
+<text class="chart-value" x="418.1" y="128">$5.6bn</text>
+<line class="chart-zero" x1="190.0" x2="190.0" y1="2" y2="146"/>
+</svg>
