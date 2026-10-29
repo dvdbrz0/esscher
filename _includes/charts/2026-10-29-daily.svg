@@ -1,0 +1,21 @@
+<svg class="chart is-bar" viewBox="0 0 720 216" role="img" aria-label="Bar chart of after-hours share-price moves on 28 October: Fortinet -26.07%, ServiceNow -17.87%, Alphabet -10.12%, Ford -1.42%, Microsoft +2.63% and Chipotle +7.21%." preserveAspectRatio="xMinYMin meet">
+<text class="chart-label" x="0" y="26">Fortinet</text>
+<rect class="chart-bar neg" x="260.0" y="11" width="305.5" height="22"/>
+<text class="chart-value" x="254.0" y="26" text-anchor="end">−26.07%</text>
+<text class="chart-label" x="0" y="60">ServiceNow</text>
+<rect class="chart-bar neg" x="356.1" y="45" width="209.4" height="22"/>
+<text class="chart-value" x="350.1" y="60" text-anchor="end">−17.87%</text>
+<text class="chart-label" x="0" y="94">Alphabet</text>
+<rect class="chart-bar neg" x="446.9" y="79" width="118.6" height="22"/>
+<text class="chart-value" x="440.9" y="94" text-anchor="end">−10.12%</text>
+<text class="chart-label" x="0" y="128">Ford</text>
+<rect class="chart-bar neg" x="548.9" y="113" width="16.6" height="22"/>
+<text class="chart-value" x="542.9" y="128" text-anchor="end">−1.42%</text>
+<text class="chart-label" x="0" y="162">Microsoft</text>
+<rect class="chart-bar" x="565.5" y="147" width="30.8" height="22"/>
+<text class="chart-value" x="602.3" y="162">2.63%</text>
+<text class="chart-label" x="0" y="196">Chipotle</text>
+<rect class="chart-bar" x="565.5" y="181" width="84.5" height="22"/>
+<text class="chart-value" x="656.0" y="196">7.21%</text>
+<line class="chart-zero" x1="565.5" x2="565.5" y1="2" y2="214"/>
+</svg>
