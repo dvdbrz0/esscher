@@ -14,6 +14,11 @@ A map of the moving parts, for whoever works on the site next. The house style i
   OK" or "- PROBLEMA"). The check only reads; it never fixes or pushes anything.
   The scheduled check does not run code from its clone (that was refused): its instructions
   carry a copy of `check_live.py`, so a change to the script must be copied into them too.
+- Every publishing run ends by confirming that its post is on `origin/main`. If it is not,
+  the run retries the failed step once and, if the post is still missing, leaves one
+  unsent failure record with the failed command, its exact error and the edition JSON;
+  the status check reports the reason from it. The weekly review is published before its
+  private email is written, because a long run can stop after the email.
 - The site is Jekyll 3.10 on GitHub Pages (branch `main`, root folder), custom domain
   in `CNAME`, HTTPS enforced. `future: true` lets an edition dated 05:00 appear as soon
   as it is pushed.
