@@ -24,8 +24,9 @@ A map of the moving parts, for whoever works on the site next. The house style i
 |---|---|
 | `scripts/new_post.py FILE.json` | Validates an edition, writes the post, one page per story, the chart SVG and the share images. Rerunning keeps the first publication time and records an update. |
 | `scripts/correct.py STORY --note ... --replace OLD NEW` | Public correction: changes the text, adds a dated note, marks the story in its edition, lists it on /corrections/, redraws the share image if the headline changed. |
-| `scripts/chart.py` | Draws the chart of the day (line or bar) as inline SVG styled by `site.css`. |
+| `scripts/chart.py` | Draws the chart of the day (line or bar) and the small chart of a story (`spark`) as inline SVG styled by `site.css`. Sparks are written to `_includes/charts/spark/`. |
 | `scripts/fred.py SERIES START` | Downloads a FRED series as chart points. |
+| `scripts/series.py SYMBOL [RANGE]` | Downloads daily closes from Yahoo Finance as points for a story's small chart (spark); see "A story's small chart" in `format.md`. |
 | `scripts/share_card.py` | Draws the 1200x630 image shown when a page is shared. Fonts in `scripts/fonts/` (SIL Open Font License). The wordmark comes from `scripts/brand/wordmark-white.png`. Needs Pillow; without it pages use `assets/share.png`. |
 | `scripts/brand.py` | Redraws the wordmark, the mark and `assets/favicon.svg` from Newsreader (`scripts/fonts/`). Only needed if the brand changes; needs fonttools and uharfbuzz. The PNG icons and `scripts/brand/wordmark-white.png` are rendered from those SVGs. |
 | `scripts/typography.py` | Typographer's quotes for edition text, used by `new_post.py` and `correct.py`; formulas are left alone. Run it on its own to test it. |

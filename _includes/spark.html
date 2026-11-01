@@ -1,0 +1,5 @@
+{% assign k = include.k %}{% if k and k.svg %}<figure class="spark-fig{% if include.large %} spark-lg{% endif %}">
+  <figcaption class="spark-head"><span class="spark-title">{{ k.title | escape }}</span><span class="spark-last">{{ k.latest | escape }}</span></figcaption>
+  {% include {{ k.svg }} %}
+  <span class="spark-foot">Daily closes, {{ k.first_date | date: "%-d %b" }} to {{ k.latest_date | date: "%-d %b %Y" }} · <a href="{{ k.source_url | escape }}">{{ k.source | escape }}</a></span>
+</figure>{% endif %}

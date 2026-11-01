@@ -165,6 +165,32 @@ own page and listed at /maths/. Rules:
 `unit` is printed after values ("%", "bp"), `prefix` before them ("$"), `decimals` sets the
 rounding. Every figure in `title`, `subtitle` and `note` must be visible in the points.
 
+## A story's small chart (spark)
+
+A market or economy story that turns on one instrument (a yield, an index, oil, gold, a
+currency, bitcoin) can carry a small line chart of its recent daily closes, shown under the
+summary in the edition and at the top of the story page's side column. Add `spark` to the
+story:
+
+```json
+"spark": {"title": "Brent crude futures, $ a barrel", "points": [{"x": "2026-05-01", "y": 104.2}, ...],
+          "prefix": "$", "decimals": 2, "source": "Yahoo Finance", "source_url": "https://finance.yahoo.com/quote/BZ%3DF/"}
+```
+
+- Get the points with `python3 scripts/series.py SYMBOL 6mo` (Yahoo Finance symbols are listed
+  by `python3 scripts/series.py` alone; the source page is `https://finance.yahoo.com/quote/SYMBOL/`),
+  or from FRED with `scripts/fred.py` for official series. At least ten points; three to six
+  months reads best. Drop a last point that belongs to a session still open.
+- The text and the chart must agree. When the story quotes the instrument's level, quote the
+  latest close shown on the spark, with its date ("Brent settled at $113.17 on Thursday"), not
+  an intraday figure from another source. An intraday high or low may be added only when it is
+  labelled as such and attributed.
+- `title` names the instrument and its unit; `unit` or `prefix` and `decimals` format the
+  latest value printed beside the title. Only the latest value is printed, so no other figure
+  needs checking against the points.
+- At most one spark per story, and only for stories about markets or the economy; never on AI
+  stories, papers or voices.
+
 ## Corrections
 
 When a fact in an earlier edition turns out to be wrong:

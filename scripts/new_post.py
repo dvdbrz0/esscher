@@ -200,7 +200,7 @@ def write_stories(front, edition, day):
                 "summary": it.get("summary") or it.get("dek") or it.get("why") or "",
                 "body": body,
             }
-            for k in ("why", "sources", "links", "published", "authors", "arxiv", "url", "tag", "status"):
+            for k in ("why", "sources", "links", "published", "authors", "arxiv", "url", "tag", "status", "spark"):
                 if it.get(k) and not (kind == "voice" and k == "url"):
                     story[k] = it[k]
             if kind == "voice":
@@ -269,6 +269,48 @@ def write_chart(front, edition, day):
         last = max(pts, key=lambda q: q["x"])
         spec.setdefault("latest", last["y"])
         spec.setdefault("latest_date", last["x"])
+
+
+def write_sparks(front, edition, day):
+    """Draw each story's small chart ("spark") as an SVG include and keep only what the page needs."""
+    folder = ROOT / "_includes" / "charts" / "spark"
+    prefix = f'{day.strftime("%Y-%m-%d")}-{edition}-'
+    for old in folder.glob(prefix + "*.svg"):
+        old.unlink()
+    for key in LIST_KEYS + ["must_read"]:
+        items = front.get(key)
+        if isinstance(items, dict):
+            items = [items]
+        for i, it in enumerate(items or []):
+            spec = it.get("spark") if isinstance(it, dict) else None
+            if not spec:
+                continue
+            for k in ("title", "points", "source", "source_url"):
+                if not spec.get(k):
+                    fail(f'{key}[{i}].spark needs "{k}" (see _docs/format.md)')
+            if not str(spec["source_url"]).startswith("http"):
+                fail(f"{key}[{i}].spark.source_url must be an http(s) link")
+            try:
+                svg = chart.spark(spec)
+            except (ValueError, KeyError, TypeError) as e:
+                fail(f"{key}[{i}].spark could not be drawn: {e}")
+            name = prefix + slugify(it.get("headline") or it.get("title") or f"{key}-{i}")
+            rel = f"charts/spark/{name}.svg"
+            out = ROOT / "_includes" / rel
+            out.parent.mkdir(parents=True, exist_ok=True)
+            out.write_text(svg, encoding="utf-8")
+            WRITTEN.append(out)
+            pts = sorted((p for p in spec["points"] if p.get("y") is not None), key=lambda q: q["x"])
+            decimals = int(spec.get("decimals", 2))
+            it["spark"] = {
+                "svg": rel,
+                "title": spec["title"],
+                "source": spec["source"],
+                "source_url": spec["source_url"],
+                "latest": chart.fmt(float(pts[-1]["y"]), decimals, spec.get("prefix", ""), spec.get("unit", "")),
+                "latest_date": pts[-1]["x"],
+                "first_date": pts[0]["x"],
+            }
 
 
 def feed_body(front, edition):
@@ -387,6 +429,7 @@ def main():
         front["updated"] = now
 
     write_chart(front, edition, day)
+    write_sparks(front, edition, day)
     write_stories(front, edition, day)
     card = ROOT / "assets" / "og" / f'{day.strftime("%Y-%m-%d")}-{edition}.png'
     kicker = "Daily Brief" if edition == "daily" else "Weekly Review"

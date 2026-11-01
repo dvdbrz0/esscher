@@ -32,6 +32,7 @@ layout: default
   </div>
 
   <aside class="story-page-aside">
+    {% include spark.html k=st.spark large=true %}
     {% if st.why %}
     <p class="why">{{ st.why | escape }}</p>
     {% endif %}

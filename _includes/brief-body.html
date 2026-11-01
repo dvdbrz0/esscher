@@ -69,6 +69,7 @@
     <div class="story story-lg">
       <h3>{% if first.story %}<a href="{{ first.story | relative_url }}">{{ first.headline | escape }}</a>{% else %}{{ first.headline | escape }}{% endif %}</h3>
       <p>{{ first.summary | escape }}</p>
+{% include spark.html k=first.spark %}
       {% include item-meta.html it=first %}
     </div>
     {% if b.ai.size > 1 %}
@@ -77,6 +78,7 @@
       <div class="story">
         <h3>{% if s.story %}<a href="{{ s.story | relative_url }}">{{ s.headline | escape }}</a>{% else %}{{ s.headline | escape }}{% endif %}</h3>
         <p>{{ s.summary | escape }}</p>
+{% include spark.html k=s.spark %}
         {% include item-meta.html it=s %}
       </div>
       {% endfor %}
@@ -111,6 +113,7 @@
       <div class="story">
         <h3>{% if s.story %}<a href="{{ s.story | relative_url }}">{{ s.headline | escape }}</a>{% else %}{{ s.headline | escape }}{% endif %}</h3>
         <p>{{ s.summary | escape }}</p>
+{% include spark.html k=s.spark %}
         {% include item-meta.html it=s %}
       </div>
       {% endfor %}
@@ -127,6 +130,7 @@
       <div class="story story-sm">
         <h3>{% if s.story %}<a href="{{ s.story | relative_url }}">{{ s.headline | escape }}</a>{% else %}{{ s.headline | escape }}{% endif %}</h3>
         <p>{{ s.summary | escape }}</p>
+{% include spark.html k=s.spark %}
         {% include item-meta.html it=s %}
       </div>
       {% endfor %}
@@ -139,6 +143,7 @@
       <div class="story story-sm">
         <h3>{% if s.story %}<a href="{{ s.story | relative_url }}">{{ s.headline | escape }}</a>{% else %}{{ s.headline | escape }}{% endif %}</h3>
         <p>{{ s.summary | escape }}</p>
+{% include spark.html k=s.spark %}
         {% include item-meta.html it=s %}
       </div>
       {% endfor %}

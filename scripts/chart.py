@@ -150,6 +150,40 @@ def bar_chart(spec):
     return H, out
 
 
+SW, SH = 320, 64   # drawing size of a story's small chart (scaled to the column width)
+
+
+def spark(spec):
+    """A story's small chart: the line, a hairline at its lowest and highest
+    value and a dot on the latest point. The name, the latest value and the
+    period are written in HTML by the page template."""
+    pts = [(date.fromisoformat(p["x"]), float(p["y"])) for p in spec["points"] if p.get("y") is not None]
+    if len(pts) < 10:
+        raise ValueError("a small chart needs at least ten points")
+    pts.sort()
+    ys = [y for _, y in pts]
+    lo, hi = min(ys), max(ys)
+    span = (hi - lo) or abs(hi) * 0.05 or 1
+    top, bottom, right = 6, 6, 6
+    d0, d1 = pts[0][0].toordinal(), pts[-1][0].toordinal()
+
+    def X(d):
+        return (d.toordinal() - d0) / max(d1 - d0, 1) * (SW - right)
+
+    def Y(v):
+        return top + (hi - v) / span * (SH - top - bottom)
+
+    path = " ".join(f"{'M' if i == 0 else 'L'}{X(d):.1f},{Y(v):.1f}" for i, (d, v) in enumerate(pts))
+    ld, lv = pts[-1]
+    label = spec.get("alt") or spec.get("title", "Chart")
+    return (f'<svg class="spark" viewBox="0 0 {SW} {SH}" role="img" aria-label="{escape(label)}" preserveAspectRatio="xMinYMin meet">\n'
+            f'<line class="spark-rule" x1="0" x2="{SW - right}" y1="{Y(hi):.1f}" y2="{Y(hi):.1f}"/>\n'
+            f'<line class="spark-rule" x1="0" x2="{SW - right}" y1="{Y(lo):.1f}" y2="{Y(lo):.1f}"/>\n'
+            f'<path class="spark-line" d="{path}"/>\n'
+            f'<circle class="spark-dot" cx="{X(ld):.1f}" cy="{Y(lv):.1f}" r="3.5"/>\n'
+            f'</svg>\n')
+
+
 def render(spec):
     kind = spec.get("kind", "line")
     H, parts = (bar_chart if kind == "bar" else line_chart)(spec)
