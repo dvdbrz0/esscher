@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+{% assign newest_post = site.posts | first %}{% if page.url == "/" %}{% assign home_ed = newest_post %}{% endif %}
 {% if page.layout == "story" %}{% assign doc_title = page.title %}{% elsif page.title and page.url != "/" %}{% capture doc_title %}{{ page.title }}{% if page.date %}, {{ page.date | date: "%-d %B %Y" }}{% endif %}{% endcapture %}{% else %}{% assign doc_title = "" %}{% endif %}
-{% if page.summary_plain %}{% assign doc_desc = page.summary_plain %}{% elsif page.summary %}{% assign doc_desc = page.summary %}{% elsif page.description %}{% assign doc_desc = page.description %}{% elsif page.url == "/" %}{% assign home_latest = site.posts | where: "edition", "daily" | first %}{% assign doc_desc = home_latest.description | default: site.description %}{% else %}{% assign doc_desc = site.description %}{% endif %}
+{% if page.summary_plain %}{% assign doc_desc = page.summary_plain %}{% elsif page.summary %}{% assign doc_desc = page.summary %}{% elsif page.description %}{% assign doc_desc = page.description %}{% elsif page.url == "/" %}{% assign doc_desc = home_ed.description | default: site.description %}{% else %}{% assign doc_desc = site.description %}{% endif %}
 {% assign doc_desc = doc_desc | strip_html | strip_newlines | truncate: 200 %}
 <title>{% if doc_title != "" %}{{ doc_title | escape }} · Esscher{% else %}Esscher: {{ site.tagline | escape }}{% endif %}</title>
 <meta name="description" content="{{ doc_desc | escape }}">
@@ -14,7 +15,7 @@
 <meta property="og:title" content="{% if doc_title != "" %}{{ doc_title | escape }}{% else %}Esscher{% endif %}">
 <meta property="og:description" content="{{ doc_desc | escape }}">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
-{% if page.image %}{% assign share_img = page.image %}{% elsif page.url == "/" %}{% assign share_latest = site.posts | where: "edition", "daily" | first %}{% assign share_img = share_latest.image | default: "/assets/share.png" %}{% else %}{% assign share_img = "/assets/share.png" %}{% endif %}
+{% if page.image %}{% assign share_img = page.image %}{% elsif page.url == "/" %}{% assign share_img = home_ed.image | default: "/assets/share.png" %}{% else %}{% assign share_img = "/assets/share.png" %}{% endif %}
 <meta property="og:image" content="{{ share_img | absolute_url }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -28,7 +29,7 @@
 {% if site.bing_site_verification and site.bing_site_verification != "" %}<meta name="msvalidate.01" content="{{ site.bing_site_verification }}">{% endif %}
 {% if site.goatcounter and site.goatcounter != "" %}<script data-goatcounter="https://{{ site.goatcounter }}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>{% endif %}
 <link rel="stylesheet" href="{{ '/assets/fonts/fonts.css' | relative_url }}">
-{% assign needs_math = page.math %}{% if page.url == "/" %}{% assign math_latest = site.posts | where: "edition", "daily" | first %}{% if math_latest.math %}{% assign needs_math = true %}{% endif %}{% endif %}
+{% assign needs_math = page.math %}{% if page.url == "/" and home_ed.math %}{% assign needs_math = true %}{% endif %}
 {% if needs_math %}<link rel="stylesheet" href="{{ '/assets/katex/katex.min.css' | relative_url }}">
 <script defer src="{{ '/assets/katex/katex.min.js' | relative_url }}"></script>
 <script defer src="{{ '/assets/katex/contrib/auto-render.min.js' | relative_url }}" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false})"></script>{% endif %}
@@ -42,15 +43,15 @@
 </head>
 <body>
 {% if page.ticker %}{% assign tick_page = page %}{% else %}{% assign tick_page = site.posts | where: "edition", "daily" | first %}{% endif %}
-{% assign dailies_all = site.posts | where: "edition", "daily" %}{% assign ed_no = nil %}{% for d in dailies_all %}{% if d.url == tick_page.url %}{% assign ed_no = dailies_all.size | minus: forloop.index0 %}{% endif %}{% endfor %}
+{% assign dailies_all = site.posts | where: "edition", "daily" %}{% if newest_post.edition == "weekly" and dailies_all.size > 0 %}{% assign sec_base = dailies_all.first.url | relative_url %}{% else %}{% assign sec_base = "/" | relative_url %}{% endif %}{% assign ed_no = nil %}{% for d in dailies_all %}{% if d.url == tick_page.url %}{% assign ed_no = dailies_all.size | minus: forloop.index0 %}{% endif %}{% endfor %}
 <header class="site-header">
   <div class="wrap mh-row">
     <a class="wordmark" href="{{ '/' | relative_url }}" aria-label="Esscher, front page">{% include brand/wordmark.svg %}</a>
     <nav aria-label="Sections" class="topnav">
-      <a href="{{ '/' | relative_url }}#ai">AI</a>
-      <a href="{{ '/' | relative_url }}#papers">Papers</a>
-      <a href="{{ '/' | relative_url }}#markets">Markets</a>
-      <a href="{{ '/' | relative_url }}#economy">Economy</a>
+      <a href="{{ sec_base }}#ai">AI</a>
+      <a href="{{ sec_base }}#papers">Papers</a>
+      <a href="{{ sec_base }}#markets">Markets</a>
+      <a href="{{ sec_base }}#economy">Economy</a>
       <a href="{{ '/topics/' | relative_url }}">Topics</a>
       <a href="{{ '/weekly/' | relative_url }}">Weekly Review</a>
       <a href="{{ '/archive/' | relative_url }}">Archive</a>
@@ -60,10 +61,10 @@
       <details class="menu">
         <summary>Menu</summary>
         <nav aria-label="Sections" class="menu-panel">
-          <a href="{{ '/' | relative_url }}#ai">AI and machine learning</a>
-          <a href="{{ '/' | relative_url }}#papers">Papers</a>
-          <a href="{{ '/' | relative_url }}#markets">Markets</a>
-          <a href="{{ '/' | relative_url }}#economy">Economy</a>
+          <a href="{{ sec_base }}#ai">AI and machine learning</a>
+          <a href="{{ sec_base }}#papers">Papers</a>
+          <a href="{{ sec_base }}#markets">Markets</a>
+          <a href="{{ sec_base }}#economy">Economy</a>
           <a href="{{ '/topics/' | relative_url }}">Topics</a>
           <a href="{{ '/weekly/' | relative_url }}">Weekly Review</a>
           <a href="{{ '/maths/' | relative_url }}">The maths behind the news</a>
@@ -74,7 +75,7 @@
   </div>
   <div class="mh-sub">
     <div class="wrap mh-sub-inner">
-      <span class="mh-date">{% if page.date %}{{ page.date | date: "%A %-d %B %Y" }}{% elsif tick_page %}{{ tick_page.date | date: "%A %-d %B %Y" }}{% endif %}{% if ed_no and page.layout != "story" %}<span class="mh-no">No. {{ ed_no }}</span>{% endif %}</span>
+      <span class="mh-date">{% if page.date %}{{ page.date | date: "%A %-d %B %Y" }}{% elsif home_ed.edition == "weekly" %}{{ home_ed.date | date: "%A %-d %B %Y" }}{% elsif tick_page %}{{ tick_page.date | date: "%A %-d %B %Y" }}{% endif %}{% if ed_no and page.layout != "story" and page.edition != "weekly" and home_ed.edition != "weekly" %}<span class="mh-no">No. {{ ed_no }}</span>{% endif %}</span>
       {% if tick_page.ticker %}
       {% assign latest_daily = dailies_all | first %}
       <div class="ticker" aria-label="Markets" data-markets="{{ '/markets.json' | relative_url }}" data-date="{{ tick_page.date | date: '%Y-%m-%d' }}"{% if tick_page.url == latest_daily.url %} data-live="{{ '/live.json' | relative_url }}" data-asof="{{ tick_page.ticker_asof | default: '' }}"{% endif %}>

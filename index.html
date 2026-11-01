@@ -2,14 +2,18 @@
 layout: default
 title: Esscher
 ---
+{% assign newest = site.posts | first %}
 {% assign latest = site.posts | where: "edition", "daily" | first %}
 {% assign latest_weekly = site.posts | where: "edition", "weekly" | first %}
-{% if latest %}
+{% if newest.edition == "weekly" %}
+{% comment %}On the day the Weekly Review appears, and until the next daily brief, it leads the front page.{% endcomment %}
+{% include weekly-body.html w=newest %}
+<p class="edition-link"><a href="{{ newest.url | relative_url }}">Permanent link to this review</a>{% if latest %} · <a href="{{ latest.url | relative_url }}">The latest daily brief, {{ latest.date | date: "%A %-d %B" }}</a>{% endif %} · <a href="{{ '/archive/' | relative_url }}">Earlier editions</a></p>
+
+{% include signup.html id="home" %}
+{% elsif latest %}
 {% include brief-body.html b=latest %}
 <p class="edition-link"><a href="{{ latest.url | relative_url }}">Permanent link to this edition</a> · <a href="{{ '/archive/' | relative_url }}">Earlier editions</a></p>
-{% else %}
-<section class="three-lines"><p>The first edition will appear here shortly.</p></section>
-{% endif %}
 
 {% include signup.html id="home" %}
 
@@ -26,3 +30,8 @@ title: Esscher
   <span class="button button-quiet">First review {{ first_weekly }}</span>
   {% endif %}
 </section>
+{% else %}
+<section class="three-lines"><p>The first edition will appear here shortly.</p></section>
+
+{% include signup.html id="home" %}
+{% endif %}

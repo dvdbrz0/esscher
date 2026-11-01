@@ -19,6 +19,9 @@ A map of the moving parts, for whoever works on the site next. The house style i
   unsent failure record with the failed command, its exact error and the edition JSON;
   the status check reports the reason from it. The weekly review is published before its
   private email is written, because a long run can stop after the email.
+- The front page shows the newest edition. On Sunday, once the Weekly Review is published,
+  it leads the front page until the next daily brief (`_includes/weekly-body.html`, shared
+  with the review's own page); the header's section links then point to the latest daily brief.
 - The site is Jekyll 3.10 on GitHub Pages (branch `main`, root folder), custom domain
   in `CNAME`, HTTPS enforced. `future: true` lets an edition dated 05:00 appear as soon
   as it is pushed.
