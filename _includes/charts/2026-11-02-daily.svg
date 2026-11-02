@@ -1,0 +1,18 @@
+<svg class="chart is-bar" viewBox="0 0 720 182" role="img" aria-label="Bar chart of planned 2026 capital expenditure: Amazon $220bn, Alphabet $205bn, Microsoft $170bn, Meta $145bn and SpaceX $88bn." preserveAspectRatio="xMinYMin meet">
+<text class="chart-label" x="0" y="26">Amazon</text>
+<rect class="chart-bar" x="190.0" y="11" width="460.0" height="22"/>
+<text class="chart-value" x="656.0" y="26">$220bn</text>
+<text class="chart-label" x="0" y="60">Alphabet</text>
+<rect class="chart-bar" x="190.0" y="45" width="428.6" height="22"/>
+<text class="chart-value" x="624.6" y="60">$205bn</text>
+<text class="chart-label" x="0" y="94">Microsoft</text>
+<rect class="chart-bar" x="190.0" y="79" width="355.5" height="22"/>
+<text class="chart-value" x="551.5" y="94">$170bn</text>
+<text class="chart-label" x="0" y="128">Meta</text>
+<rect class="chart-bar" x="190.0" y="113" width="303.2" height="22"/>
+<text class="chart-value" x="499.2" y="128">$145bn</text>
+<text class="chart-label" x="0" y="162">SpaceX</text>
+<rect class="chart-bar" x="190.0" y="147" width="184.0" height="22"/>
+<text class="chart-value" x="380.0" y="162">$88bn</text>
+<line class="chart-zero" x1="190.0" x2="190.0" y1="2" y2="180"/>
+</svg>
