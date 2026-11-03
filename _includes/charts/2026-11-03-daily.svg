@@ -1,0 +1,15 @@
+<svg class="chart is-bar" viewBox="0 0 720 148" role="img" aria-label="Bar chart of four Anthropic counterparties: Broadcom $161bn, Google $121bn, SpaceX’s AI unit $120.5bn and Amazon $110bn." preserveAspectRatio="xMinYMin meet">
+<text class="chart-label" x="0" y="26">Broadcom</text>
+<rect class="chart-bar" x="190.0" y="11" width="460.0" height="22"/>
+<text class="chart-value" x="656.0" y="26">$161.0bn</text>
+<text class="chart-label" x="0" y="60">Google</text>
+<rect class="chart-bar" x="190.0" y="45" width="345.7" height="22"/>
+<text class="chart-value" x="541.7" y="60">$121.0bn</text>
+<text class="chart-label" x="0" y="94">SpaceX AI unit</text>
+<rect class="chart-bar" x="190.0" y="79" width="344.3" height="22"/>
+<text class="chart-value" x="540.3" y="94">$120.5bn</text>
+<text class="chart-label" x="0" y="128">Amazon</text>
+<rect class="chart-bar" x="190.0" y="113" width="314.3" height="22"/>
+<text class="chart-value" x="510.3" y="128">$110.0bn</text>
+<line class="chart-zero" x1="190.0" x2="190.0" y1="2" y2="146"/>
+</svg>
