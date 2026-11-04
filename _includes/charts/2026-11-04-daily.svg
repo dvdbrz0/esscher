@@ -1,0 +1,15 @@
+<svg class="chart is-bar" viewBox="0 0 720 148" role="img" aria-label="Bar chart of AMD’s year-on-year revenue change by segment: Data Center up 97%, Embedded up 29%, Client up 7%, Gaming down 40%." preserveAspectRatio="xMinYMin meet">
+<text class="chart-label" x="0" y="26">Data Center</text>
+<rect class="chart-bar" x="373.9" y="11" width="276.1" height="22"/>
+<text class="chart-value" x="656.0" y="26">97%</text>
+<text class="chart-label" x="0" y="60">Embedded</text>
+<rect class="chart-bar" x="373.9" y="45" width="82.6" height="22"/>
+<text class="chart-value" x="462.4" y="60">29%</text>
+<text class="chart-label" x="0" y="94">Client</text>
+<rect class="chart-bar" x="373.9" y="79" width="19.9" height="22"/>
+<text class="chart-value" x="399.8" y="94">7%</text>
+<text class="chart-label" x="0" y="128">Gaming</text>
+<rect class="chart-bar neg" x="260.0" y="113" width="113.9" height="22"/>
+<text class="chart-value" x="254.0" y="128" text-anchor="end">−40%</text>
+<line class="chart-zero" x1="373.9" x2="373.9" y1="2" y2="146"/>
+</svg>
