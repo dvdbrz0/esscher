@@ -1,49 +1,49 @@
 {
- "asof": "2026-11-05T20:36:48Z",
+ "asof": "2026-11-06T01:07:58Z",
  "source": "CNBC",
  "note": "Delayed by at least 15 minutes.",
  "quotes": [
   {
    "label": "S&P 500",
-   "value": "7,374.82",
-   "time": "2026-11-05T20:36:48Z",
-   "change": "−4.1%",
+   "value": "7,353.73",
+   "time": "2026-11-05T21:34:08Z",
+   "change": "−4.4%",
    "dir": "down"
   },
   {
    "label": "Dow",
-   "value": "51,612.31",
-   "time": "2026-11-05T20:36:48Z",
-   "change": "−3.3%",
+   "value": "51,523.06",
+   "time": "2026-11-05T21:35:51Z",
+   "change": "−3.4%",
    "dir": "down"
   },
   {
    "label": "Nasdaq",
-   "value": "24,406.07",
-   "time": "2026-11-05T20:36:48Z",
-   "change": "−5.2%",
+   "value": "24,315.00",
+   "time": "2026-11-05T22:15:59Z",
+   "change": "−5.5%",
    "dir": "down"
   },
   {
    "label": "US 10Y",
-   "value": "4.83%",
-   "time": "2026-11-05T20:36:42Z",
-   "change": "−6 bp",
-   "dir": "down"
+   "value": "4.84%",
+   "time": "2026-11-06T01:07:58Z",
+   "change": "0 bp",
+   "dir": "flat"
   },
   {
    "label": "Gold",
-   "value": "$4,116",
-   "time": "2026-11-05T20:26:44Z",
-   "change": "+1.0%",
-   "dir": "up"
+   "value": "$4,105",
+   "time": "2026-11-06T00:57:53Z",
+   "change": "−0.2%",
+   "dir": "down"
   },
   {
    "label": "Brent",
-   "value": "$98.37",
-   "time": "2026-11-05T20:26:44Z",
-   "change": "+4.0%",
-   "dir": "up"
+   "value": "$98.29",
+   "time": "2026-11-06T00:56:59Z",
+   "change": "0.0%",
+   "dir": "flat"
   }
  ]
 }
