@@ -1,0 +1,24 @@
+<svg class="chart is-line" viewBox="0 0 720 320" role="img" aria-label="Line chart of Brent crude futures from August to November 2026, rising to a peak at the end of October and falling sharply in early November." preserveAspectRatio="xMinYMin meet">
+<line class="chart-grid" x1="0" x2="646" y1="290.0" y2="290.0"/>
+<text class="chart-axis" x="720" y="295.0" text-anchor="end">$80</text>
+<line class="chart-grid" x1="0" x2="646" y1="234.4" y2="234.4"/>
+<line class="chart-grid" x1="0" x2="646" y1="178.8" y2="178.8"/>
+<text class="chart-axis" x="720" y="183.8" text-anchor="end">$100</text>
+<line class="chart-grid" x1="0" x2="646" y1="123.2" y2="123.2"/>
+<text class="chart-axis" x="720" y="128.2" text-anchor="end">$110</text>
+<line class="chart-grid" x1="0" x2="646" y1="67.6" y2="67.6"/>
+<text class="chart-axis" x="720" y="72.6" text-anchor="end">$120</text>
+<line class="chart-grid" x1="0" x2="646" y1="12.0" y2="12.0"/>
+<text class="chart-axis" x="720" y="17.0" text-anchor="end">$130</text>
+<line class="chart-tick" x1="156.2" x2="156.2" y1="290" y2="295"/>
+<text class="chart-axis" x="156.2" y="312" text-anchor="start">Sep 2026</text>
+<line class="chart-tick" x1="369.1" x2="369.1" y1="290" y2="295"/>
+<text class="chart-axis" x="369.1" y="312" text-anchor="start">Oct</text>
+<line class="chart-tick" x1="589.2" x2="589.2" y1="290" y2="295"/>
+<text class="chart-axis" x="589.2" y="312" text-anchor="start">Nov</text>
+<line class="chart-base" x1="0" x2="646" y1="290" y2="290"/>
+<path class="chart-line" d="M0.0,247.1 L7.1,240.5 L14.2,240.1 L21.3,250.7 L28.4,242.6 L49.7,229.6 L56.8,228.7 L63.9,225.4 L71.0,213.4 L78.1,210.0 L99.4,222.3 L106.5,242.3 L113.6,246.4 L120.7,236.1 L127.8,238.2 L149.1,231.7 L156.2,208.5 L163.3,203.1 L170.4,203.7 L177.5,199.5 L205.9,190.4 L213.0,172.1 L220.1,136.4 L227.2,153.2 L248.5,147.2 L255.6,130.1 L262.7,146.4 L269.8,152.0 L276.9,157.3 L298.2,176.9 L305.3,183.0 L312.4,161.7 L319.5,142.1 L326.5,154.8 L347.8,149.4 L354.9,164.4 L362.0,159.2 L369.1,166.0 L376.2,166.3 L397.5,177.0 L404.6,175.6 L411.7,177.7 L418.8,155.0 L425.9,152.6 L447.2,141.8 L454.3,147.2 L461.4,145.1 L468.5,145.9 L475.6,124.0 L496.9,125.7 L504.0,129.9 L511.1,129.8 L518.2,105.6 L525.3,85.8 L546.6,90.9 L553.7,101.6 L560.8,93.6 L567.9,96.1 L575.0,80.7 L596.3,152.3 L603.4,158.8 L610.5,208.7 L617.6,188.3 L624.7,188.1 L646.0,220.1"/>
+<circle class="chart-dot" cx="646.0" cy="220.1" r="3.5"/>
+<rect class="chart-flag" x="650" y="206.1" width="70" height="28"/>
+<text class="chart-flag-text" x="716" y="226.1" text-anchor="end">$92.57</text>
+</svg>
