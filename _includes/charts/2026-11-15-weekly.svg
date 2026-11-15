@@ -1,0 +1,24 @@
+<svg class="chart is-line" viewBox="0 0 720 320" role="img" aria-label="Line chart of the US 10-year Treasury yield over three months, peaking in early October, falling to about 4.86% in early November and rising back above 5.1% by 13 November." preserveAspectRatio="xMinYMin meet">
+<line class="chart-grid" x1="0" x2="646" y1="290.0" y2="290.0"/>
+<text class="chart-axis" x="720" y="295.0" text-anchor="end">4.4%</text>
+<line class="chart-grid" x1="0" x2="646" y1="234.4" y2="234.4"/>
+<text class="chart-axis" x="720" y="239.4" text-anchor="end">4.6%</text>
+<line class="chart-grid" x1="0" x2="646" y1="178.8" y2="178.8"/>
+<text class="chart-axis" x="720" y="183.8" text-anchor="end">4.8%</text>
+<line class="chart-grid" x1="0" x2="646" y1="123.2" y2="123.2"/>
+<text class="chart-axis" x="720" y="128.2" text-anchor="end">5.0%</text>
+<line class="chart-grid" x1="0" x2="646" y1="67.6" y2="67.6"/>
+<line class="chart-grid" x1="0" x2="646" y1="12.0" y2="12.0"/>
+<text class="chart-axis" x="720" y="17.0" text-anchor="end">5.4%</text>
+<line class="chart-tick" x1="133.4" x2="133.4" y1="290" y2="295"/>
+<text class="chart-axis" x="133.4" y="312" text-anchor="start">Sep 2026</text>
+<line class="chart-tick" x1="344.1" x2="344.1" y1="290" y2="295"/>
+<text class="chart-axis" x="344.1" y="312" text-anchor="start">Oct</text>
+<line class="chart-tick" x1="561.7" x2="561.7" y1="290" y2="295"/>
+<text class="chart-axis" x="561.7" y="312" text-anchor="start">Nov</text>
+<line class="chart-base" x1="0" x2="646" y1="290" y2="290"/>
+<path class="chart-line" d="M0.0,223.0 L7.0,207.7 L28.1,199.9 L35.1,204.9 L42.1,219.7 L49.2,207.7 L56.2,196.0 L77.2,205.5 L84.3,223.6 L91.3,216.6 L98.3,214.4 L105.3,201.0 L126.4,190.5 L133.4,179.9 L140.4,179.9 L147.5,189.4 L154.5,183.2 L182.6,177.1 L189.6,168.5 L196.6,138.8 L203.6,130.2 L224.7,134.0 L231.7,124.3 L238.7,121.5 L245.8,137.9 L252.8,123.8 L273.8,133.5 L280.9,132.1 L287.9,91.5 L294.9,78.2 L301.9,72.0 L323.0,56.5 L330.0,52.3 L337.0,41.7 L344.1,57.3 L351.1,46.2 L372.2,36.7 L379.2,48.4 L386.2,46.2 L393.2,59.0 L400.2,55.4 L421.3,56.5 L428.3,62.9 L435.3,70.4 L442.4,98.5 L449.4,96.0 L470.5,85.4 L477.5,90.7 L484.5,82.6 L491.5,136.3 L498.5,126.5 L519.6,127.1 L526.6,125.1 L533.7,110.7 L540.7,126.3 L547.7,142.9 L568.8,152.7 L575.8,136.5 L582.8,152.7 L589.8,168.5 L596.8,162.4 L617.9,161.0 L624.9,127.9 L632.0,123.8 L639.0,94.6 L646.0,80.4"/>
+<circle class="chart-dot" cx="646.0" cy="80.4" r="3.5"/>
+<rect class="chart-flag" x="650" y="66.4" width="70" height="28"/>
+<text class="chart-flag-text" x="716" y="86.4" text-anchor="end">5.154%</text>
+</svg>
