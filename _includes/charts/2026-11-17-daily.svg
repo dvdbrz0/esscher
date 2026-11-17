@@ -1,0 +1,12 @@
+<svg class="chart is-bar" viewBox="0 0 720 114" role="img" aria-label="Bar chart showing artificial intelligence cited by 87% of contacts, a risk asset correction by 52% and higher long-term rates by 48%." preserveAspectRatio="xMinYMin meet">
+<text class="chart-label" x="0" y="26">Artificial intelligence</text>
+<rect class="chart-bar" x="190.0" y="11" width="460.0" height="22"/>
+<text class="chart-value" x="656.0" y="26">87%</text>
+<text class="chart-label" x="0" y="60">Risk asset correction</text>
+<rect class="chart-bar" x="190.0" y="45" width="274.9" height="22"/>
+<text class="chart-value" x="470.9" y="60">52%</text>
+<text class="chart-label" x="0" y="94">Higher long-term rates</text>
+<rect class="chart-bar" x="190.0" y="79" width="253.8" height="22"/>
+<text class="chart-value" x="449.8" y="94">48%</text>
+<line class="chart-zero" x1="190.0" x2="190.0" y1="2" y2="112"/>
+</svg>
