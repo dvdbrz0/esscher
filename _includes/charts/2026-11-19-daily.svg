@@ -1,0 +1,27 @@
+<svg class="chart is-line" viewBox="0 0 720 320" role="img" aria-label="Line chart of daily gold futures settlements from May to November 2026, rising to a peak in late August and falling steeply through November." preserveAspectRatio="xMinYMin meet">
+<line class="chart-grid" x1="0" x2="646" y1="290.0" y2="290.0"/>
+<text class="chart-axis" x="720" y="295.0" text-anchor="end">$3,500</text>
+<line class="chart-grid" x1="0" x2="646" y1="197.3" y2="197.3"/>
+<text class="chart-axis" x="720" y="202.3" text-anchor="end">$4,000</text>
+<line class="chart-grid" x1="0" x2="646" y1="104.7" y2="104.7"/>
+<text class="chart-axis" x="720" y="109.7" text-anchor="end">$4,500</text>
+<line class="chart-grid" x1="0" x2="646" y1="12.0" y2="12.0"/>
+<text class="chart-axis" x="720" y="17.0" text-anchor="end">$5,000</text>
+<line class="chart-tick" x1="49.2" x2="49.2" y1="290" y2="295"/>
+<text class="chart-axis" x="49.2" y="312" text-anchor="start">Jun 2026</text>
+<line class="chart-tick" x1="154.5" x2="154.5" y1="290" y2="295"/>
+<text class="chart-axis" x="154.5" y="312" text-anchor="start">Jul</text>
+<line class="chart-tick" x1="263.3" x2="263.3" y1="290" y2="295"/>
+<text class="chart-axis" x="263.3" y="312" text-anchor="start">Aug</text>
+<line class="chart-tick" x1="372.2" x2="372.2" y1="290" y2="295"/>
+<text class="chart-axis" x="372.2" y="312" text-anchor="start">Sep</text>
+<line class="chart-tick" x1="477.5" x2="477.5" y1="290" y2="295"/>
+<text class="chart-axis" x="477.5" y="312" text-anchor="start">Oct</text>
+<line class="chart-tick" x1="586.3" x2="586.3" y1="290" y2="295"/>
+<text class="chart-axis" x="586.3" y="312" text-anchor="start">Nov</text>
+<line class="chart-base" x1="0" x2="646" y1="290" y2="290"/>
+<path class="chart-line" d="M0.0,93.9 L3.5,102.6 L7.0,98.1 L10.5,96.8 L14.0,100.4 L28.1,104.2 L31.6,114.2 L35.1,104.8 L38.6,87.4 L49.2,103.5 L52.7,101.0 L56.2,110.8 L59.7,103.7 L63.2,129.6 L73.7,130.0 L77.2,144.3 L80.8,172.6 L84.3,176.2 L87.8,153.1 L98.3,132.2 L101.8,131.7 L105.3,126.6 L108.8,151.8 L122.9,159.8 L126.4,169.6 L129.9,195.7 L133.4,188.5 L136.9,179.5 L147.5,190.1 L151.0,190.2 L154.5,182.1 L158.0,174.0 L172.0,166.3 L175.5,168.2 L179.1,182.1 L182.6,171.2 L186.1,176.3 L196.6,196.3 L200.1,184.4 L203.6,187.7 L207.1,198.8 L210.7,193.8 L221.2,194.4 L224.7,183.2 L228.2,169.2 L231.7,188.0 L235.2,184.2 L245.8,183.1 L249.3,190.2 L252.8,190.6 L256.3,178.8 L259.8,177.5 L270.3,180.6 L273.8,169.1 L277.4,140.8 L280.9,141.8 L284.4,123.3 L294.9,119.5 L298.4,115.6 L301.9,110.7 L305.4,119.4 L309.0,116.3 L319.5,109.5 L323.0,119.4 L326.5,96.3 L330.0,91.4 L333.5,71.2 L344.1,68.0 L347.6,68.6 L351.1,76.3 L354.6,74.3 L358.1,99.1 L368.6,108.1 L372.2,123.9 L375.7,120.5 L379.2,97.3 L382.7,109.0 L396.7,116.0 L400.2,112.0 L403.8,121.8 L407.3,121.6 L417.8,132.1 L421.3,135.7 L424.8,125.5 L428.3,123.3 L431.8,118.6 L442.4,126.2 L445.9,127.6 L449.4,138.3 L452.9,142.1 L456.4,137.8 L466.9,166.1 L470.5,164.0 L474.0,162.7 L477.5,159.8 L481.0,167.3 L491.5,168.3 L495.0,162.7 L498.5,171.3 L502.1,168.2 L505.6,157.2 L516.1,162.0 L519.6,164.5 L523.1,177.3 L526.6,165.8 L530.1,163.8 L540.7,167.7 L544.2,170.9 L547.7,169.5 L551.2,186.1 L554.7,195.9 L565.2,190.2 L568.8,183.5 L572.3,187.8 L575.8,191.5 L579.3,216.1 L589.8,203.0 L593.3,208.4 L596.8,183.8 L600.4,176.3 L603.9,183.5 L614.4,176.1 L617.9,191.7 L621.4,197.2 L624.9,218.6 L628.4,218.4 L639.0,224.6 L642.5,222.5 L646.0,245.2"/>
+<circle class="chart-dot" cx="646.0" cy="245.2" r="3.5"/>
+<rect class="chart-flag" x="650" y="231.2" width="70" height="28"/>
+<text class="chart-flag-text" x="716" y="251.2" text-anchor="end">$3,741.90</text>
+</svg>
