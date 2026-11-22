@@ -1,0 +1,20 @@
+<svg class="chart is-line" viewBox="0 0 720 320" role="img" aria-label="Line chart of the S&amp;P 500 over three months, peaking at 7,818.93 in early October and falling steeply in the week to 20 November to 6,910.39." preserveAspectRatio="xMinYMin meet">
+<line class="chart-grid" x1="0" x2="646" y1="290.0" y2="290.0"/>
+<text class="chart-axis" x="720" y="295.0" text-anchor="end">6,500</text>
+<line class="chart-grid" x1="0" x2="646" y1="197.3" y2="197.3"/>
+<line class="chart-grid" x1="0" x2="646" y1="104.7" y2="104.7"/>
+<text class="chart-axis" x="720" y="109.7" text-anchor="end">7,500</text>
+<line class="chart-grid" x1="0" x2="646" y1="12.0" y2="12.0"/>
+<text class="chart-axis" x="720" y="17.0" text-anchor="end">8,000</text>
+<line class="chart-tick" x1="78.1" x2="78.1" y1="290" y2="295"/>
+<text class="chart-axis" x="78.1" y="312" text-anchor="start">Sep 2026</text>
+<line class="chart-tick" x1="291.1" x2="291.1" y1="290" y2="295"/>
+<text class="chart-axis" x="291.1" y="312" text-anchor="start">Oct</text>
+<line class="chart-tick" x1="511.1" x2="511.1" y1="290" y2="295"/>
+<text class="chart-axis" x="511.1" y="312" text-anchor="start">Nov</text>
+<line class="chart-base" x1="0" x2="646" y1="290" y2="290"/>
+<path class="chart-line" d="M0.0,72.4 L21.3,76.3 L28.4,71.8 L35.5,72.1 L42.6,61.9 L49.7,65.4 L71.0,70.2 L78.1,80.3 L85.2,73.8 L92.3,58.8 L99.4,64.2 L127.8,72.5 L134.9,79.4 L142.0,87.7 L149.1,75.6 L170.4,82.4 L177.5,88.8 L184.6,95.1 L191.7,79.1 L198.8,76.8 L220.1,55.6 L227.2,55.6 L234.3,66.5 L241.4,66.8 L248.5,59.6 L269.8,70.6 L276.9,73.0 L284.0,76.6 L291.1,73.8 L298.2,63.4 L319.5,53.9 L326.5,45.6 L333.6,48.7 L340.7,55.5 L347.8,46.9 L369.1,47.7 L376.2,48.1 L383.3,64.1 L390.4,59.4 L397.5,75.1 L418.8,69.3 L425.9,65.3 L433.0,57.0 L440.1,74.4 L447.2,81.7 L468.5,71.9 L475.6,63.4 L482.7,59.4 L489.8,63.8 L496.9,89.8 L518.2,97.0 L525.3,91.9 L532.4,69.7 L539.5,131.8 L546.6,127.5 L567.9,95.4 L575.0,100.8 L582.1,82.5 L589.2,87.5 L596.3,93.2 L617.6,120.1 L624.7,134.2 L631.8,137.4 L638.9,164.7 L646.0,213.9"/>
+<circle class="chart-dot" cx="646.0" cy="213.9" r="3.5"/>
+<rect class="chart-flag" x="650" y="199.9" width="70" height="28"/>
+<text class="chart-flag-text" x="716" y="219.9" text-anchor="end">6,910.39</text>
+</svg>
