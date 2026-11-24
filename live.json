@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-23T17:56:49Z",
+ "asof": "2026-11-24T00:45:09Z",
  "source": "CNBC",
  "note": "Delayed by at least 15 minutes.",
  "quotes": [
@@ -26,16 +26,16 @@
   },
   {
    "label": "US 10Y",
-   "value": "4.94%",
-   "time": "2026-11-23T17:56:49Z",
-   "change": "+3 bp",
+   "value": "4.93%",
+   "time": "2026-11-24T00:45:09Z",
+   "change": "+1 bp",
    "dir": "up"
   },
   {
    "label": "Gold",
-   "value": "$3,650",
-   "time": "2026-11-23T17:47:49Z",
-   "change": "+3.8%",
+   "value": "$3,654",
+   "time": "2026-11-24T00:35:33Z",
+   "change": "+0.1%",
    "dir": "up"
   },
   {
