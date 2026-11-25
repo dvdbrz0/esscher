@@ -1,0 +1,21 @@
+<svg class="chart is-line" viewBox="0 0 720 320" role="img" aria-label="Line chart of the PHLX Semiconductor Index from late August to 24 November 2026, rising to a peak on 6 October, falling through November to a low on 20 November, jumping on 23 November and dropping again on 24 November." preserveAspectRatio="xMinYMin meet">
+<line class="chart-grid" x1="0" x2="646" y1="290.0" y2="290.0"/>
+<text class="chart-axis" x="720" y="295.0" text-anchor="end">8,000</text>
+<line class="chart-grid" x1="0" x2="646" y1="197.3" y2="197.3"/>
+<text class="chart-axis" x="720" y="202.3" text-anchor="end">10,000</text>
+<line class="chart-grid" x1="0" x2="646" y1="104.7" y2="104.7"/>
+<text class="chart-axis" x="720" y="109.7" text-anchor="end">12,000</text>
+<line class="chart-grid" x1="0" x2="646" y1="12.0" y2="12.0"/>
+<text class="chart-axis" x="720" y="17.0" text-anchor="end">14,000</text>
+<line class="chart-tick" x1="49.7" x2="49.7" y1="290" y2="295"/>
+<text class="chart-axis" x="49.7" y="312" text-anchor="start">Sep 2026</text>
+<line class="chart-tick" x1="262.7" x2="262.7" y1="290" y2="295"/>
+<text class="chart-axis" x="262.7" y="312" text-anchor="start">Oct</text>
+<line class="chart-tick" x1="482.7" x2="482.7" y1="290" y2="295"/>
+<text class="chart-axis" x="482.7" y="312" text-anchor="start">Nov</text>
+<line class="chart-base" x1="0" x2="646" y1="290" y2="290"/>
+<path class="chart-line" d="M0.0,123.8 L7.1,122.7 L14.2,110.1 L21.3,129.2 L42.6,126.2 L49.7,137.6 L56.8,135.3 L63.9,134.7 L71.0,116.9 L99.4,109.9 L106.5,107.8 L113.6,122.5 L120.7,112.8 L142.0,144.9 L149.1,142.9 L156.2,139.6 L163.3,123.2 L170.4,108.3 L191.7,84.6 L198.8,72.7 L205.9,79.9 L213.0,81.8 L220.1,73.7 L241.4,83.1 L248.5,75.5 L255.6,75.5 L262.7,66.3 L269.8,52.0 L291.1,50.3 L298.2,48.2 L305.3,55.3 L312.4,75.8 L319.5,78.1 L340.7,93.7 L347.8,95.0 L354.9,119.3 L362.0,124.1 L369.1,144.6 L390.4,136.3 L397.5,137.9 L404.6,127.6 L411.7,163.4 L418.8,161.2 L440.1,147.1 L447.2,128.6 L454.3,119.3 L461.4,127.0 L468.5,165.4 L489.8,182.1 L496.9,169.5 L504.0,184.9 L511.1,243.2 L518.2,225.6 L539.5,195.8 L546.6,197.4 L553.7,171.2 L560.8,173.9 L567.9,190.6 L589.2,215.4 L596.3,213.9 L603.4,213.4 L610.5,224.2 L617.6,271.1 L638.9,216.4 L646.0,251.4"/>
+<circle class="chart-dot" cx="646.0" cy="251.4" r="3.5"/>
+<rect class="chart-flag" x="650" y="237.4" width="70" height="28"/>
+<text class="chart-flag-text" x="716" y="257.4" text-anchor="end">8,832</text>
+</svg>
