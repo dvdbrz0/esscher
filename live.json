@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-26T16:37:53Z",
+ "asof": "2026-11-26T19:01:58Z",
  "source": "CNBC",
  "note": "Delayed by at least 15 minutes.",
  "quotes": [
@@ -33,16 +33,16 @@
   },
   {
    "label": "Gold",
-   "value": "$3,570",
-   "time": "2026-11-26T16:37:42Z",
-   "change": "+1.0%",
+   "value": "$3,566",
+   "time": "2026-11-26T19:01:58Z",
+   "change": "+0.9%",
    "dir": "up"
   },
   {
    "label": "Brent",
-   "value": "$96.29",
-   "time": "2026-11-26T16:37:53Z",
-   "change": "+1.8%",
+   "value": "$96.53",
+   "time": "2026-11-26T18:30:00Z",
+   "change": "+2.0%",
    "dir": "up"
   }
  ]
